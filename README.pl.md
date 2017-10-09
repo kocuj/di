@@ -15,7 +15,7 @@ Kontener dla wzorca projektowego "wstrzykiwanie zależności" (Dependency Inject
 
 Niniejszy pakiet jest zgodny z [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Jeżeli zauważyłeś niezgodność, proszę abyś wysłał poprawkę przez prośbę o pociągnięcie danych ("pull request").
 
-## [Pobierz 1.1.0](https://github.com/kocuj/di/releases/tag/1.1.0)
+## [Pobierz 1.1.0](https://github.com/kocuj/di/releases/tag/v1.1.0)
 
 ## Instalacja
 
