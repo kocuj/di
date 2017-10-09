@@ -1,0 +1,40 @@
+{
+	"name": "kocuj/di",
+	"description": "Container for design pattern Dependency Injection in PHP 7",
+	"type": "library",
+	"license": "MIT",
+	"homepage": "http://phplibs.kocuj.pl/libraries/kocuj-di/",
+	"authors": [
+		{
+			"name": "Dominik Kocuj",
+			"role": "Developer",
+			"homepage": "http://kocuj.pl"
+		}
+	],
+	"require": {
+		"php": ">=7.0.0",
+		"psr/container": "~1.0",
+		"danielstjules/stringy": "~3.1",
+		"esky/enum": "~1.1"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^6.4",
+		"phpdocumentor/phpdocumentor": "^2.9"
+	},
+	"autoload": {
+		"psr-4": {
+			"Kocuj\\Di\\" : "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Kocuj\\Di\\Examples\\" : "examples","Kocuj\\Di\\Tests\\":"tests/src",
+			"Kocuj\\Di\\TestsLib\\" : "tests/lib"
+		}
+	},
+	"keywords": [
+		"dependency injection",
+		"di",
+		"container"
+	]
+}
