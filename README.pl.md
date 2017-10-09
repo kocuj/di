@@ -3,6 +3,8 @@ Kontener dla wzorca projektowego "wstrzykiwanie zależności" (Dependency Inject
 
 [![Autor](http://img.shields.io/badge/author-kocuj.pl-blue.svg?style=flat-square)](http://kocuj.pl)
 [![Najnowsza wersja](https://img.shields.io/github/release/kocuj/di.svg?style=flat-square)](https://github.com/kocuj/di/releases)
+[![Problemy](http://githubbadges.herokuapp.com/kocuj/di/issues.svg)](https://github.com/kocuj/di/issues)
+[![Oczekujące prośby o pociągnięcie danych](http://githubbadges.herokuapp.com/kocuj/di/pulls.svg)](https://github.com/kocuj/di/pulls)
 [![Licencja](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/kocuj/di/blob/master/LICENSE.md)
 [![Status budowy](https://img.shields.io/travis/kocuj/di/master.svg?style=flat-square)](https://travis-ci.org/kocuj/di)
 [![Status pokrycia kodu](https://img.shields.io/scrutinizer/coverage/g/kocuj/di.svg?style=flat-square)](https://scrutinizer-ci.com/g/kocuj/di/code-structure)
@@ -12,6 +14,8 @@ Kontener dla wzorca projektowego "wstrzykiwanie zależności" (Dependency Inject
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/8445db3c-571b-48e3-a71b-e46de879c955/big.png)](https://insight.sensiolabs.com/projects/8445db3c-571b-48e3-a71b-e46de879c955)
 
 Niniejszy pakiet jest zgodny z [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Jeżeli zauważyłeś niezgodność, proszę abyś wysłał poprawkę przez prośbę o pociągnięcie danych ("pull request").
+
+## [Pobierz 1.1.0](https://github.com/kocuj/di/releases/tag/1.1.0)
 
 ## Instalacja
 
