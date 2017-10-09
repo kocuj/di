@@ -3,13 +3,13 @@ Kontener dla wzorca projektowego "wstrzykiwanie zależności" (Dependency Inject
 
 [![Autor](http://img.shields.io/badge/author-kocuj.pl-blue.svg?style=flat-square)](http://kocuj.pl)
 [![Najnowsza wersja](https://img.shields.io/github/release/kocuj/di.svg?style=flat-square)](https://github.com/kocuj/di/releases)
-[![Licencja](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Licencja](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/kocuj/di/blob/master/LICENSE.md)
 
 Niniejszy pakiet jest zgodny z [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Jeżeli zauważyłeś niezgodność, proszę abyś wysłał poprawkę przez prośbę o pociągnięcie danych ("pull request").
 
 ## Instalacja
 
-Przy użyciu Composera
+Przy użyciu Composera:
 
 ``` bash
 $ composer require kocuj/di
@@ -50,7 +50,7 @@ $container->addStandard('main', Main::class, [
 $container->get('main')->display();
 ```
 
-Więcej informacji możesz uzyskać przeglądając przykłady dołączone do projektu lub zaglądając na [stronę internetową projektu](http://libs.kocuj.pl/en/kocuj-di).
+Więcej informacji możesz uzyskać przeglądając przykłady dołączone do projektu lub zaglądając na [stronę internetową projektu](http://libs.kocuj.pl/pl/kocuj-di).
 
 ## Testowanie
 
@@ -72,4 +72,4 @@ Licencja MIT. Proszę zapoznać się z [plikiem licencji](https://github.com/koc
 
 ## Czy mogę Cię wynająć do innych projektów programistycznych?
 
-Tak! Zobacz moją domową stronę internetową [kocuj.pl](http://kocuj.pl/) lub po prostu pozostaw mi informację używając [formularza kontaktowego](http://libs.kocuj.pl/en/contact).
+Tak! Zobacz moją domową stronę internetową [kocuj.pl](http://kocuj.pl/) lub po prostu pozostaw mi informację używając [formularza kontaktowego](http://libs.kocuj.pl/pl/contact).

@@ -10,39 +10,18 @@
  */
 namespace Kocuj\Di\ArgumentParser;
 
-use Kocuj\Di\Container\IContainer;
+use Kocuj\Di\Container\ContainerInterface;
 
 /**
  * Service argument parser
  */
-class ArgumentParser implements IArgumentParser
+class ArgumentParser implements ArgumentParserInterface
 {
-
-    /**
-     * Dependency injection container for services
-     *
-     * @var IContainer
-     */
-    private $container;
-
-    /**
-     * Service identifier
-     *
-     * @var string
-     */
-    private $id;
-
-    /**
-     * Service argument to parse
-     *
-     * @var array
-     */
-    private $argument;
 
     /**
      * Parse service argument and return argument to service constructor
      *
-     * @param IContainer $container
+     * @param ContainerInterface $container
      *            Dependency injection container for services
      * @param string $id
      *            Service identifier
@@ -50,9 +29,9 @@ class ArgumentParser implements IArgumentParser
      *            Service argument to parse
      * @throws Exception
      * @return mixed Parsed argument
-     * @see \Kocuj\Di\ArgumentParser\IArgumentParser::parse()
+     * @see \Kocuj\Di\ArgumentParser\ArgumentParserInterface::parse()
      */
-    public function parse(IContainer $container, string $id, array $argument)
+    public function parse(ContainerInterface $container, string $id, array $argument)
     {
         // parse argument
         $parsedArg = null;

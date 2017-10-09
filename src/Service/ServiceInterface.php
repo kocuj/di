@@ -1,7 +1,7 @@
 <?php
 
 /**
- * IService.php
+ * ServiceInterface.php
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
@@ -13,7 +13,7 @@ namespace Kocuj\Di\Service;
 /**
  * Service creator interface
  */
-interface IService
+interface ServiceInterface
 {
 
     /**

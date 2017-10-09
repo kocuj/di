@@ -11,8 +11,8 @@
 namespace Kocuj\Di\Tests;
 
 use Kocuj\Di\ArgumentParser\ArgumentParser;
-use Kocuj\Di\Container\IContainer;
-use Kocuj\Di\Service\IService;
+use Kocuj\Di\Container\ContainerInterface;
+use Kocuj\Di\Service\ServiceInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -34,7 +34,7 @@ class ArgumentParserTest extends TestCase
     {
         // arrange
         $id = 'ThisService';
-        $container = $this->prophesize(IContainer::class);
+        $container = $this->prophesize(ContainerInterface::class);
         $argument = [
             'type' => 'value',
             'value' => $value
@@ -90,8 +90,8 @@ class ArgumentParserTest extends TestCase
         // arrange
         $id = 'ThisService';
         $otherId = 'OtherService';
-        $service = $this->prophesize(IService::class);
-        $container = $this->prophesize(IContainer::class);
+        $service = $this->prophesize(ServiceInterface::class);
+        $container = $this->prophesize(ContainerInterface::class);
         $container->get($otherId)->willReturn($service->reveal());
         $argument = [
             'type' => 'service',
@@ -103,7 +103,7 @@ class ArgumentParserTest extends TestCase
         $parsedArg = $argumentParser->parse($container->reveal(), $id, $argument);
         
         // assert
-        $this->assertTrue($parsedArg instanceof IService);
+        $this->assertTrue($parsedArg instanceof ServiceInterface);
     }
 
     /**
@@ -115,8 +115,8 @@ class ArgumentParserTest extends TestCase
     {
         // arrange
         $id = 'ThisService';
-        $service = $this->prophesize(IService::class);
-        $container = $this->prophesize(IContainer::class);
+        $service = $this->prophesize(ServiceInterface::class);
+        $container = $this->prophesize(ContainerInterface::class);
         $container->get($id)->willReturn($service->reveal());
         $argument = [
             'type' => 'service',
@@ -137,7 +137,7 @@ class ArgumentParserTest extends TestCase
     {
         // arrange
         $id = 'ThisService';
-        $container = $this->prophesize(IContainer::class);
+        $container = $this->prophesize(ContainerInterface::class);
         $argument = [
             'type' => 'something_unknown'
         ];

@@ -10,29 +10,29 @@
  */
 namespace Kocuj\Di\ServiceIdDecorator;
 
-use Kocuj\Di\Tools\Camelizer\ICamelizer;
+use Kocuj\Di\Tools\Camelizer\CamelizerInterface;
 
 /**
  * Service identifier decorator
  */
-class ServiceIdDecorator implements IServiceIdDecorator
+class ServiceIdDecorator implements ServiceIdDecoratorInterface
 {
 
     /**
      * Camelizer object
      *
-     * @var ICamelizer
+     * @var CamelizerInterface
      */
     private $camelizer;
 
     /**
      * Constructor
      *
-     * @param ICamelizer $camelizer
+     * @param CamelizerInterface $camelizer
      *            Camelizer object
      *            @codeCoverageIgnore
      */
-    public function __construct(ICamelizer $camelizer)
+    public function __construct(CamelizerInterface $camelizer)
     {
         // remember arguments
         $this->camelizer = $camelizer;
@@ -44,7 +44,7 @@ class ServiceIdDecorator implements IServiceIdDecorator
      * @param string $id
      *            Identifier to decorate
      * @return string Decorated identifier
-     * @see \Kocuj\Di\ServiceIdDecorator\IServiceIdDecorator::decorate() @codeCoverageIgnore
+     * @see \Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface::decorate() @codeCoverageIgnore
      */
     public function decorate(string $id): string
     {

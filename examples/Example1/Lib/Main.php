@@ -19,26 +19,26 @@ class Main
     /**
      * Input service
      *
-     * @var IInputService
+     * @var InputServiceInterface
      */
     private $inputService;
 
     /**
      * Output service
      *
-     * @var IOutputService
+     * @var OutputServiceInterface
      */
     private $outputService;
 
     /**
      * Constructor
      *
-     * @param IInputService $inputService
+     * @param InputServiceInterface $inputService
      *            Input service
-     * @param IOutputService $outputService
+     * @param OutputServiceInterface $outputService
      *            Output service
      */
-    public function __construct(IInputService $inputService, IOutputService $outputService)
+    public function __construct(InputServiceInterface $inputService, OutputServiceInterface $outputService)
     {
         // remember arguments
         $this->inputService = $inputService;

@@ -11,7 +11,7 @@
 namespace Kocuj\Di;
 
 use Kocuj\Di\Container\Container;
-use Kocuj\Di\Container\IContainer;
+use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\ServiceFactory;
 use Kocuj\Di\ServiceIdDecorator\ServiceIdDecorator;
 use Kocuj\Di\Tools\Camelizer\Camelizer;
@@ -25,21 +25,21 @@ class Di
     /**
      * Service identifier decorator
      *
-     * @var IServiceIdDecorator
+     * @var ServiceIdDecoratorInterface
      */
     private $serviceIdDecorator;
 
     /**
      * Service factory
      *
-     * @var IServiceFactory
+     * @var ServiceFactoryInterface
      */
     private $serviceFactory;
 
     /**
      * Default dependency injection container for services
      *
-     * @var IContainer
+     * @var ContainerInterface
      */
     private $defaultContainer;
 
@@ -60,9 +60,9 @@ class Di
     /**
      * Create dependency injection container for services
      *
-     * @return IContainer @codeCoverageIgnore
+     * @return ContainerInterface @codeCoverageIgnore
      */
-    public function create(): IContainer
+    public function create(): ContainerInterface
     {
         // exit
         return new Container($this->serviceIdDecorator, $this->serviceFactory);
@@ -71,9 +71,9 @@ class Di
     /**
      * Get default dependency injection container for services
      *
-     * @return IContainer @codeCoverageIgnore
+     * @return ContainerInterface @codeCoverageIgnore
      */
-    public function getDefault(): IContainer
+    public function getDefault(): ContainerInterface
     {
         // exit
         return $this->defaultContainer;

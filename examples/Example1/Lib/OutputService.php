@@ -13,7 +13,7 @@ namespace Kocuj\Di\Examples\Example1\Lib;
 /**
  * Output service
  */
-class OutputService implements IOutputService
+class OutputService implements OutputServiceInterface
 {
 
     /**
@@ -30,7 +30,7 @@ class OutputService implements IOutputService
      *
      * @param string $output
      *            String to display
-     * @see \Kocuj\Di\Examples\Example1\Lib\IOutputService::displayOutput()
+     * @see \Kocuj\Di\Examples\Example1\Lib\OutputServiceInterface::displayOutput()
      */
     public function displayOutput(string $output)
     {

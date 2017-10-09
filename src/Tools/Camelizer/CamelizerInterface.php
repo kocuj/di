@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ICamelizer.php
+ * CamelizerInterface.php
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
@@ -13,7 +13,7 @@ namespace Kocuj\Di\Tools\Camelizer;
 /**
  * Camelizer interface
  */
-interface ICamelizer
+interface CamelizerInterface
 {
 
     /**

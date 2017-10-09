@@ -1,7 +1,7 @@
 <?php
 
 /**
- * IInputService.php
+ * OutputServiceInterface.php
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
@@ -11,15 +11,16 @@
 namespace Kocuj\Di\Examples\Example1\Lib;
 
 /**
- * Input service interface
+ * Output service interface
  */
-interface IInputService
+interface OutputServiceInterface
 {
 
     /**
-     * Get input
+     * Display output string
      *
-     * @return string Input string
+     * @param string $output
+     *            String to display
      */
-    public function getInput(): string;
+    public function displayOutput(string $output);
 }

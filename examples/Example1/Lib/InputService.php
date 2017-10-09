@@ -13,7 +13,7 @@ namespace Kocuj\Di\Examples\Example1\Lib;
 /**
  * Input service
  */
-class InputService implements IInputService
+class InputService implements InputServiceInterface
 {
 
     /**
@@ -29,7 +29,7 @@ class InputService implements IInputService
      * Get input
      *
      * @return string Input string
-     * @see \Kocuj\Di\Examples\Example1\Lib\IInputService::getInput()
+     * @see \Kocuj\Di\Examples\Example1\Lib\InputServiceInterface::getInput()
      */
     public function getInput(): string
     {

@@ -11,27 +11,27 @@
 namespace Kocuj\Di\Service\Shared;
 
 use Kocuj\Di\ArgumentParser\ArgumentParser;
-use Kocuj\Di\ArgumentParser\IArgumentParser;
-use Kocuj\Di\Container\IContainer;
-use Kocuj\Di\Service\IService;
+use Kocuj\Di\ArgumentParser\ArgumentParserInterface;
+use Kocuj\Di\Container\ContainerInterface;
+use Kocuj\Di\Service\ServiceInterface;
 
 /**
  * Shared service creator
  */
-class Shared implements IService
+class Shared implements ServiceInterface
 {
 
     /**
      * Service argument parser
      *
-     * @var IArgumentParser
+     * @var ArgumentParserInterface
      */
     private $argumentParser;
 
     /**
      * Dependency injection container for services
      *
-     * @var IContainer
+     * @var ContainerInterface
      */
     private $container;
 
@@ -66,9 +66,9 @@ class Shared implements IService
     /**
      * Constructor
      *
-     * @param IArgumentParser $argumentParser
+     * @param ArgumentParserInterface $argumentParser
      *            Service argument parser
-     * @param IContainer $container
+     * @param ContainerInterface $container
      *            Dependency injection container for services
      * @param string $id
      *            Service identifier
@@ -77,7 +77,7 @@ class Shared implements IService
      * @param array $arguments
      *            Service arguments to parse
      */
-    public function __construct(IArgumentParser $argumentParser, IContainer $container, string $id, string $source, array $arguments = [])
+    public function __construct(ArgumentParserInterface $argumentParser, ContainerInterface $container, string $id, string $source, array $arguments = [])
     {
         // remember arguments
         $this->argumentParser = $argumentParser;
@@ -91,7 +91,7 @@ class Shared implements IService
      * Get service
      *
      * @return object Service object
-     * @see \Kocuj\Di\Service\IService::getService()
+     * @see \Kocuj\Di\Service\ServiceInterface::getService()
      */
     public function getService()
     {

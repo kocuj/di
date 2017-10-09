@@ -1,7 +1,7 @@
 <?php
 
 /**
- * IContainer.php
+ * ContainerInterface.php
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
@@ -11,12 +11,11 @@
 namespace Kocuj\Di\Container;
 
 use Kocuj\Di\Service\ServiceType;
-use Psr\Container\ContainerInterface;
 
 /**
  * Dependency injection container interface
  */
-interface IContainer extends ContainerInterface
+interface ContainerInterface extends \Psr\Container\ContainerInterface
 {
 
     /**
@@ -30,9 +29,9 @@ interface IContainer extends ContainerInterface
      *            Service to create
      * @param array $arguments
      *            Service arguments to inject into constructor
-     * @return IContainer This object
+     * @return ContainerInterface This object
      */
-    public function add(ServiceType $serviceType, string $id, string $source, array $arguments = []): IContainer;
+    public function add(ServiceType $serviceType, string $id, string $source, array $arguments = []): ContainerInterface;
 
     /**
      * Add standard service
@@ -43,9 +42,9 @@ interface IContainer extends ContainerInterface
      *            Service to create
      * @param array $arguments
      *            Service arguments to inject into constructor
-     * @return IContainer This object
+     * @return ContainerInterface This object
      */
-    public function addStandard(string $id, string $source, array $arguments = []): IContainer;
+    public function addStandard(string $id, string $source, array $arguments = []): ContainerInterface;
 
     /**
      * Add shared service
@@ -56,9 +55,9 @@ interface IContainer extends ContainerInterface
      *            Service to create
      * @param array $arguments
      *            Service arguments to inject into constructor
-     * @return IContainer This object
+     * @return ContainerInterface This object
      */
-    public function addShared(string $id, string $source, array $arguments = []): IContainer;
+    public function addShared(string $id, string $source, array $arguments = []): ContainerInterface;
 
     /**
      * Get service type

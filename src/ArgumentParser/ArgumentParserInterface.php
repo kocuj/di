@@ -1,7 +1,7 @@
 <?php
 
 /**
- * IArgumentParser.php
+ * ArgumentParserInterface.php
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
@@ -10,18 +10,18 @@
  */
 namespace Kocuj\Di\ArgumentParser;
 
-use Kocuj\Di\Container\IContainer;
+use Kocuj\Di\Container\ContainerInterface;
 
 /**
  * Service argument parser
  */
-interface IArgumentParser
+interface ArgumentParserInterface
 {
 
     /**
      * Parse service argument and return argument to service constructor
      *
-     * @param IContainer $container
+     * @param ContainerInterface $container
      *            Dependency injection container for services
      * @param string $id
      *            Service identifier
@@ -30,5 +30,5 @@ interface IArgumentParser
      * @throws Exception
      * @return mixed Parsed argument
      */
-    public function parse(IContainer $container, string $id, array $argument);
+    public function parse(ContainerInterface $container, string $id, array $argument);
 }

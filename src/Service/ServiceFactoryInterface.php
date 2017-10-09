@@ -1,7 +1,7 @@
 <?php
 
 /**
- * IServiceFactory.php
+ * ServiceFactoryInterface.php
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
@@ -10,18 +10,18 @@
  */
 namespace Kocuj\Di\Service;
 
-use Kocuj\Di\Container\IContainer;
+use Kocuj\Di\Container\ContainerInterface;
 
 /**
  * Service factory interface
  */
-interface IServiceFactory
+interface ServiceFactoryInterface
 {
 
     /**
      * Create standard or shared service
      *
-     * @param IContainer $container
+     * @param ContainerInterface $container
      *            Dependency injection container for services
      * @param ServiceType $serviceType
      *            Service type
@@ -31,7 +31,7 @@ interface IServiceFactory
      *            Source for service to create
      * @param array $arguments
      *            Service arguments to parse
-     * @return IService Service creator object
+     * @return ServiceInterface Service creator object
      */
-    public function create(IContainer $container, ServiceType $serviceType, string $id, string $source, array $arguments = []): IService;
+    public function create(ContainerInterface $container, ServiceType $serviceType, string $id, string $source, array $arguments = []): ServiceInterface;
 }

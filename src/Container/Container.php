@@ -10,28 +10,28 @@
  */
 namespace Kocuj\Di\Container;
 
-use Kocuj\Di\Service\IServiceFactory;
 use Kocuj\Di\Service\ServiceFactory;
+use Kocuj\Di\Service\ServiceFactoryInterface;
 use Kocuj\Di\Service\ServiceType;
-use Kocuj\Di\ServiceIdDecorator\IServiceIdDecorator;
+use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
 
 /**
  * Dependency injection container for services
  */
-class Container implements IContainer
+class Container implements ContainerInterface
 {
 
     /**
      * Service identifier decorator
      *
-     * @var IServiceIdDecorator
+     * @var ServiceIdDecoratorInterface
      */
     private $serviceIdDecorator;
 
     /**
      * Service factory
      *
-     * @var IServiceFactory
+     * @var ServiceFactoryInterface
      */
     private $serviceFactory;
 
@@ -45,12 +45,12 @@ class Container implements IContainer
     /**
      * Constructor
      *
-     * @param IServiceIdDecorator $serviceIdDecorator
+     * @param ServiceIdDecoratorInterface $serviceIdDecorator
      *            Service identifier decorator
-     * @param IServiceFactory $serviceFactory
+     * @param ServiceFactoryInterface $serviceFactory
      *            Service factory
      */
-    public function __construct(IServiceIdDecorator $serviceIdDecorator, IServiceFactory $serviceFactory)
+    public function __construct(ServiceIdDecoratorInterface $serviceIdDecorator, ServiceFactoryInterface $serviceFactory)
     {
         // remember arguments
         $this->serviceIdDecorator = $serviceIdDecorator;
@@ -68,11 +68,11 @@ class Container implements IContainer
      *            Service to create
      * @param array $arguments
      *            Service arguments to inject into constructor
-     * @return IContainer This object
+     * @return ContainerInterface This object
      * @throws ContainerException
-     * @see \Kocuj\Di\Container\IContainer::add()
+     * @see \Kocuj\Di\Container\ContainerInterface::add()
      */
-    public function add(ServiceType $serviceType, string $id, string $source, array $arguments = []): IContainer
+    public function add(ServiceType $serviceType, string $id, string $source, array $arguments = []): ContainerInterface
     {
         // decorate service identifier
         $decoratedId = $this->serviceIdDecorator->decorate($id);
@@ -98,10 +98,10 @@ class Container implements IContainer
      *            Service to create
      * @param array $arguments
      *            Service arguments to inject into constructor
-     * @return IContainer This object
-     * @see \Kocuj\Di\Container\IContainer::addStandard() @codeCoverageIgnore
+     * @return ContainerInterface This object
+     * @see \Kocuj\Di\Container\ContainerInterface::addStandard() @codeCoverageIgnore
      */
-    public function addStandard(string $id, string $source, array $arguments = []): IContainer
+    public function addStandard(string $id, string $source, array $arguments = []): ContainerInterface
     {
         // exit
         return $this->add(new ServiceType(ServiceType::STANDARD), $id, $source, $arguments);
@@ -116,10 +116,10 @@ class Container implements IContainer
      *            Service to create
      * @param array $arguments
      *            Service arguments to inject into constructor
-     * @return IContainer This object
-     * @see \Kocuj\Di\Container\IContainer::addShared() @codeCoverageIgnore
+     * @return ContainerInterface This object
+     * @see \Kocuj\Di\Container\ContainerInterface::addShared() @codeCoverageIgnore
      */
-    public function addShared(string $id, string $source, array $arguments = []): IContainer
+    public function addShared(string $id, string $source, array $arguments = []): ContainerInterface
     {
         // exit
         return $this->add(new ServiceType(ServiceType::SHARED), $id, $source, $arguments);
@@ -167,7 +167,7 @@ class Container implements IContainer
      *            Service identifier
      * @return ServiceType Service type
      * @throws NotFoundException
-     * @see \Kocuj\Di\Container\IContainer::getType()
+     * @see \Kocuj\Di\Container\ContainerInterface::getType()
      */
     public function getType(string $id): ServiceType
     {

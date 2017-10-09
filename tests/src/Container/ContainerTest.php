@@ -11,11 +11,11 @@
 namespace Kocuj\Di\Tests;
 
 use Kocuj\Di\Container\Container;
-use Kocuj\Di\Container\IContainer;
-use Kocuj\Di\Service\IService;
-use Kocuj\Di\Service\IServiceFactory;
+use Kocuj\Di\Container\ContainerInterface;
+use Kocuj\Di\Service\ServiceFactoryInterface;
+use Kocuj\Di\Service\ServiceInterface;
 use Kocuj\Di\Service\ServiceType;
-use Kocuj\Di\ServiceIdDecorator\IServiceIdDecorator;
+use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
 use Kocuj\Di\TestsLib\FakeService;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
@@ -29,7 +29,7 @@ class ContainerTest extends TestCase
     /**
      * Service identifier decorator
      *
-     * @var IServiceIdDecorator
+     * @var ServiceIdDecoratorInterface
      */
     private $serviceIdDecorator;
 
@@ -43,14 +43,14 @@ class ContainerTest extends TestCase
     /**
      * Service
      *
-     * @var IService
+     * @var ServiceInterface
      */
     private $service;
 
     /**
      * Service factory
      *
-     * @var IServiceFactory
+     * @var ServiceFactoryInterface
      */
     private $serviceFactory;
 
@@ -60,14 +60,14 @@ class ContainerTest extends TestCase
     public function setUp()
     {
         // arrange
-        $this->serviceIdDecorator = $this->prophesize(IServiceIdDecorator::class);
+        $this->serviceIdDecorator = $this->prophesize(ServiceIdDecoratorInterface::class);
         
         $this->fakeService = new FakeService();
         
-        $this->service = $this->prophesize(IService::class);
+        $this->service = $this->prophesize(ServiceInterface::class);
         $this->service->getService()->willReturn($this->fakeService);
         
-        $this->serviceFactory = $this->prophesize(IServiceFactory::class);
+        $this->serviceFactory = $this->prophesize(ServiceFactoryInterface::class);
     }
 
     /**
@@ -87,7 +87,7 @@ class ContainerTest extends TestCase
         $this->serviceIdDecorator->decorate($serviceId)->willReturn($decoratedServiceId);
         $this->serviceIdDecorator->decorate($decoratedServiceId)->willReturn($decoratedServiceId);
         
-        $this->serviceFactory->create(Argument::type(IContainer::class), $serviceType, $decoratedServiceId, FakeService::class, [])->willReturn($this->service);
+        $this->serviceFactory->create(Argument::type(ContainerInterface::class), $serviceType, $decoratedServiceId, FakeService::class, [])->willReturn($this->service);
         
         // act
         $container = new Container($this->serviceIdDecorator->reveal(), $this->serviceFactory->reveal());
@@ -164,7 +164,7 @@ class ContainerTest extends TestCase
         $this->serviceIdDecorator->decorate($serviceId)->willReturn($decoratedServiceId);
         $this->serviceIdDecorator->decorate($decoratedServiceId)->willReturn($decoratedServiceId);
         
-        $this->serviceFactory->create(Argument::type(IContainer::class), $serviceType, $decoratedServiceId, FakeService::class, [])->willReturn($this->service);
+        $this->serviceFactory->create(Argument::type(ContainerInterface::class), $serviceType, $decoratedServiceId, FakeService::class, [])->willReturn($this->service);
         
         // act
         $container = new Container($this->serviceIdDecorator->reveal(), $this->serviceFactory->reveal());
@@ -247,7 +247,7 @@ class ContainerTest extends TestCase
         $this->serviceIdDecorator->decorate($serviceId)->willReturn($decoratedServiceId);
         $this->serviceIdDecorator->decorate($decoratedServiceId)->willReturn($decoratedServiceId);
         
-        $this->serviceFactory->create(Argument::type(IContainer::class), $serviceType, $decoratedServiceId, FakeService::class, [])->willReturn($this->service);
+        $this->serviceFactory->create(Argument::type(ContainerInterface::class), $serviceType, $decoratedServiceId, FakeService::class, [])->willReturn($this->service);
         
         // act
         $container = new Container($this->serviceIdDecorator->reveal(), $this->serviceFactory->reveal());
@@ -271,7 +271,7 @@ class ContainerTest extends TestCase
         $this->serviceIdDecorator->decorate($serviceId)->willReturn($serviceId);
         $this->serviceIdDecorator->decorate($wrongServiceId)->willReturn($wrongServiceId);
         
-        $this->serviceFactory->create(Argument::type(IContainer::class), $serviceType, $serviceId, FakeService::class, [])->willReturn($this->service);
+        $this->serviceFactory->create(Argument::type(ContainerInterface::class), $serviceType, $serviceId, FakeService::class, [])->willReturn($this->service);
         
         // act
         $container = new Container($this->serviceIdDecorator->reveal(), $this->serviceFactory->reveal());
@@ -295,7 +295,7 @@ class ContainerTest extends TestCase
         $this->serviceIdDecorator->decorate($serviceId)->willReturn($decoratedServiceId);
         $this->serviceIdDecorator->decorate($decoratedServiceId)->willReturn($decoratedServiceId);
         
-        $this->serviceFactory->create(Argument::type(IContainer::class), $serviceType, $decoratedServiceId, FakeService::class, [])->willReturn($this->service);
+        $this->serviceFactory->create(Argument::type(ContainerInterface::class), $serviceType, $decoratedServiceId, FakeService::class, [])->willReturn($this->service);
         
         // act
         $container = new Container($this->serviceIdDecorator->reveal(), $this->serviceFactory->reveal());
@@ -318,7 +318,7 @@ class ContainerTest extends TestCase
         $this->serviceIdDecorator->decorate($serviceId)->willReturn($decoratedServiceId);
         $this->serviceIdDecorator->decorate($decoratedServiceId)->willReturn($decoratedServiceId);
         
-        $this->serviceFactory->create(Argument::type(IContainer::class), $serviceType, $decoratedServiceId, FakeService::class, [])->willReturn($this->service);
+        $this->serviceFactory->create(Argument::type(ContainerInterface::class), $serviceType, $decoratedServiceId, FakeService::class, [])->willReturn($this->service);
         
         // act
         $container = new Container($this->serviceIdDecorator->reveal(), $this->serviceFactory->reveal());

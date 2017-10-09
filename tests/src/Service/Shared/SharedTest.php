@@ -10,8 +10,8 @@
  */
 namespace Kocuj\Di\Tests\Service\Shared;
 
-use Kocuj\Di\ArgumentParser\IArgumentParser;
-use Kocuj\Di\Container\IContainer;
+use Kocuj\Di\ArgumentParser\ArgumentParserInterface;
+use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\Shared\Shared;
 use Kocuj\Di\TestsLib\FakeService;
 use PHPUnit\Framework\TestCase;
@@ -34,8 +34,8 @@ class SharedTest extends TestCase
     {
         // arrange
         $id = 'ThisService';
-        $argumentParser = $this->prophesize(IArgumentParser::class);
-        $container = $this->prophesize(IContainer::class);
+        $argumentParser = $this->prophesize(ArgumentParserInterface::class);
+        $container = $this->prophesize(ContainerInterface::class);
         foreach ($arguments as $argument) {
             if ($argumentsAreServices) {
                 $argumentParser->parse($container, $id, $argument)->willReturn($argument['service']);

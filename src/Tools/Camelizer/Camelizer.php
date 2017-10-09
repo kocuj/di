@@ -15,7 +15,7 @@ use Stringy\Stringy;
 /**
  * Camelizer
  */
-class Camelizer implements ICamelizer
+class Camelizer implements CamelizerInterface
 {
 
     /**
@@ -24,7 +24,7 @@ class Camelizer implements ICamelizer
      * @param string $text
      *            Text to camelize
      * @return string Camelized text
-     * @see \Kocuj\Di\Tools\Camelizer\ICamelizer::camelize() @codeCoverageIgnore
+     * @see \Kocuj\Di\Tools\Camelizer\CamelizerInterface::camelize() @codeCoverageIgnore
      */
     public function camelize(string $text): string
     {

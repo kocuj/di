@@ -11,20 +11,20 @@
 namespace Kocuj\Di\Service;
 
 use Kocuj\Di\ArgumentParser\ArgumentParser;
-use Kocuj\Di\Container\IContainer;
+use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\Shared\Shared;
 use Kocuj\Di\Service\Standard\Standard;
 
 /**
  * Service factory
  */
-class ServiceFactory implements IServiceFactory
+class ServiceFactory implements ServiceFactoryInterface
 {
 
     /**
      * Create standard or shared service
      *
-     * @param IContainer $container
+     * @param ContainerInterface $container
      *            Dependency injection container for services
      * @param ServiceType $serviceType
      *            Service type
@@ -34,10 +34,10 @@ class ServiceFactory implements IServiceFactory
      *            Source for service to create
      * @param array $arguments
      *            Service arguments to parse
-     * @return IService Service creator object
-     * @see \Kocuj\Di\Service\IServiceFactory::create() @codeCoverageIgnore
+     * @return ServiceInterface Service creator object
+     * @see \Kocuj\Di\Service\ServiceFactoryInterface::create() @codeCoverageIgnore
      */
-    public function create(IContainer $container, ServiceType $serviceType, string $id, string $source, array $arguments = []): IService
+    public function create(ContainerInterface $container, ServiceType $serviceType, string $id, string $source, array $arguments = []): ServiceInterface
     {
         // exit
         switch ($serviceType->getValue()) {

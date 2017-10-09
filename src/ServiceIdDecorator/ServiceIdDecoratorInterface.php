@@ -1,7 +1,7 @@
 <?php
 
 /**
- * IServiceIdDecorator.php
+ * ServiceIdDecoratorInterface.php
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
@@ -13,7 +13,7 @@ namespace Kocuj\Di\ServiceIdDecorator;
 /**
  * Service identifier decorator interface
  */
-interface IServiceIdDecorator
+interface ServiceIdDecoratorInterface
 {
 
     /**
