@@ -50,7 +50,7 @@ $container->addStandard('main', Main::class, [
 $container->get('main')->display();
 ```
 
-Więcej informacji możesz uzyskać przeglądając przykłady dołączone do projektu lub zaglądając na [stronę internetową projektu](http://phplibs.kocuj.pl/en/kocuj-di).
+Więcej informacji możesz uzyskać przeglądając przykłady dołączone do projektu lub zaglądając na [stronę internetową projektu](http://libs.kocuj.pl/en/kocuj-di).
 
 ## Testowanie
 
@@ -64,7 +64,7 @@ Proszę zobaczyć [informacje o współpracy](https://github.com/kocuj/di/blob/m
 
 ## Bezpieczeństwo
 
-Jeżeli odkryłeś jakikolwiek problem z bezpieczeństwem, proszę abyś się ze mną skontaktował używając [formularza kontaktowego na stronie internetowej projektu](http://phplibs.kocuj.pl/pl/kontakt/), zamiast zgłaszać publiczny błąd.
+Jeżeli odkryłeś jakikolwiek problem z bezpieczeństwem, proszę abyś się ze mną skontaktował używając [formularza kontaktowego na stronie internetowej projektu](http://libs.kocuj.pl/pl/kontakt/), zamiast zgłaszać publiczny błąd.
 
 ## Licencja
 
@@ -72,4 +72,4 @@ Licencja MIT. Proszę zapoznać się z [plikiem licencji](https://github.com/koc
 
 ## Czy mogę Cię wynająć do innych projektów programistycznych?
 
-Tak! Zobacz moją domową stronę internetową [kocuj.pl](http://kocuj.pl/) lub po prostu pozostaw mi informację używając [formularza kontaktowego](http://phplibs.kocuj.pl/en/contact).
+Tak! Zobacz moją domową stronę internetową [kocuj.pl](http://kocuj.pl/) lub po prostu pozostaw mi informację używając [formularza kontaktowego](http://libs.kocuj.pl/en/contact).

@@ -50,7 +50,7 @@ $container->addStandard('main', Main::class, [
 $container->get('main')->display();
 ```
 
-For more information you can see examples included in this project or by looking on [project website](http://phplibs.kocuj.pl/en/kocuj-di).
+For more information you can see examples included in this project or by looking on [project website](http://libs.kocuj.pl/en/kocuj-di).
 
 ## Testing
 
@@ -64,7 +64,7 @@ Please see [CONTRIBUTING](https://github.com/kocuj/di/blob/master/CONTRIBUTING.m
 
 ## Security
 
-If you discover any security related issues, please contact me by using [contact form on project website](http://phplibs.kocuj.pl/en/contact/) instead of using the issue tracker.
+If you discover any security related issues, please contact me by using [contact form on project website](http://libs.kocuj.pl/en/contact/) instead of using the issue tracker.
 
 ## License
 
@@ -72,4 +72,4 @@ The MIT License (MIT). Please see [License File](https://github.com/kocuj/di/blo
 
 ## Can I hire you to other programming projects?
 
-Yes! Visit my homepage [kocuj.pl](http://kocuj.pl/) (currently only in Polish language) or simply leave me a note by using the [contact form](http://phplibs.kocuj.pl/en/contact).
+Yes! Visit my homepage [kocuj.pl](http://kocuj.pl/) (currently only in Polish language) or simply leave me a note by using the [contact form](http://libs.kocuj.pl/en/contact).
