@@ -7,6 +7,9 @@
 	<transformer>
 		<target>doc/phpdoc</target>
 	</transformer>
+	<transformations>
+		<template name="responsive" />
+	</transformations>
 	<files>
 		<directory>.</directory>
 		<ignore>vendor/*</ignore>
