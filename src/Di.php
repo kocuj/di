@@ -13,7 +13,9 @@ namespace Kocuj\Di;
 use Kocuj\Di\Container\Container;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\ServiceFactory;
+use Kocuj\Di\Service\ServiceFactoryInterface;
 use Kocuj\Di\ServiceIdDecorator\ServiceIdDecorator;
+use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
 use Kocuj\Di\Tools\Camelizer\Camelizer;
 
 /**

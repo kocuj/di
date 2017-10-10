@@ -36,7 +36,10 @@ $container->addStandard('main', Main::class, [
 ]);
 // execute
 for ($z = 0; $z < 5; ++ $z) {
-    $container->getMain()->display();
+    $container->/**
+     * @scrutinizer ignore-call
+     */
+    getMain()->display();
 }
 for ($z = 0; $z < 5; ++ $z) {
     $container->get('main')->display();

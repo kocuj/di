@@ -47,6 +47,8 @@ class ServiceFactory implements ServiceFactoryInterface
             case ServiceType::SHARED:
                 return new Shared(new ArgumentParser(), $container, $id, $source, $arguments);
                 break;
+            default:
+                throw new \Exception('This exception will not be executed!');
         }
     }
 }
