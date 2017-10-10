@@ -39,6 +39,8 @@ Example of using the library:
 ```php
 <?php
 
+use Kocuj\Di\Di;
+
 // initialize DI container
 $di = new Di();
 // get DI container
