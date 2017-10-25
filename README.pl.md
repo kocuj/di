@@ -76,7 +76,7 @@ Proszę zobaczyć [informacje o współpracy](https://github.com/kocuj/di/blob/m
 
 ## Bezpieczeństwo
 
-Jeżeli odkryłeś jakikolwiek problem z bezpieczeństwem, proszę abyś się ze mną skontaktował używając [formularza kontaktowego na stronie internetowej projektu](http://libs.kocuj.pl/pl/kontakt/), zamiast zgłaszać publiczny błąd.
+Jeżeli odkryłeś jakikolwiek problem z bezpieczeństwem, proszę abyś się ze mną skontaktował używając [formularza kontaktowego na stronie internetowej projektu](http://libs.kocuj.pl/pl/contact/), zamiast zgłaszać publiczny błąd.
 
 ## Licencja
 
