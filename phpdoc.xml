@@ -8,7 +8,7 @@
 		<target>doc/phpdoc</target>
 	</transformer>
 	<transformations>
-		<template name="responsive" />
+		<template name="responsive-twig" />
 	</transformations>
 	<files>
 		<directory>.</directory>
