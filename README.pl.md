@@ -47,7 +47,7 @@ Aby użyć biblioteki Kocuj DI musisz najpierw zainicjalizować ją:
 $di = new Di();
 ```
 
-Utworzy to obiekt biblioteki Kocuj DI. Możesz utworzyć więcej obiektów Di, ale nie jest to zalecane.
+Utworzy to obiekt biblioteki Kocuj DI. Możesz utworzyć więcej obiektów Di, ale nie jest to zalecane. Lepszym rozwiązaniem jest utworzenie większej ilości kontenerów DI, co zostanie wyjaśnione w dalszej części niniejszej dokumentacji.
 
 Po skonstruowaniu, zmienna $di będzie zawierała jeden kontener do wstrzykiwania zależności, które możesz pobrać używając następującego kodu:
 
@@ -59,6 +59,12 @@ Możesz też utworzyć więcej kontenerów:
 
 ```php
 $myContainer = $di->create();
+```
+
+Możesz także utworzyć nowy kontener bazujący na już istniejącym kontenerze używając następującego kodu:
+
+```php
+$otherContainer = $di->copy($myContainer);
 ```
 
 Od tego momentu możesz używać nowego kontenera używając metod na zmiennej $myContainer. Jednakże niniejsza dokumentacja będzie używała domyślnego kontenera do wyjaśnień dotyczących używania biblioteki Kocuj DI.

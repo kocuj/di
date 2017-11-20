@@ -62,7 +62,8 @@ class Di
     /**
      * Create dependency injection container for services
      *
-     * @return ContainerInterface @codeCoverageIgnore
+     * @return ContainerInterface New container
+     *         @codeCoverageIgnore
      */
     public function create(): ContainerInterface
     {
@@ -71,9 +72,24 @@ class Di
     }
 
     /**
+     * Copy container
+     *
+     * @param ContainerInterface $fromContainer
+     *            Container from which copy will be made
+     * @return ContainerInterface Copied container
+     *         @codeCoverageIgnore
+     */
+    public function copy(ContainerInterface $fromContainer): ContainerInterface
+    {
+        // exit
+        return clone $fromContainer;
+    }
+
+    /**
      * Get default dependency injection container for services
      *
-     * @return ContainerInterface @codeCoverageIgnore
+     * @return ContainerInterface Default container
+     *         @codeCoverageIgnore
      */
     public function getDefault(): ContainerInterface
     {

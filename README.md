@@ -47,7 +47,7 @@ To use the Kocuj DI library you must first initialize it:
 $di = new Di();
 ```
 
-It will create a Kocuj DI library object. You can create more Di objects, but it is not recommended.
+It will create a Kocuj DI library object. You can create more Di objects, but it is not recommended. The better solution is to create more DI containers, which will be explained in the next part of this documentation.
 
 After the construction, the $di variable will have one container for Dependency Injection, which you can get by using the following code:
 
@@ -59,6 +59,12 @@ You can also create more containers:
 
 ```php
 $myContainer = $di->create();
+```
+
+You can also create new container based on already existing container by using the following code:
+
+```php
+$otherContainer = $di->copy($myContainer);
 ```
 
 From now on you can use new container by using methods on $myContainer variable. However, the following documentation will use default container for explanations about using the Kocuj DI library.

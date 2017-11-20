@@ -43,10 +43,8 @@ class ServiceFactory implements ServiceFactoryInterface
         switch ($serviceType->getValue()) {
             case ServiceType::STANDARD:
                 return new Standard(new ArgumentParser(), $container, $id, $source, $arguments);
-                break;
             case ServiceType::SHARED:
                 return new Shared(new ArgumentParser(), $container, $id, $source, $arguments);
-                break;
             default:
                 throw new \Exception('This exception will not be executed!');
         }

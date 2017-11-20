@@ -58,6 +58,22 @@ class Container implements ContainerInterface
     }
 
     /**
+     * Cloning container
+     *
+     * @return void @codeCoverageIgnore
+     */
+    public function __clone()
+    {
+        // copy services definitions
+        $oldDefinitions = $this->definitions;
+        // recreate services
+        $this->definitions = [];
+        foreach ($oldDefinitions as $definition) {
+            $this->add($definition['type'], $definition['clonedata']['id'], $definition['clonedata']['source'], $definition['clonedata']['arguments']);
+        }
+    }
+
+    /**
      * Add standard or shared service
      *
      * @param ServiceType $serviceType
@@ -83,7 +99,12 @@ class Container implements ContainerInterface
         // set service definition
         $this->definitions[$decoratedId] = [
             'service' => $this->serviceFactory->create($this, $serviceType, $decoratedId, $source, $arguments),
-            'type' => $serviceType
+            'type' => $serviceType,
+            'clonedata' => [
+                'id' => $id,
+                'source' => $source,
+                'arguments' => $arguments
+            ]
         ];
         // exit
         return $this;
