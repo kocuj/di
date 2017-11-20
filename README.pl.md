@@ -61,12 +61,6 @@ Możesz też utworzyć więcej kontenerów:
 $myContainer = $di->create();
 ```
 
-Możesz także utworzyć nowy kontener bazujący na już istniejącym kontenerze używając następującego kodu:
-
-```php
-$otherContainer = $di->copy($myContainer);
-```
-
 Od tego momentu możesz używać nowego kontenera używając metod na zmiennej $myContainer. Jednakże niniejsza dokumentacja będzie używała domyślnego kontenera do wyjaśnień dotyczących używania biblioteki Kocuj DI.
 
 Po utworzeniu kontenera (domyślnego lub innego), możesz dodać serwisy do niego. Istnieją dwa typy serwisów:

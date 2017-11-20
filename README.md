@@ -61,12 +61,6 @@ You can also create more containers:
 $myContainer = $di->create();
 ```
 
-You can also create new container based on already existing container by using the following code:
-
-```php
-$otherContainer = $di->copy($myContainer);
-```
-
 From now on you can use new container by using methods on $myContainer variable. However, the following documentation will use default container for explanations about using the Kocuj DI library.
 
 After creating the container (default or other), you can add services into it. There are two types of services:
