@@ -31,6 +31,7 @@ Następujące wersje PHP są obsługiwane przez tą wersję:
 
 * PHP 7.0
 * PHP 7.1
+* PHP 7.2
 
 ## Dokumentacja
 
@@ -64,7 +65,7 @@ $myContainer = $di->create();
 Możesz także utworzyć nowy kontener bazujący na już istniejącym kontenerze używając następującego kodu:
 
 ```php
-$otherContainer = $di->copy($myContainer);
+$myContainer = $di->copy($oldContainer);
 ```
 
 Od tego momentu możesz używać nowego kontenera używając metod na zmiennej $myContainer. Jednakże niniejsza dokumentacja będzie używała domyślnego kontenera do wyjaśnień dotyczących używania biblioteki Kocuj DI.
@@ -97,7 +98,7 @@ Na przykład, aby dodać serwis współdzielony z klasy \Services\Service z iden
 $myContainer->addShared('someService', \Services\Service::class);
 ```
 
-Jednakże, najlepszą funkcjonalnością biblioteki Kocuj DI jest automatyczne rozwiązywanie zależności pomiędzy serwisami. Aby użyć tej funkcjonalności, powinien być przynajmniej jeden argument wysłany do konstruktora serwisu. Miejscem do wykonania tego jest argument $arguments.
+Jednakże najlepszą funkcjonalnością biblioteki Kocuj DI jest automatyczne rozwiązywanie zależności pomiędzy serwisami. Aby użyć tej funkcjonalności, powinien być przynajmniej jeden argument wysłany do konstruktora serwisu. Miejscem do wykonania tego jest argument $arguments.
 
 Każdy argument w $arguments zawiera tablicę z jednym elementem z indeksem "type" i z drugim z innym indeksem, który zależy od wartości ustawionej w indeksie "type". Element z indeksem "type" zawiera nazwę typu argumentu.
 
@@ -121,7 +122,7 @@ $myContainer->addShared('otherService', \Services\OtherService::class, [
 ]);
 ```
 
-Kolejność dodawania serwisów nie jest ważna, ponieważ podczas konstrukcji serwisu wszystkie zależności będą automatycznie rozwiązane.
+Kolejność dodawania serwisów do kontenera nie jest ważna, ponieważ podczas konstrukcji serwisu wszystkie zależności będą automatycznie rozwiązane.
 
 Aby pobrać obiekt serwisu, możesz użyć następującego kodu:
 
@@ -187,4 +188,4 @@ Licencja MIT. Proszę zapoznać się z [plikiem licencji](https://github.com/koc
 
 ## Czy mogę Cię wynająć do innych projektów programistycznych?
 
-Tak! Zobacz moją domową stronę internetową [kocuj.pl](http://kocuj.pl/) lub po prostu pozostaw mi informację używając [formularza kontaktowego](http://libs.kocuj.pl/pl/contact).
+Tak! Zobacz moją domową stronę internetową [kocuj.pl](http://kocuj.pl/) lub po prostu pozostaw mi informację używając [formularza kontaktowego](http://kocuj.pl/kontakt).

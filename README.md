@@ -31,6 +31,7 @@ The following versions of PHP are supported by this version:
 
 * PHP 7.0
 * PHP 7.1
+* PHP 7.2
 
 ## Documentation
 
@@ -64,7 +65,7 @@ $myContainer = $di->create();
 You can also create new container based on already existing container by using the following code:
 
 ```php
-$otherContainer = $di->copy($myContainer);
+$myContainer = $di->copy($oldContainer);
 ```
 
 From now on you can use new container by using methods on $myContainer variable. However, the following documentation will use default container for explanations about using the Kocuj DI library.
@@ -121,7 +122,7 @@ $myContainer->addShared('otherService', \Services\OtherService::class, [
 ]);
 ```
 
-The order of adding services is not important, because during construction of service all dependencies will be automatically resolved.
+The order of adding services to container is not important, because during construction of service all dependencies will be automatically resolved.
 
 To get service object you can use the following code:
 
@@ -187,4 +188,4 @@ The MIT License (MIT). Please see [License File](https://github.com/kocuj/di/blo
 
 ## Can I hire you to other programming projects?
 
-Yes! Visit my homepage [kocuj.pl](http://kocuj.pl/) (currently only in Polish language) or simply leave me a note by using the [contact form](http://libs.kocuj.pl/en/contact).
+Yes! Visit my homepage [kocuj.pl](http://kocuj.pl/) (currently only in Polish language) or simply leave me a note by using the [contact form](http://kocuj.pl/kontakt) (currently only in Polish language).
