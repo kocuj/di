@@ -33,8 +33,14 @@
 		}
 	},
 	"keywords" : [
-		"dependency injection",
-		"di",
+		"di-container",
+		"dependency-injection",
+		"php",
+		"psr-1",
+		"psr-2",
+		"psr-4",
+		"php7",
+		"oop",
 		"container"
 	]
 }
