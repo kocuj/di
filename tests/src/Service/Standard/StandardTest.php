@@ -5,7 +5,7 @@
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
- * @copyright Copyright (c) 2017 kocuj.pl
+ * @copyright Copyright (c) 2017-2018 kocuj.pl
  * @package kocuj_di_tests
  */
 namespace Kocuj\Di\Tests\Service\Standard;
@@ -15,6 +15,7 @@ use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\Standard\Standard;
 use Kocuj\Di\TestsLib\FakeService;
 use PHPUnit\Framework\TestCase;
+use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
 
 /**
  * Tests for Standard object
@@ -34,19 +35,22 @@ class StandardTest extends TestCase
     {
         // arrange
         $id = 'ThisService';
-        $argumentParser = $this->prophesize(ArgumentParserInterface::class);
         $container = $this->prophesize(ContainerInterface::class);
-        foreach ($arguments as $argument) {
+        $argumentParserFactory = $this->prophesize(ArgumentParserFactoryInterface::class);
+        foreach ($arguments as $key => $argument) {
+            $argumentParser = $this->prophesize(ArgumentParserInterface::class);
             if ($argumentsAreServices) {
-                $argumentParser->parse($container, $id, $argument)->willReturn($argument['service']);
+                $argumentParserFactory->create($container, $id, $argument)->willReturn($argumentParser);
+                $argumentParser->parse()->willReturn($argument['service']);
             } else {
-                $argumentParser->parse($container, $id, $argument)->willReturn($argument['value']);
+                $argumentParserFactory->create($container, $id, $argument)->willReturn($argumentParser);
+                $argumentParser->parse()->willReturn($argument['value']);
             }
         }
         $source = FakeService::class;
         
         // act
-        $standard = new Standard($argumentParser->reveal(), $container->reveal(), $id, $source, $arguments);
+        $standard = new Standard($argumentParserFactory->reveal(), $container->reveal(), $id, $source, $arguments);
         $service1 = $standard->getService();
         $service2 = $standard->getService();
         
@@ -63,7 +67,7 @@ class StandardTest extends TestCase
     }
 
     /**
-     * Get value for the selected service
+     * Testing get value for the selected service
      *
      * @param array $arguments
      *            Arguments
@@ -76,7 +80,7 @@ class StandardTest extends TestCase
     }
 
     /**
-     * Get service for the selected service
+     * Testing get service for the selected service
      *
      * @param array $arguments
      *            Arguments
@@ -89,7 +93,7 @@ class StandardTest extends TestCase
     }
 
     /**
-     * Provider for get value for the selected service
+     * Provider for testing get value for the selected service
      *
      * @return array Data for get value for the selected service
      */
@@ -112,7 +116,7 @@ class StandardTest extends TestCase
     }
 
     /**
-     * Provider for get service for the selected service
+     * Provider for testing get service for the selected service
      *
      * @return array Data for get service for the selected service
      */
