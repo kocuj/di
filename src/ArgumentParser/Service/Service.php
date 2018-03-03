@@ -59,8 +59,8 @@ class Service implements ArgumentParserInterface
         $this->argument = $argument;
         // check argument in "service" element - for compatibility with 1.2.0
         if (isset($this->argument['service'])) {
-            trigger_error('Argument "service" is deprecated and will be removed in version 2.0.0; please use "value" instead', E_USER_NOTICE);
             $this->argument['value'] = $this->argument['service'];
+            trigger_error('Argument "service" is deprecated and will be removed in version 2.0.0; please use "value" instead', E_USER_NOTICE);
         } else {
             // check argument
             if (! isset($this->argument['value'])) {
