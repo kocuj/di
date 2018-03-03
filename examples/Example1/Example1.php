@@ -5,7 +5,7 @@
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
- * @copyright Copyright (c) 2017 kocuj.pl
+ * @copyright Copyright (c) 2017-2018 kocuj.pl
  * @package kocuj_di
  */
 namespace Kocuj\Di\Examples\Example1;
@@ -27,11 +27,11 @@ $container->addShared('output', OutputService::class);
 $container->addStandard('main', Main::class, [
     [
         'type' => 'service',
-        'service' => 'input'
+        'value' => 'input'
     ],
     [
         'type' => 'service',
-        'service' => 'output'
+        'value' => 'output'
     ]
 ]);
 // execute
