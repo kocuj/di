@@ -17,6 +17,8 @@ Niniejszy pakiet jest zgodny z [PSR-1](https://github.com/php-fig/fig-standards/
 
 ## [Pobierz 1.3.0](https://github.com/kocuj/di/releases/tag/v1.3.0)
 
+NIE UŻYWAJ TEJ GAŁĘZI NA PRODUKCJI! TA GAŁĄŹ ISTNIEJE TYLKO DLA PROGRAMOWANIA WERSJI 2.0.
+
 ## Instalacja
 
 Przy użyciu Composera:

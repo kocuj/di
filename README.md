@@ -17,6 +17,8 @@ This package is compliant with [PSR-1](https://github.com/php-fig/fig-standards/
 
 ## [Download 1.3.0](https://github.com/kocuj/di/releases/tag/v1.3.0)
 
+DO NOT USE THIS BRANCH ON PRODUCTION! THIS BRANCH IS ONLY FOR DEVELOPMENT OF VERSION 2.0.
+
 ## Install
 
 Via Composer:
