@@ -15,6 +15,9 @@ use Psr\Container\ContainerExceptionInterface;
 /**
  * Exception
  */
-class Exception extends ContainerException implements ContainerExceptionInterface
+class Exception extends /**
+ * @scrutinizer ignore-deprecated
+ */
+ContainerException implements ContainerExceptionInterface
 {
 }
