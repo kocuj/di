@@ -15,7 +15,7 @@ Container for design pattern Dependency Injection in PHP 7
 
 This package is compliant with [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). If you notice compliance oversights, please send a patch via pull request.
 
-## [Download 1.2.0](https://github.com/kocuj/di/releases/tag/v1.2.0)
+## [Download 1.3.0](https://github.com/kocuj/di/releases/tag/v1.3.0)
 
 ## Install
 
@@ -100,12 +100,12 @@ $myContainer->addShared('someService', \Services\Service::class);
 
 However, the best feature of the Kocuj DI library is to automatically resolving dependencies between services. To use this feature, there should be at least one argument sent to a service constructor. The place to do so is in $arguments argument.
 
-Each argument in $arguments contains an array with one element with index "type" and second with different index which depends on value set in index "type". Element with index "type" contains a name of argument type.
+Each argument in $arguments contains an array with one element with index "type" and second with index "value" which value depends on value set in index "type". Element with index "type" contains a name of argument type.
 
-There are two types of arguments:
+There are two types of arguments selected by element with index "type":
 
-* "service" - this argument will have a service from the same container; to set service to get, there must be a second element in array with index "service" containing service identifier;
-* "value" - this argument will have a value; to set this value, there must be a second element in array with index "value" containing this value.
+* "service" - to set service to get, there must be a second element in array with index "value" containing service identifier;
+* "value" - to set value, there must be a second element in array with index "value" containing this value.
 
 For example, to add shared service from class \Services\OtherService with "otherService" identifier, which has constructor `__construct(\Services\Service $service, bool $status)` and require $status to set to true, use the following code:
 
@@ -113,7 +113,7 @@ For example, to add shared service from class \Services\OtherService with "other
 $myContainer->addShared('otherService', \Services\OtherService::class, [
     [
         'type' => 'service',
-        'service' => \Services\Service::class
+        'value' => \Services\Service::class
     ],
     [
         'type' => 'value',
@@ -136,7 +136,13 @@ or:
 $myContainer->getOtherService();
 ```
 
-Additionally you can check type of service by using the following method: `getType(string $id): ServiceType`. You can also check if service exists in container by using the following method: `has($id): bool`.
+Additionally you can check type of service by using the following method: `checkType(string $id, ServiceType $serviceType): bool`. You can also check if service exists in container by using the following method: `has($id): bool`.
+
+To control any wrong situations, there are the following exceptions available:
+
+* `\Kocuj\Di\ArgumentParser\Exception` - for problems with argument with other services and/or values for created service;
+* `\Kocuj\Di\Container\Exception` - for problem with creating or getting service in container;
+* `\Kocuj\Di\Service\Exception` - for problems with service type; however, this exception will not be used when this library is used correctly.
 
 Example of using the library:
 
@@ -155,11 +161,11 @@ $container->addShared('output', OutputService::class);
 $container->addStandard('main', Main::class, [
     [
         'type' => 'service',
-        'service' => 'input'
+        'value' => 'input'
     ],
     [
         'type' => 'service',
-        'service' => 'output'
+        'value' => 'output'
     ]
 ]);
 // execute
@@ -172,6 +178,12 @@ For more information you can see examples included in this project or by looking
 
 ``` bash
 $ vendor/bin/phpunit
+```
+
+## Creating programming documentation
+
+``` bash
+$ vendor/bin/phpdoc
 ```
 
 ## Contributing

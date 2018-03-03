@@ -15,7 +15,7 @@ Kontener dla wzorca projektowego "wstrzykiwanie zależności" (Dependency Inject
 
 Niniejszy pakiet jest zgodny z [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Jeżeli zauważyłeś niezgodność, proszę abyś wysłał poprawkę przez prośbę o pociągnięcie danych ("pull request").
 
-## [Pobierz 1.2.0](https://github.com/kocuj/di/releases/tag/v1.2.0)
+## [Pobierz 1.3.0](https://github.com/kocuj/di/releases/tag/v1.3.0)
 
 ## Instalacja
 
@@ -100,12 +100,12 @@ $myContainer->addShared('someService', \Services\Service::class);
 
 Jednakże najlepszą funkcjonalnością biblioteki Kocuj DI jest automatyczne rozwiązywanie zależności pomiędzy serwisami. Aby użyć tej funkcjonalności, powinien być przynajmniej jeden argument wysłany do konstruktora serwisu. Miejscem do wykonania tego jest argument $arguments.
 
-Każdy argument w $arguments zawiera tablicę z jednym elementem z indeksem "type" i z drugim z innym indeksem, który zależy od wartości ustawionej w indeksie "type". Element z indeksem "type" zawiera nazwę typu argumentu.
+Każdy argument w $arguments zawiera tablicę z jednym elementem z indeksem "type" i z drugim z indeksem "value", którego wartość zależy od wartości ustawionej w indeksie "type". Element z indeksem "type" zawiera nazwę typu argumentu.
 
-Istnieją dwa typy argumentów:
+Istnieją dwa typy argumentów wybierane przez element z indeksem "type":
 
-* "service" - ten argument określa serwis z tego samego kontenera; aby ustawić serwis do pobrania, musi istnieć drugi element w tablicy z indeksem "service" zawierającym identyfikator serwisu;
-* "value" - ten argument określa wartość; aby ustawić tą wartość, musi istnieć drugi element w tablicy z indeksem "value" zawierającym tą wartość.
+* "service" - aby ustawić serwis do pobrania, musi istnieć drugi element w tablicy z indeksem "value" zawierającym identyfikator serwisu;
+* "value" - aby ustawić wartość, musi istnieć drugi element w tablicy z indeksem "value" zawierającym tą wartość.
 
 Na przykład, aby dodać serwis współdzielony z klasy \Services\OtherService z identyfikatorem "otherService", który posiada konstruktor `__construct(\Services\Service $service, bool $status)` i wymaga, aby $status był ustawiony na true, użyj następującego kodu:
 
@@ -113,7 +113,7 @@ Na przykład, aby dodać serwis współdzielony z klasy \Services\OtherService z
 $myContainer->addShared('otherService', \Services\OtherService::class, [
     [
         'type' => 'service',
-        'service' => \Services\Service::class
+        'value' => \Services\Service::class
     ],
     [
         'type' => 'value',
@@ -136,7 +136,13 @@ lub:
 $myContainer->getOtherService();
 ```
 
-Dodatkowo możesz sprawdzić typ serwisu używając następującej metody: `getType(string $id): ServiceType`. Możesz też sprawdzić, czy serwis istnieje w kontenerze używając następującej metody: `has($id): bool`.
+Dodatkowo możesz sprawdzić typ serwisu używając następującej metody: `checkType(string $id, ServiceType $serviceType): bool`. Możesz też sprawdzić, czy serwis istnieje w kontenerze używając następującej metody: `has($id): bool`.
+
+Aby kontrolować wszystkie nieprawidłowe sytuacje, istnieją następujące wyjątki:
+
+* `\Kocuj\Di\ArgumentParser\Exception` - dla problemów z argumentem z innymi serwisami i/lub wartościami dla tworzonego serwisu;
+* `\Kocuj\Di\Container\Exception` - dla problemów z tworzeniem lub pobieraniem serwisu w kontenerze;
+* `\Kocuj\Di\Service\Exception` - dla problemów z typem serwisu; jednakże ten wyjątek nie będzie używany, gdy biblioteka jest używana poprawnie.
 
 Przykład użycia biblioteki:
 
@@ -155,11 +161,11 @@ $container->addShared('output', OutputService::class);
 $container->addStandard('main', Main::class, [
     [
         'type' => 'service',
-        'service' => 'input'
+        'value' => 'input'
     ],
     [
         'type' => 'service',
-        'service' => 'output'
+        'value' => 'output'
     ]
 ]);
 // execute
@@ -172,6 +178,12 @@ Więcej informacji możesz uzyskać przeglądając przykłady dołączone do pro
 
 ``` bash
 $ vendor/bin/phpunit
+```
+
+## Tworzenie dokumentacji programistycznej
+
+``` bash
+$ vendor/bin/phpdoc
 ```
 
 ## Współpraca
