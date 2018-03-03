@@ -5,13 +5,12 @@
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
- * @copyright Copyright (c) 2017 kocuj.pl
+ * @copyright Copyright (c) 2017-2018 kocuj.pl
  * @package kocuj_di
  */
 namespace Kocuj\Di\Service\Shared;
 
-use Kocuj\Di\ArgumentParser\ArgumentParser;
-use Kocuj\Di\ArgumentParser\ArgumentParserInterface;
+use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\ServiceInterface;
 
@@ -22,11 +21,11 @@ class Shared implements ServiceInterface
 {
 
     /**
-     * Service argument parser
+     * Service argument parser factory
      *
-     * @var ArgumentParserInterface
+     * @var ArgumentParserFactoryInterface
      */
-    private $argumentParser;
+    private $argumentParserFactory;
 
     /**
      * Dependency injection container for services
@@ -66,8 +65,8 @@ class Shared implements ServiceInterface
     /**
      * Constructor
      *
-     * @param ArgumentParserInterface $argumentParser
-     *            Service argument parser
+     * @param ArgumentParserFactoryInterface $argumentParserFactory
+     *            Service argument parser factory
      * @param ContainerInterface $container
      *            Dependency injection container for services
      * @param string $id
@@ -77,10 +76,10 @@ class Shared implements ServiceInterface
      * @param array $arguments
      *            Service arguments to parse
      */
-    public function __construct(ArgumentParserInterface $argumentParser, ContainerInterface $container, string $id, string $source, array $arguments = [])
+    public function __construct(ArgumentParserFactoryInterface $argumentParserFactory, ContainerInterface $container, string $id, string $source, array $arguments = [])
     {
         // remember arguments
-        $this->argumentParser = $argumentParser;
+        $this->argumentParserFactory = $argumentParserFactory;
         $this->container = $container;
         $this->id = $id;
         $this->source = $source;
@@ -102,7 +101,8 @@ class Shared implements ServiceInterface
         // parse arguments
         $parsedArgs = [];
         foreach ($this->arguments as $argument) {
-            $parsedArgs[] = $this->argumentParser->parse($this->container, $this->id, $argument);
+            $obj = $this->argumentParserFactory->create($this->container, $this->id, $argument);
+            $parsedArgs[] = $obj->parse();
         }
         // execute service constructor
         $this->serviceObject = new $this->source(...$parsedArgs);

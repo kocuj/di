@@ -1,7 +1,7 @@
 <?php
 
 /**
- * NotFoundException.php
+ * Exception.php
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
@@ -10,11 +10,11 @@
  */
 namespace Kocuj\Di\Container;
 
-use Psr\Container\NotFoundExceptionInterface;
+use Psr\Container\ContainerExceptionInterface;
 
 /**
  * Exception
  */
-class NotFoundException extends \Exception implements NotFoundExceptionInterface
+class Exception extends ContainerException implements ContainerExceptionInterface
 {
 }

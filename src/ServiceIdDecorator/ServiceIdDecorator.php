@@ -5,7 +5,7 @@
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
- * @copyright Copyright (c) 2017 kocuj.pl
+ * @copyright Copyright (c) 2017-2018 kocuj.pl
  * @package kocuj_di
  */
 namespace Kocuj\Di\ServiceIdDecorator;
@@ -48,7 +48,9 @@ class ServiceIdDecorator implements ServiceIdDecoratorInterface
      */
     public function decorate(string $id): string
     {
+        // set decorated identifier
+        $decoratedId = $this->camelizer->camelize($id);
         // exit
-        return $this->camelizer->camelize($id);
+        return $decoratedId;
     }
 }

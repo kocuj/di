@@ -5,12 +5,11 @@
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
- * @copyright Copyright (c) 2017 kocuj.pl
+ * @copyright Copyright (c) 2017-2018 kocuj.pl
  * @package kocuj_di
  */
 namespace Kocuj\Di\Container;
 
-use Kocuj\Di\Service\ServiceFactory;
 use Kocuj\Di\Service\ServiceFactoryInterface;
 use Kocuj\Di\Service\ServiceType;
 use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
@@ -60,7 +59,7 @@ class Container implements ContainerInterface
     /**
      * Cloning container
      *
-     * @return void @codeCoverageIgnore
+     * @return void
      */
     public function __clone()
     {
@@ -85,7 +84,7 @@ class Container implements ContainerInterface
      * @param array $arguments
      *            Service arguments to inject into constructor
      * @return ContainerInterface This object
-     * @throws ContainerException
+     * @throws Exception
      * @see \Kocuj\Di\Container\ContainerInterface::add()
      */
     public function add(ServiceType $serviceType, string $id, string $source, array $arguments = []): ContainerInterface
@@ -94,7 +93,7 @@ class Container implements ContainerInterface
         $decoratedId = $this->serviceIdDecorator->decorate($id);
         // check if service does not exist already
         if (isset($this->definitions[$decoratedId])) {
-            throw new ContainerException(sprintf('Service "%s" already exists', $decoratedId));
+            throw new Exception(sprintf('Service "%s" already exists', $decoratedId));
         }
         // set service definition
         $this->definitions[$decoratedId] = [
@@ -182,16 +181,36 @@ class Container implements ContainerInterface
     }
 
     /**
-     * Get service type
+     * Check service type
+     *
+     * @param string $id
+     *            Service identifier
+     * @param ServiceType $serviceType
+     *            Service type
+     * @return bool This service has selected type (true) or not (false)
+     * @throws NotFoundException
+     * @see \Kocuj\Di\Container\ContainerInterface::checkType()
+     */
+    public function checkType(string $id, ServiceType $serviceType): bool
+    {
+        // exit
+        return $this->getServiceDefinition($id)['type']->getValue() === $serviceType->getValue();
+    }
+
+    /**
+     * Get service type - for compatibility with 1.2.0
      *
      * @param string $id
      *            Service identifier
      * @return ServiceType Service type
      * @throws NotFoundException
-     * @see \Kocuj\Di\Container\ContainerInterface::getType()
+     * @deprecated
+     * @see \Kocuj\Di\Container\Container::checkType() @codeCoverageIgnore
      */
     public function getType(string $id): ServiceType
     {
+        // set information about deprecated method
+        trigger_error('Method ' . __METHOD__ . ' is deprecated and will be removed in version 2.0.0; please use checkType() method instead', E_USER_NOTICE);
         // exit
         return $this->getServiceDefinition($id)['type'];
     }
@@ -220,13 +239,13 @@ class Container implements ContainerInterface
      * @param array $arguments
      *            Arguments for called method
      * @return object Service object
-     * @throws ContainerException
+     * @throws Exception
      */
     public function __call(string $method, array $arguments)
     {
         // disallow any arguments
         if (! empty($arguments)) {
-            throw new ContainerException('Service must be get without arguments');
+            throw new Exception('Service must be get without arguments');
         }
         // check prefix
         $prefix = substr($method, 0, 3);

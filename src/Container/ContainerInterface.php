@@ -5,7 +5,7 @@
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
- * @copyright Copyright (c) 2017 kocuj.pl
+ * @copyright Copyright (c) 2017-2018 kocuj.pl
  * @package kocuj_di
  */
 namespace Kocuj\Di\Container;
@@ -60,12 +60,22 @@ interface ContainerInterface extends \Psr\Container\ContainerInterface
     public function addShared(string $id, string $source, array $arguments = []): ContainerInterface;
 
     /**
-     * Get service type
+     * Check service type
+     *
+     * @param string $id
+     *            Service identifier
+     * @param ServiceType $serviceType
+     *            Service type
+     * @return bool This service has selected type (true) or not (false)
+     */
+    public function checkType(string $id, ServiceType $serviceType): bool;
+
+    /**
+     * Get service type - for compatibility with 1.2.0
      *
      * @param string $id
      *            Service identifier
      * @return ServiceType Service type
-     * @throws NotFoundException
      */
     public function getType(string $id): ServiceType;
 }

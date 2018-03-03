@@ -5,12 +5,12 @@
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
- * @copyright Copyright (c) 2017 kocuj.pl
+ * @copyright Copyright (c) 2017-2018 kocuj.pl
  * @package kocuj_di
  */
 namespace Kocuj\Di\Service;
 
-use Kocuj\Di\ArgumentParser\ArgumentParser;
+use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\Shared\Shared;
 use Kocuj\Di\Service\Standard\Standard;
@@ -20,6 +20,26 @@ use Kocuj\Di\Service\Standard\Standard;
  */
 class ServiceFactory implements ServiceFactoryInterface
 {
+
+    /**
+     * Service argument parser factory
+     *
+     * @var ArgumentParserFactoryInterface
+     */
+    private $argumentParserFactory;
+
+    /**
+     * Constructor
+     *
+     * @param
+     *            ArgumentParserFactoryInterface Service argument parser factory
+     *            @codeCoverageIgnore
+     */
+    public function __construct(ArgumentParserFactoryInterface $argumentParserFactory)
+    {
+        // remember arguments
+        $this->argumentParserFactory = $argumentParserFactory;
+    }
 
     /**
      * Create standard or shared service
@@ -42,11 +62,11 @@ class ServiceFactory implements ServiceFactoryInterface
         // exit
         switch ($serviceType->getValue()) {
             case ServiceType::STANDARD:
-                return new Standard(new ArgumentParser(), $container, $id, $source, $arguments);
+                return new Standard($this->argumentParserFactory, $container, $id, $source, $arguments);
             case ServiceType::SHARED:
-                return new Shared(new ArgumentParser(), $container, $id, $source, $arguments);
+                return new Shared($this->argumentParserFactory, $container, $id, $source, $arguments);
             default:
-                throw new \Exception('This exception will not be executed!');
+                throw new Exception(sprintf('Unknown service type "%s"', $serviceType->getValue()));
         }
     }
 }

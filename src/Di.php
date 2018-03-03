@@ -5,7 +5,7 @@
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
- * @copyright Copyright (c) 2017 kocuj.pl
+ * @copyright Copyright (c) 2017-2018 kocuj.pl
  * @package kocuj_di
  */
 namespace Kocuj\Di;
@@ -17,6 +17,7 @@ use Kocuj\Di\Service\ServiceFactoryInterface;
 use Kocuj\Di\ServiceIdDecorator\ServiceIdDecorator;
 use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
 use Kocuj\Di\Tools\Camelizer\Camelizer;
+use Kocuj\Di\ArgumentParser\ArgumentParserFactory;
 
 /**
  * Dependency injection containers library
@@ -52,9 +53,10 @@ class Di
      */
     public function __construct()
     {
-        // remember arguments
+        // initialize
         $this->serviceIdDecorator = new ServiceIdDecorator(new Camelizer());
-        $this->serviceFactory = new ServiceFactory();
+        $argumentParserFactory = new ArgumentParserFactory();
+        $this->serviceFactory = new ServiceFactory($argumentParserFactory);
         // create default container
         $this->defaultContainer = $this->create();
     }

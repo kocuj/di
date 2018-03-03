@@ -1,20 +1,18 @@
 <?php
 
 /**
- * NotFoundException.php
+ * Exception.php
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
  * @package kocuj_di
  */
-namespace Kocuj\Di\Container;
-
-use Psr\Container\NotFoundExceptionInterface;
+namespace Kocuj\Di\Service;
 
 /**
  * Exception
  */
-class NotFoundException extends \Exception implements NotFoundExceptionInterface
+class Exception extends \Exception
 {
 }
