@@ -69,13 +69,4 @@ interface ContainerInterface extends \Psr\Container\ContainerInterface
      * @return bool This service has selected type (true) or not (false)
      */
     public function checkType(string $id, ServiceType $serviceType): bool;
-
-    /**
-     * Get service type - for compatibility with 1.2.0
-     *
-     * @param string $id
-     *            Service identifier
-     * @return ServiceType Service type
-     */
-    public function getType(string $id): ServiceType;
 }

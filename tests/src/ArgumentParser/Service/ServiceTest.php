@@ -36,7 +36,7 @@ class ServiceTest extends TestCase
         $container->get($id)->willReturn($service->reveal());
         $argument = [
             'type' => 'service',
-            'service' => $otherId,
+            'service' => $otherId
         ];
         
         // act

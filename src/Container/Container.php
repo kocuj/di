@@ -198,24 +198,6 @@ class Container implements ContainerInterface
     }
 
     /**
-     * Get service type - for compatibility with 1.2.0
-     *
-     * @param string $id
-     *            Service identifier
-     * @return ServiceType Service type
-     * @throws NotFoundException
-     * @deprecated
-     * @see \Kocuj\Di\Container\Container::checkType() @codeCoverageIgnore
-     */
-    public function getType(string $id): ServiceType
-    {
-        // set information about deprecated method
-        trigger_error('Method ' . __METHOD__ . ' is deprecated and will be removed in version 2.0.0; please use checkType() method instead', E_USER_NOTICE);
-        // exit
-        return $this->getServiceDefinition($id)['type'];
-    }
-
-    /**
      * Check if service exists
      *
      * @param string $id
