@@ -6,8 +6,8 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di
  */
+
 namespace Kocuj\Di\Service;
 
 use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
@@ -17,10 +17,11 @@ use Kocuj\Di\Service\Standard\Standard;
 
 /**
  * Service factory
+ *
+ * @package Kocuj\Di\Service
  */
 class ServiceFactory implements ServiceFactoryInterface
 {
-
     /**
      * Service argument parser factory
      *
@@ -31,9 +32,8 @@ class ServiceFactory implements ServiceFactoryInterface
     /**
      * Constructor
      *
-     * @param
-     *            ArgumentParserFactoryInterface Service argument parser factory
-     *            @codeCoverageIgnore
+     * @param ArgumentParserFactoryInterface $argumentParserFactory Service argument parser factory
+     * @codeCoverageIgnore
      */
     public function __construct(ArgumentParserFactoryInterface $argumentParserFactory)
     {
@@ -44,21 +44,23 @@ class ServiceFactory implements ServiceFactoryInterface
     /**
      * Create standard or shared service
      *
-     * @param ContainerInterface $container
-     *            Dependency injection container for services
-     * @param ServiceType $serviceType
-     *            Service type
-     * @param string $id
-     *            Service identifier
-     * @param string $source
-     *            Source for service to create
-     * @param array $arguments
-     *            Service arguments to parse
+     * @param ContainerInterface $container Dependency injection container for services
+     * @param ServiceType $serviceType Service type
+     * @param string $id Service identifier
+     * @param string $source Source for service to create
+     * @param array $arguments Service arguments to parse
      * @return ServiceInterface Service creator object
-     * @see \Kocuj\Di\Service\ServiceFactoryInterface::create() @codeCoverageIgnore
+     * @throws Exception
+     * @see \Kocuj\Di\Service\ServiceFactoryInterface::create()
+     * @codeCoverageIgnore
      */
-    public function create(ContainerInterface $container, ServiceType $serviceType, string $id, string $source, array $arguments = []): ServiceInterface
-    {
+    public function create(
+        ContainerInterface $container,
+        ServiceType $serviceType,
+        string $id,
+        string $source,
+        array $arguments = []
+    ): ServiceInterface {
         // exit
         switch ($serviceType->getValue()) {
             case ServiceType::STANDARD:

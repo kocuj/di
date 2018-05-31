@@ -6,21 +6,22 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di_tests
  */
+
 namespace Kocuj\Di\Tests\ArgumentParser\ServiceTest;
 
-use PHPUnit\Framework\TestCase;
-use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\ArgumentParser\Service\Service;
+use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\ServiceInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for Service object
+ *
+ * @package Kocuj\Di\Tests\ArgumentParser\ServiceTest
  */
 class ServiceTest extends TestCase
 {
-
     /**
      * Testing argument for old version
      *
@@ -38,7 +39,7 @@ class ServiceTest extends TestCase
             'type' => 'service',
             'service' => $otherId,
         ];
-        
+
         // act
         $argumentParserService = new Service($container->reveal(), $id, $argument);
     }
@@ -58,7 +59,7 @@ class ServiceTest extends TestCase
         $argument = [
             'type' => 'service'
         ];
-        
+
         // act
         $argumentParserService = new Service($container->reveal(), $id, $argument);
     }
@@ -78,11 +79,11 @@ class ServiceTest extends TestCase
             'type' => 'service',
             'value' => $otherId
         ];
-        
+
         // act
         $argumentParserService = new Service($container->reveal(), $id, $argument);
         $parsedArg = $argumentParserService->parse();
-        
+
         // assert
         $this->assertTrue($parsedArg instanceof ServiceInterface);
     }
@@ -103,7 +104,7 @@ class ServiceTest extends TestCase
             'type' => 'service',
             'value' => $id
         ];
-        
+
         // act
         $argumentParserService = new Service($container->reveal(), $id, $argument);
         $argumentParserService->parse();

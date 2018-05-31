@@ -6,8 +6,8 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di
  */
+
 namespace Kocuj\Di\ArgumentParser\Service;
 
 use Kocuj\Di\ArgumentParser\ArgumentParserInterface;
@@ -16,10 +16,11 @@ use Kocuj\Di\Container\ContainerInterface;
 
 /**
  * Service argument parser for service
+ *
+ * @package Kocuj\Di\ArgumentParser\Service
  */
 class Service implements ArgumentParserInterface
 {
-
     /**
      * Dependency injection container for services
      *
@@ -44,12 +45,10 @@ class Service implements ArgumentParserInterface
     /**
      * Constructor
      *
-     * @param ContainerInterface $container
-     *            Dependency injection container for services
-     * @param string $id
-     *            Service identifier
-     * @param array $argument
-     *            Service argument to parse
+     * @param ContainerInterface $container Dependency injection container for services
+     * @param string $id Service identifier
+     * @param array $argument Service argument to parse
+     * @throws Exception
      */
     public function __construct(ContainerInterface $container, string $id, array $argument)
     {
@@ -60,10 +59,11 @@ class Service implements ArgumentParserInterface
         // check argument in "service" element - for compatibility with 1.2.0
         if (isset($this->argument['service'])) {
             $this->argument['value'] = $this->argument['service'];
-            trigger_error('Argument "service" is deprecated and will be removed in version 2.0.0; please use "value" instead', E_USER_NOTICE);
+            trigger_error('Argument "service" is deprecated and will be removed in version 2.0.0; please use "value" instead',
+                E_USER_NOTICE);
         } else {
             // check argument
-            if (! isset($this->argument['value'])) {
+            if (!isset($this->argument['value'])) {
                 throw new Exception('No "value" argument');
             }
         }

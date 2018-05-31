@@ -6,10 +6,11 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di
  */
+
 namespace Kocuj\Di;
 
+use Kocuj\Di\ArgumentParser\ArgumentParserFactory;
 use Kocuj\Di\Container\Container;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\ServiceFactory;
@@ -17,14 +18,14 @@ use Kocuj\Di\Service\ServiceFactoryInterface;
 use Kocuj\Di\ServiceIdDecorator\ServiceIdDecorator;
 use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
 use Kocuj\Di\Tools\Camelizer\Camelizer;
-use Kocuj\Di\ArgumentParser\ArgumentParserFactory;
 
 /**
  * Dependency injection containers library
+ *
+ * @package Kocuj\Di
  */
 class Di
 {
-
     /**
      * Service identifier decorator
      *
@@ -65,7 +66,7 @@ class Di
      * Create dependency injection container for services
      *
      * @return ContainerInterface New container
-     *         @codeCoverageIgnore
+     * @codeCoverageIgnore
      */
     public function create(): ContainerInterface
     {
@@ -79,7 +80,7 @@ class Di
      * @param ContainerInterface $fromContainer
      *            Container from which copy will be made
      * @return ContainerInterface Copied container
-     *         @codeCoverageIgnore
+     * @codeCoverageIgnore
      */
     public function copy(ContainerInterface $fromContainer): ContainerInterface
     {
@@ -91,7 +92,7 @@ class Di
      * Get default dependency injection container for services
      *
      * @return ContainerInterface Default container
-     *         @codeCoverageIgnore
+     * @codeCoverageIgnore
      */
     public function getDefault(): ContainerInterface
     {

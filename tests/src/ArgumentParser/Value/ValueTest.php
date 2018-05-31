@@ -6,19 +6,20 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di_tests
  */
+
 namespace Kocuj\Di\Tests\ArgumentParser\Value;
 
-use PHPUnit\Framework\TestCase;
 use Kocuj\Di\ArgumentParser\Value\Value;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for Value object
+ *
+ * @package Kocuj\Di\Tests\ArgumentParser\Value
  */
 class ValueTest extends TestCase
 {
-
     /**
      * Testing wrong argument
      *
@@ -30,7 +31,7 @@ class ValueTest extends TestCase
         $argument = [
             'type' => 'value'
         ];
-        
+
         // act
         $argumentParserValue = new Value($argument);
     }
@@ -38,11 +39,9 @@ class ValueTest extends TestCase
     /**
      * Testing parsing value as argument
      *
-     * @param mixed $value
-     *            Value
-     * @param mixed $expectedValue
-     *            Expected value
-     *            @dataProvider parseValueProvider
+     * @param mixed $value Value
+     * @param mixed $expectedValue Expected value
+     * @dataProvider parseValueProvider
      */
     public function testParseValue($value, $expectedValue)
     {
@@ -51,11 +50,11 @@ class ValueTest extends TestCase
             'type' => 'value',
             'value' => $value
         ];
-        
+
         // act
         $argumentParserValue = new Value($argument);
         $parsedArg = $argumentParserValue->parse();
-        
+
         // assert
         $this->assertSame($parsedArg, $value);
     }

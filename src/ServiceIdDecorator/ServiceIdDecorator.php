@@ -6,18 +6,19 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di
  */
+
 namespace Kocuj\Di\ServiceIdDecorator;
 
 use Kocuj\Di\Tools\Camelizer\CamelizerInterface;
 
 /**
  * Service identifier decorator
+ *
+ * @package Kocuj\Di\ServiceIdDecorator
  */
 class ServiceIdDecorator implements ServiceIdDecoratorInterface
 {
-
     /**
      * Camelizer object
      *
@@ -28,9 +29,8 @@ class ServiceIdDecorator implements ServiceIdDecoratorInterface
     /**
      * Constructor
      *
-     * @param CamelizerInterface $camelizer
-     *            Camelizer object
-     *            @codeCoverageIgnore
+     * @param CamelizerInterface $camelizer Camelizer object
+     * @codeCoverageIgnore
      */
     public function __construct(CamelizerInterface $camelizer)
     {
@@ -41,10 +41,10 @@ class ServiceIdDecorator implements ServiceIdDecoratorInterface
     /**
      * Decorate identifier
      *
-     * @param string $id
-     *            Identifier to decorate
+     * @param string $id Identifier to decorate
      * @return string Decorated identifier
-     * @see \Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface::decorate() @codeCoverageIgnore
+     * @see \Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface::decorate()
+     * @codeCoverageIgnore
      */
     public function decorate(string $id): string
     {
