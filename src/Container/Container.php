@@ -6,8 +6,8 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di
  */
+
 namespace Kocuj\Di\Container;
 
 use Kocuj\Di\Service\ServiceFactoryInterface;
@@ -16,10 +16,11 @@ use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
 
 /**
  * Dependency injection container for services
+ *
+ * @package Kocuj\Di\Container
  */
 class Container implements ContainerInterface
 {
-
     /**
      * Service identifier decorator
      *
@@ -44,13 +45,13 @@ class Container implements ContainerInterface
     /**
      * Constructor
      *
-     * @param ServiceIdDecoratorInterface $serviceIdDecorator
-     *            Service identifier decorator
-     * @param ServiceFactoryInterface $serviceFactory
-     *            Service factory
+     * @param ServiceIdDecoratorInterface $serviceIdDecorator Service identifier decorator
+     * @param ServiceFactoryInterface $serviceFactory Service factory
      */
-    public function __construct(ServiceIdDecoratorInterface $serviceIdDecorator, ServiceFactoryInterface $serviceFactory)
-    {
+    public function __construct(
+        ServiceIdDecoratorInterface $serviceIdDecorator,
+        ServiceFactoryInterface $serviceFactory
+    ) {
         // remember arguments
         $this->serviceIdDecorator = $serviceIdDecorator;
         $this->serviceFactory = $serviceFactory;
@@ -60,6 +61,7 @@ class Container implements ContainerInterface
      * Cloning container
      *
      * @return void
+     * @throws Exception
      */
     public function __clone()
     {
@@ -68,21 +70,18 @@ class Container implements ContainerInterface
         // recreate services
         $this->definitions = [];
         foreach ($oldDefinitions as $definition) {
-            $this->add($definition['type'], $definition['clonedata']['id'], $definition['clonedata']['source'], $definition['clonedata']['arguments']);
+            $this->add($definition['type'], $definition['clonedata']['id'], $definition['clonedata']['source'],
+                $definition['clonedata']['arguments']);
         }
     }
 
     /**
      * Add standard or shared service
      *
-     * @param ServiceType $serviceType
-     *            Service type
-     * @param string $id
-     *            Service identifier
-     * @param string $source
-     *            Service to create
-     * @param array $arguments
-     *            Service arguments to inject into constructor
+     * @param ServiceType $serviceType Service type
+     * @param string $id Service identifier
+     * @param string $source Service to create
+     * @param array $arguments Service arguments to inject into constructor
      * @return ContainerInterface This object
      * @throws Exception
      * @see \Kocuj\Di\Container\ContainerInterface::add()
@@ -112,14 +111,13 @@ class Container implements ContainerInterface
     /**
      * Add standard service
      *
-     * @param string $id
-     *            Service identifier
-     * @param string $source
-     *            Service to create
-     * @param array $arguments
-     *            Service arguments to inject into constructor
+     * @param string $id Service identifier
+     * @param string $source Service to create
+     * @param array $arguments Service arguments to inject into constructor
      * @return ContainerInterface This object
-     * @see \Kocuj\Di\Container\ContainerInterface::addStandard() @codeCoverageIgnore
+     * @throws Exception
+     * @see \Kocuj\Di\Container\ContainerInterface::addStandard()
+     * @codeCoverageIgnore
      */
     public function addStandard(string $id, string $source, array $arguments = []): ContainerInterface
     {
@@ -130,14 +128,13 @@ class Container implements ContainerInterface
     /**
      * Add shared service
      *
-     * @param string $id
-     *            Service identifier
-     * @param string $source
-     *            Service to create
-     * @param array $arguments
-     *            Service arguments to inject into constructor
+     * @param string $id Service identifier
+     * @param string $source Service to create
+     * @param array $arguments Service arguments to inject into constructor
      * @return ContainerInterface This object
-     * @see \Kocuj\Di\Container\ContainerInterface::addShared() @codeCoverageIgnore
+     * @throws Exception
+     * @see \Kocuj\Di\Container\ContainerInterface::addShared()
+     * @codeCoverageIgnore
      */
     public function addShared(string $id, string $source, array $arguments = []): ContainerInterface
     {
@@ -146,47 +143,10 @@ class Container implements ContainerInterface
     }
 
     /**
-     * Get service definition
-     *
-     * @param string $id
-     *            Service identifier
-     * @return array Service definition
-     * @throws NotFoundException
-     */
-    private function getServiceDefinition(string $id)
-    {
-        // decorate service identifier
-        $decoratedId = $this->serviceIdDecorator->decorate($id);
-        // check if service exists
-        if (! $this->has($decoratedId)) {
-            throw new NotFoundException(sprintf('Service "%s" does not exist', $decoratedId));
-        }
-        // exit
-        return $this->definitions[$decoratedId];
-    }
-
-    /**
-     * Get service
-     *
-     * @param string $id
-     *            Service identifier
-     * @return object Service object
-     * @throws NotFoundException
-     * @see \Psr\Container\ContainerInterface::get()
-     */
-    public function get($id)
-    {
-        // exit
-        return $this->getServiceDefinition($id)['service']->getService();
-    }
-
-    /**
      * Check service type
      *
-     * @param string $id
-     *            Service identifier
-     * @param ServiceType $serviceType
-     *            Service type
+     * @param string $id Service identifier
+     * @param ServiceType $serviceType Service type
      * @return bool This service has selected type (true) or not (false)
      * @throws NotFoundException
      * @see \Kocuj\Di\Container\ContainerInterface::checkType()
@@ -198,10 +158,28 @@ class Container implements ContainerInterface
     }
 
     /**
+     * Get service definition
+     *
+     * @param string $id Service identifier
+     * @return array Service definition
+     * @throws NotFoundException
+     */
+    private function getServiceDefinition(string $id)
+    {
+        // decorate service identifier
+        $decoratedId = $this->serviceIdDecorator->decorate($id);
+        // check if service exists
+        if (!$this->has($decoratedId)) {
+            throw new NotFoundException(sprintf('Service "%s" does not exist', $decoratedId));
+        }
+        // exit
+        return $this->definitions[$decoratedId];
+    }
+
+    /**
      * Check if service exists
      *
-     * @param string $id
-     *            Service
+     * @param string $id Service
      * @return bool Service exists (true) or not (false)
      * @see \Psr\Container\ContainerInterface::has()
      */
@@ -216,17 +194,16 @@ class Container implements ContainerInterface
     /**
      * Call service by method get*(), where "*" is service identifier written in camel case
      *
-     * @param string $method
-     *            Method to call
-     * @param array $arguments
-     *            Arguments for called method
+     * @param string $method Method to call
+     * @param array $arguments Arguments for called method
      * @return object Service object
      * @throws Exception
+     * @throws NotFoundException
      */
     public function __call(string $method, array $arguments)
     {
         // disallow any arguments
-        if (! empty($arguments)) {
+        if (!empty($arguments)) {
             throw new Exception('Service must be get without arguments');
         }
         // check prefix
@@ -238,5 +215,19 @@ class Container implements ContainerInterface
         $service = $this->get(substr($method, 3));
         // exit
         return $service;
+    }
+
+    /**
+     * Get service
+     *
+     * @param string $id Service identifier
+     * @return object Service object
+     * @throws NotFoundException
+     * @see \Psr\Container\ContainerInterface::get()
+     */
+    public function get($id)
+    {
+        // exit
+        return $this->getServiceDefinition($id)['service']->getService();
     }
 }

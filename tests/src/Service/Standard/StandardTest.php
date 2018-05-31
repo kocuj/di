@@ -6,30 +6,41 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di_tests
  */
+
 namespace Kocuj\Di\Tests\Service\Standard;
 
+use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
 use Kocuj\Di\ArgumentParser\ArgumentParserInterface;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\Standard\Standard;
 use Kocuj\Di\TestsLib\FakeService;
 use PHPUnit\Framework\TestCase;
-use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
 
 /**
  * Tests for Standard object
+ *
+ * @package Kocuj\Di\Tests\Service\Standard
  */
 class StandardTest extends TestCase
 {
+    /**
+     * Testing get value for the selected service
+     *
+     * @param array $arguments Arguments
+     * @dataProvider getServiceValueProvider
+     */
+    public function testGetServiceValue(array $arguments)
+    {
+        // assert
+        $this->getServiceValueOrService(false, $arguments);
+    }
 
     /**
      * Get value or service for the selected service
      *
-     * @param bool $argumentsAreServices
-     *            Arguments are services (true) or values (false)
-     * @param array $arguments
-     *            Arguments
+     * @param bool $argumentsAreServices Arguments are services (true) or values (false)
+     * @param array $arguments Arguments
      */
     private function getServiceValueOrService(bool $argumentsAreServices, array $arguments)
     {
@@ -48,12 +59,12 @@ class StandardTest extends TestCase
             }
         }
         $source = FakeService::class;
-        
+
         // act
         $standard = new Standard($argumentParserFactory->reveal(), $container->reveal(), $id, $source, $arguments);
         $service1 = $standard->getService();
         $service2 = $standard->getService();
-        
+
         // assert
         $this->assertInstanceOf(FakeService::class, $service1);
         foreach ($arguments as $key => $argument) {
@@ -67,24 +78,10 @@ class StandardTest extends TestCase
     }
 
     /**
-     * Testing get value for the selected service
-     *
-     * @param array $arguments
-     *            Arguments
-     *            @dataProvider getServiceValueProvider
-     */
-    public function testGetServiceValue(array $arguments)
-    {
-        // assert
-        $this->getServiceValueOrService(false, $arguments);
-    }
-
-    /**
      * Testing get service for the selected service
      *
-     * @param array $arguments
-     *            Arguments
-     *            @dataProvider getServiceServiceProvider
+     * @param array $arguments Arguments
+     * @dataProvider getServiceServiceProvider
      */
     public function testGetServiceService(array $arguments)
     {

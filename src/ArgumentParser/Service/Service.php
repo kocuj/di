@@ -6,8 +6,8 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di
  */
+
 namespace Kocuj\Di\ArgumentParser\Service;
 
 use Kocuj\Di\ArgumentParser\ArgumentParserInterface;
@@ -16,10 +16,11 @@ use Kocuj\Di\Container\ContainerInterface;
 
 /**
  * Service argument parser for service
+ *
+ * @package Kocuj\Di\ArgumentParser\Service
  */
 class Service implements ArgumentParserInterface
 {
-
     /**
      * Dependency injection container for services
      *
@@ -44,12 +45,10 @@ class Service implements ArgumentParserInterface
     /**
      * Constructor
      *
-     * @param ContainerInterface $container
-     *            Dependency injection container for services
-     * @param string $id
-     *            Service identifier
-     * @param array $argument
-     *            Service argument to parse
+     * @param ContainerInterface $container Dependency injection container for services
+     * @param string $id Service identifier
+     * @param array $argument Service argument to parse
+     * @throws Exception
      */
     public function __construct(ContainerInterface $container, string $id, array $argument)
     {
@@ -58,7 +57,7 @@ class Service implements ArgumentParserInterface
         $this->id = $id;
         $this->argument = $argument;
         // check argument
-        if (! isset($this->argument['value'])) {
+        if (!isset($this->argument['value'])) {
             throw new Exception('No "value" argument');
         }
     }

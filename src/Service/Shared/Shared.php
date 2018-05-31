@@ -6,8 +6,8 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di
  */
+
 namespace Kocuj\Di\Service\Shared;
 
 use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
@@ -16,10 +16,11 @@ use Kocuj\Di\Service\ServiceInterface;
 
 /**
  * Shared service creator
+ *
+ * @package Kocuj\Di\Service\Shared
  */
 class Shared implements ServiceInterface
 {
-
     /**
      * Service argument parser factory
      *
@@ -65,19 +66,19 @@ class Shared implements ServiceInterface
     /**
      * Constructor
      *
-     * @param ArgumentParserFactoryInterface $argumentParserFactory
-     *            Service argument parser factory
-     * @param ContainerInterface $container
-     *            Dependency injection container for services
-     * @param string $id
-     *            Service identifier
-     * @param string $source
-     *            Source for service to create
-     * @param array $arguments
-     *            Service arguments to parse
+     * @param ArgumentParserFactoryInterface $argumentParserFactory Service argument parser factory
+     * @param ContainerInterface $container Dependency injection container for services
+     * @param string $id Service identifier
+     * @param string $source Source for service to create
+     * @param array $arguments Service arguments to parse
      */
-    public function __construct(ArgumentParserFactoryInterface $argumentParserFactory, ContainerInterface $container, string $id, string $source, array $arguments = [])
-    {
+    public function __construct(
+        ArgumentParserFactoryInterface $argumentParserFactory,
+        ContainerInterface $container,
+        string $id,
+        string $source,
+        array $arguments = []
+    ) {
         // remember arguments
         $this->argumentParserFactory = $argumentParserFactory;
         $this->container = $container;
@@ -95,7 +96,7 @@ class Shared implements ServiceInterface
     public function getService()
     {
         // optionally use shared object
-        if (! is_null($this->serviceObject)) {
+        if (!is_null($this->serviceObject)) {
             return $this->serviceObject;
         }
         // parse arguments

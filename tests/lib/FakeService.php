@@ -6,16 +6,17 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di_tests
  */
+
 namespace Kocuj\Di\TestsLib;
 
 /**
  * Fake service
+ *
+ * @package Kocuj\Di\TestsLib
  */
 class FakeService
 {
-
     /**
      * Fake values
      *
@@ -26,8 +27,7 @@ class FakeService
     /**
      * Constructor
      *
-     * @param mixed ...$values
-     *            Fake values
+     * @param mixed ...$values Fake values
      */
     public function __construct(...$values)
     {
@@ -38,8 +38,7 @@ class FakeService
     /**
      * Get fake value
      *
-     * @param int $id
-     *            Value identifier
+     * @param int $id Value identifier
      * @return mixed Fake value
      */
     public function getValue(int $id)

@@ -6,16 +6,17 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di
  */
+
 namespace Kocuj\Di\Examples\Example1\Lib;
 
 /**
  * Input service interface
+ *
+ * @package Kocuj\Di\Examples\Example1\Lib
  */
 interface InputServiceInterface
 {
-
     /**
      * Get input
      *

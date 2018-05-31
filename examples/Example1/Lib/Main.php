@@ -6,16 +6,17 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di
  */
+
 namespace Kocuj\Di\Examples\Example1\Lib;
 
 /**
  * Main service
+ *
+ * @package Kocuj\Di\Examples\Example1\Lib
  */
 class Main
 {
-
     /**
      * Input service
      *
@@ -33,10 +34,8 @@ class Main
     /**
      * Constructor
      *
-     * @param InputServiceInterface $inputService
-     *            Input service
-     * @param OutputServiceInterface $outputService
-     *            Output service
+     * @param InputServiceInterface $inputService Input service
+     * @param OutputServiceInterface $outputService Output service
      */
     public function __construct(InputServiceInterface $inputService, OutputServiceInterface $outputService)
     {

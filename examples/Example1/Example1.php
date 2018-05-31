@@ -6,8 +6,8 @@
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
  * @copyright Copyright (c) 2017-2018 kocuj.pl
- * @package kocuj_di
  */
+
 namespace Kocuj\Di\Examples\Example1;
 
 use Kocuj\Di\Di;
@@ -35,12 +35,12 @@ $container->addStandard('main', Main::class, [
     ]
 ]);
 // execute
-for ($z = 0; $z < 5; ++ $z) {
+for ($z = 0; $z < 5; ++$z) {
     $container->/**
      * @scrutinizer ignore-call
      */
     getMain()->display();
 }
-for ($z = 0; $z < 5; ++ $z) {
+for ($z = 0; $z < 5; ++$z) {
     $container->get('main')->display();
 }
