@@ -116,6 +116,7 @@ class Container implements ContainerInterface
      * @param array $arguments Service arguments to inject into constructor
      * @return ContainerInterface This object
      * @throws Exception
+     * @throws \Exception
      * @see \Kocuj\Di\Container\ContainerInterface::addStandard()
      * @codeCoverageIgnore
      */
@@ -133,6 +134,7 @@ class Container implements ContainerInterface
      * @param array $arguments Service arguments to inject into constructor
      * @return ContainerInterface This object
      * @throws Exception
+     * @throws \Exception
      * @see \Kocuj\Di\Container\ContainerInterface::addShared()
      * @codeCoverageIgnore
      */
