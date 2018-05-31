@@ -12,6 +12,8 @@ namespace Kocuj\Di\Tests\Container;
 
 use Kocuj\Di\Container\Container;
 use Kocuj\Di\Container\ContainerInterface;
+use Kocuj\Di\Container\Exception;
+use Kocuj\Di\Container\NotFoundException;
 use Kocuj\Di\Service\ServiceFactoryInterface;
 use Kocuj\Di\Service\ServiceInterface;
 use Kocuj\Di\Service\ServiceType;
@@ -77,6 +79,7 @@ class ContainerTest extends TestCase
      * @param ServiceType $serviceType Service type
      * @param string $serviceId Service identifier
      * @param string $decoratedServiceId Decorated service identifier
+     * @throws Exception
      * @dataProvider cloneProvider
      */
     public function testClone(ServiceType $serviceType, string $serviceId, string $decoratedServiceId)
@@ -110,6 +113,7 @@ class ContainerTest extends TestCase
      * Provider for testing cloning container
      *
      * @return array Data for testing cloning container
+     * @throws \Exception
      */
     public function cloneProvider(): array
     {
@@ -161,6 +165,8 @@ class ContainerTest extends TestCase
      * @param ServiceType $serviceType Service type
      * @param string $serviceId Service identifier
      * @param string $decoratedServiceId Decorated service identifier
+     * @throws Exception
+     * @throws NotFoundException
      * @dataProvider addHasCheckTypeProvider
      */
     public function testHas(ServiceType $serviceType, string $serviceId, string $decoratedServiceId)
@@ -188,6 +194,8 @@ class ContainerTest extends TestCase
      * @param ServiceType $serviceType Service type
      * @param string $serviceId Service identifier
      * @param string $decoratedServiceId Decorated service identifier
+     * @throws Exception
+     * @throws NotFoundException
      * @dataProvider addHasCheckTypeProvider
      */
     public function testCheckType(ServiceType $serviceType, string $serviceId, string $decoratedServiceId)
@@ -213,6 +221,7 @@ class ContainerTest extends TestCase
      * Provider for testing adding and checking standard and shared services
      *
      * @return array Data for testing adding and checking standard and shared services
+     * @throws \Exception
      */
     public function addHasCheckTypeProvider(): array
     {
@@ -281,6 +290,8 @@ class ContainerTest extends TestCase
      * @param string $serviceId Service identifier
      * @param string $decoratedServiceId Decorated service identifier
      * @param string $callMethod Method to call to get service
+     * @throws Exception
+     * @throws NotFoundException
      * @dataProvider addCallMethodProvider
      */
     public function testAddCallMethod(
@@ -317,6 +328,7 @@ class ContainerTest extends TestCase
      * Provider for testing standard and shared services
      *
      * @return array Data for testing standard and shared services
+     * @throws \Exception
      */
     public function addCallMethodProvider(): array
     {
@@ -389,6 +401,7 @@ class ContainerTest extends TestCase
      * Testing wrong service identifier to get after creating standard or shared service
      *
      * @param ServiceType $serviceType Service type
+     * @throws Exception
      * @dataProvider servicesTypesProvider
      * @expectedException \Kocuj\Di\Container\NotFoundException
      */
@@ -465,6 +478,7 @@ class ContainerTest extends TestCase
      * Provider for services types
      *
      * @return array Data for services types
+     * @throws \Exception
      */
     public function servicesTypesProvider(): array
     {

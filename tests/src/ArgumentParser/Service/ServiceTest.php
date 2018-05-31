@@ -10,6 +10,7 @@
 
 namespace Kocuj\Di\Tests\ArgumentParser\ServiceTest;
 
+use Kocuj\Di\ArgumentParser\Exception;
 use Kocuj\Di\ArgumentParser\Service\Service;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\ServiceInterface;
@@ -26,6 +27,7 @@ class ServiceTest extends TestCase
      * Testing argument for old version
      *
      * @expectedException \PHPUnit\Framework\Error\Error
+     * @throws Exception
      */
     public function testOldVersionArgument()
     {
@@ -66,6 +68,8 @@ class ServiceTest extends TestCase
 
     /**
      * Testing parsing service as argument
+     *
+     * @throws Exception
      */
     public function testParseService()
     {

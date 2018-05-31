@@ -10,6 +10,7 @@
 
 namespace Kocuj\Di\Tests\ArgumentParser\Value;
 
+use Kocuj\Di\ArgumentParser\Exception;
 use Kocuj\Di\ArgumentParser\Value\Value;
 use PHPUnit\Framework\TestCase;
 
@@ -41,6 +42,7 @@ class ValueTest extends TestCase
      *
      * @param mixed $value Value
      * @param mixed $expectedValue Expected value
+     * @throws Exception
      * @dataProvider parseValueProvider
      */
     public function testParseValue($value, $expectedValue)
