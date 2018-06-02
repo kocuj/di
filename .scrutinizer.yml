@@ -1,5 +1,5 @@
 filter:
-    excluded_paths: [tests/*]
+    excluded_paths: ['tests/*','vendor/*']
 checks:
     php:
         code_rating: true
@@ -33,4 +33,3 @@ tools:
     php_cpd:
         enabled: true
         excluded_dirs: [vendor, tests]
-
