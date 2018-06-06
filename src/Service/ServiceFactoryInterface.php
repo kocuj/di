@@ -25,15 +25,13 @@ interface ServiceFactoryInterface
      * @param ContainerInterface $container Dependency injection container for services
      * @param ServiceType $serviceType Service type
      * @param string $id Service identifier
-     * @param string $source Source for service to create
-     * @param array $arguments Service arguments to parse
+     * @param mixed $serviceSource Source for service to create
      * @return ServiceInterface Service creator object
      */
     public function create(
         ContainerInterface $container,
         ServiceType $serviceType,
         string $id,
-        string $source,
-        array $arguments = []
+        $serviceSource
     ): ServiceInterface;
 }

@@ -24,36 +24,28 @@ interface ContainerInterface extends \Psr\Container\ContainerInterface
      *
      * @param ServiceType $serviceType Service type
      * @param string $id Service identifier
-     * @param string $source Service to create
-     * @param array $arguments Service arguments to inject into constructor
+     * @param mixed $serviceSource Source for service to create
      * @return ContainerInterface This object
      */
-    public function add(
-        ServiceType $serviceType,
-        string $id,
-        string $source,
-        array $arguments = []
-    ): ContainerInterface;
+    public function add(ServiceType $serviceType, string $id, $serviceSource): ContainerInterface;
 
     /**
      * Add standard service
      *
      * @param string $id Service identifier
-     * @param string $source Service to create
-     * @param array $arguments Service arguments to inject into constructor
+     * @param mixed $serviceSource Source for service to create
      * @return ContainerInterface This object
      */
-    public function addStandard(string $id, string $source, array $arguments = []): ContainerInterface;
+    public function addStandard(string $id, $serviceSource): ContainerInterface;
 
     /**
      * Add shared service
      *
      * @param string $id Service identifier
-     * @param string $source Service to create
-     * @param array $arguments Service arguments to inject into constructor
+     * @param mixed $serviceSource Source for service to create
      * @return ContainerInterface This object
      */
-    public function addShared(string $id, string $source, array $arguments = []): ContainerInterface;
+    public function addShared(string $id, $serviceSource): ContainerInterface;
 
     /**
      * Check service type

@@ -10,10 +10,10 @@
 
 namespace Kocuj\Di\Service;
 
-use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\Shared\Shared;
 use Kocuj\Di\Service\Standard\Standard;
+use Kocuj\Di\ServiceSource\ServiceSourceFactoryInterface;
 
 /**
  * Service factory
@@ -23,22 +23,22 @@ use Kocuj\Di\Service\Standard\Standard;
 class ServiceFactory implements ServiceFactoryInterface
 {
     /**
-     * Service argument parser factory
+     * Service source factory
      *
-     * @var ArgumentParserFactoryInterface
+     * @var ServiceSourceFactoryInterface
      */
-    private $argumentParserFactory;
+    private $serviceSourceFactory;
 
     /**
      * Constructor
      *
-     * @param ArgumentParserFactoryInterface $argumentParserFactory Service argument parser factory
+     * @param ServiceSourceFactoryInterface $serviceSourceFactory Service source factory
      * @codeCoverageIgnore
      */
-    public function __construct(ArgumentParserFactoryInterface $argumentParserFactory)
+    public function __construct(ServiceSourceFactoryInterface $serviceSourceFactory)
     {
         // remember arguments
-        $this->argumentParserFactory = $argumentParserFactory;
+        $this->serviceSourceFactory = $serviceSourceFactory;
     }
 
     /**
@@ -47,8 +47,7 @@ class ServiceFactory implements ServiceFactoryInterface
      * @param ContainerInterface $container Dependency injection container for services
      * @param ServiceType $serviceType Service type
      * @param string $id Service identifier
-     * @param string $source Source for service to create
-     * @param array $arguments Service arguments to parse
+     * @param mixed $serviceSource Source for service to create
      * @return ServiceInterface Service creator object
      * @throws Exception
      * @see \Kocuj\Di\Service\ServiceFactoryInterface::create()
@@ -58,15 +57,14 @@ class ServiceFactory implements ServiceFactoryInterface
         ContainerInterface $container,
         ServiceType $serviceType,
         string $id,
-        string $source,
-        array $arguments = []
+        $serviceSource
     ): ServiceInterface {
         // exit
         switch ($serviceType->getValue()) {
             case ServiceType::STANDARD:
-                return new Standard($this->argumentParserFactory, $container, $id, $source, $arguments);
+                return new Standard($this->serviceSourceFactory, $container, $id, $serviceSource);
             case ServiceType::SHARED:
-                return new Shared($this->argumentParserFactory, $container, $id, $source, $arguments);
+                return new Shared($this->serviceSourceFactory, $container, $id, $serviceSource);
             default:
                 throw new Exception(sprintf('Unknown service type "%s"', $serviceType->getValue()));
         }

@@ -10,9 +10,9 @@
 
 namespace Kocuj\Di\Service\Shared;
 
-use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\ServiceInterface;
+use Kocuj\Di\ServiceSource\ServiceSourceFactoryInterface;
 
 /**
  * Shared service creator
@@ -22,11 +22,11 @@ use Kocuj\Di\Service\ServiceInterface;
 class Shared implements ServiceInterface
 {
     /**
-     * Service argument parser factory
+     * Service source factory
      *
-     * @var ArgumentParserFactoryInterface
+     * @var ServiceSourceFactoryInterface
      */
-    private $argumentParserFactory;
+    private $serviceSourceFactory;
 
     /**
      * Dependency injection container for services
@@ -45,16 +45,9 @@ class Shared implements ServiceInterface
     /**
      * Source for service to create
      *
-     * @var string
+     * @var mixed
      */
-    private $source;
-
-    /**
-     * Service arguments to parse
-     *
-     * @var array
-     */
-    private $arguments;
+    private $serviceSource;
 
     /**
      * Service object
@@ -66,25 +59,22 @@ class Shared implements ServiceInterface
     /**
      * Constructor
      *
-     * @param ArgumentParserFactoryInterface $argumentParserFactory Service argument parser factory
+     * @param ServiceSourceFactoryInterface $serviceSourceFactory Service source factory
      * @param ContainerInterface $container Dependency injection container for services
      * @param string $id Service identifier
-     * @param string $source Source for service to create
-     * @param array $arguments Service arguments to parse
+     * @param mixed $serviceSource Source for service to create
      */
     public function __construct(
-        ArgumentParserFactoryInterface $argumentParserFactory,
+        ServiceSourceFactoryInterface $serviceSourceFactory,
         ContainerInterface $container,
         string $id,
-        string $source,
-        array $arguments = []
+        $serviceSource
     ) {
         // remember arguments
-        $this->argumentParserFactory = $argumentParserFactory;
+        $this->serviceSourceFactory = $serviceSourceFactory;
         $this->container = $container;
         $this->id = $id;
-        $this->source = $source;
-        $this->arguments = $arguments;
+        $this->serviceSource = $serviceSource;
     }
 
     /**
@@ -99,14 +89,9 @@ class Shared implements ServiceInterface
         if (!is_null($this->serviceObject)) {
             return $this->serviceObject;
         }
-        // parse arguments
-        $parsedArgs = [];
-        foreach ($this->arguments as $argument) {
-            $obj = $this->argumentParserFactory->create($this->container, $this->id, $argument);
-            $parsedArgs[] = $obj->parse();
-        }
         // execute service constructor
-        $this->serviceObject = new $this->source(...$parsedArgs);
+        $serviceSource = $this->serviceSourceFactory->create($this->container, $this->id, $this->serviceSource);
+        $this->serviceObject = $serviceSource->resolve();
         // exit
         return $this->serviceObject;
     }

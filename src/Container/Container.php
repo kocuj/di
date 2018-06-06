@@ -70,8 +70,7 @@ class Container implements ContainerInterface
         // recreate services
         $this->definitions = [];
         foreach ($oldDefinitions as $definition) {
-            $this->add($definition['type'], $definition['clonedata']['id'], $definition['clonedata']['source'],
-                $definition['clonedata']['arguments']);
+            $this->add($definition['type'], $definition['clonedata']['id'], $definition['clonedata']['serviceSource']);
         }
     }
 
@@ -80,13 +79,12 @@ class Container implements ContainerInterface
      *
      * @param ServiceType $serviceType Service type
      * @param string $id Service identifier
-     * @param string $source Service to create
-     * @param array $arguments Service arguments to inject into constructor
+     * @param mixed $serviceSource Source for service to create
      * @return ContainerInterface This object
      * @throws Exception
      * @see \Kocuj\Di\Container\ContainerInterface::add()
      */
-    public function add(ServiceType $serviceType, string $id, string $source, array $arguments = []): ContainerInterface
+    public function add(ServiceType $serviceType, string $id, $serviceSource): ContainerInterface
     {
         // decorate service identifier
         $decoratedId = $this->serviceIdDecorator->decorate($id);
@@ -96,12 +94,11 @@ class Container implements ContainerInterface
         }
         // set service definition
         $this->definitions[$decoratedId] = [
-            'service' => $this->serviceFactory->create($this, $serviceType, $decoratedId, $source, $arguments),
+            'service' => $this->serviceFactory->create($this, $serviceType, $decoratedId, $serviceSource),
             'type' => $serviceType,
             'clonedata' => [
                 'id' => $id,
-                'source' => $source,
-                'arguments' => $arguments
+                'serviceSource' => $serviceSource,
             ]
         ];
         // exit
@@ -112,36 +109,34 @@ class Container implements ContainerInterface
      * Add standard service
      *
      * @param string $id Service identifier
-     * @param string $source Service to create
-     * @param array $arguments Service arguments to inject into constructor
+     * @param mixed $serviceSource Source for service to create
      * @return ContainerInterface This object
      * @throws Exception
      * @throws \Exception
      * @see \Kocuj\Di\Container\ContainerInterface::addStandard()
      * @codeCoverageIgnore
      */
-    public function addStandard(string $id, string $source, array $arguments = []): ContainerInterface
+    public function addStandard(string $id, $serviceSource): ContainerInterface
     {
         // exit
-        return $this->add(new ServiceType(ServiceType::STANDARD), $id, $source, $arguments);
+        return $this->add(new ServiceType(ServiceType::STANDARD), $id, $serviceSource);
     }
 
     /**
      * Add shared service
      *
      * @param string $id Service identifier
-     * @param string $source Service to create
-     * @param array $arguments Service arguments to inject into constructor
+     * @param mixed $serviceSource Source for service to create
      * @return ContainerInterface This object
      * @throws Exception
      * @throws \Exception
      * @see \Kocuj\Di\Container\ContainerInterface::addShared()
      * @codeCoverageIgnore
      */
-    public function addShared(string $id, string $source, array $arguments = []): ContainerInterface
+    public function addShared(string $id, $serviceSource): ContainerInterface
     {
         // exit
-        return $this->add(new ServiceType(ServiceType::SHARED), $id, $source, $arguments);
+        return $this->add(new ServiceType(ServiceType::SHARED), $id, $serviceSource);
     }
 
     /**

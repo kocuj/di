@@ -17,6 +17,7 @@ use Kocuj\Di\Service\ServiceFactory;
 use Kocuj\Di\Service\ServiceFactoryInterface;
 use Kocuj\Di\ServiceIdDecorator\ServiceIdDecorator;
 use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
+use Kocuj\Di\ServiceSource\ServiceSourceFactory;
 use Kocuj\Di\Tools\Camelizer\Camelizer;
 
 /**
@@ -58,7 +59,8 @@ class Di
         // initialize
         $this->serviceIdDecorator = new ServiceIdDecorator(new Camelizer());
         $argumentParserFactory = new ArgumentParserFactory();
-        $this->serviceFactory = new ServiceFactory($argumentParserFactory);
+        $serviceSourceFactory = new ServiceSourceFactory($argumentParserFactory);
+        $this->serviceFactory = new ServiceFactory($serviceSourceFactory);
         // create default container
         $this->defaultContainer = $this->create();
     }

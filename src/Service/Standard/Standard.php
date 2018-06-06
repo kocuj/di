@@ -10,9 +10,9 @@
 
 namespace Kocuj\Di\Service\Standard;
 
-use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\ServiceInterface;
+use Kocuj\Di\ServiceSource\ServiceSourceFactoryInterface;
 
 /**
  * Standard service creator
@@ -22,11 +22,11 @@ use Kocuj\Di\Service\ServiceInterface;
 class Standard implements ServiceInterface
 {
     /**
-     * Service argument parser factory
+     * Service source factory
      *
-     * @var ArgumentParserFactoryInterface
+     * @var ServiceSourceFactoryInterface
      */
-    private $argumentParserFactory;
+    private $serviceSourceFactory;
 
     /**
      * Dependency injection container for services
@@ -47,37 +47,27 @@ class Standard implements ServiceInterface
      *
      * @var string
      */
-    private $source;
-
-    /**
-     * Service arguments to parse
-     *
-     * @var array
-     */
-    private $arguments;
+    private $serviceSource;
 
     /**
      * Constructor
      *
-     * @param ArgumentParserFactoryInterface $argumentParserFactory Service argument parser factory
+     * @param ServiceSourceFactoryInterface $serviceSourceFactory Service source factory
      * @param ContainerInterface $container Dependency injection container for services
      * @param string $id Service identifier
      * @param string $source Source for service to create
-     * @param array $arguments Service arguments to parse
      */
     public function __construct(
-        ArgumentParserFactoryInterface $argumentParserFactory,
+        ServiceSourceFactoryInterface $serviceSourceFactory,
         ContainerInterface $container,
         string $id,
-        string $source,
-        array $arguments = []
+        $serviceSource
     ) {
         // remember arguments
-        $this->argumentParserFactory = $argumentParserFactory;
+        $this->serviceSourceFactory = $serviceSourceFactory;
         $this->container = $container;
         $this->id = $id;
-        $this->source = $source;
-        $this->arguments = $arguments;
+        $this->serviceSource = $serviceSource;
     }
 
     /**
@@ -88,15 +78,9 @@ class Standard implements ServiceInterface
      */
     public function getService()
     {
-        // parse arguments
-        $parsedArgs = [];
-        foreach ($this->arguments as $argument) {
-            $obj = $this->argumentParserFactory->create($this->container, $this->id, $argument);
-            $parsedArgs[] = $obj->parse();
-        }
         // execute service constructor
-        $service = new $this->source(...$parsedArgs);
+        $service = $this->serviceSourceFactory->create($this->container, $this->id, $this->serviceSource);
         // exit
-        return $service;
+        return $service->resolve();
     }
 }
