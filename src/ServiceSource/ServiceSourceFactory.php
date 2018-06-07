@@ -10,9 +10,9 @@
 
 namespace Kocuj\Di\ServiceSource;
 
-use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\ServiceSource\ClassName\AnonymousFunction;
+use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserFactory;
 use Kocuj\Di\ServiceSource\ClassName\ClassName;
 use Kocuj\Di\ServiceSource\ObjectInstance\ObjectInstance;
 
@@ -23,24 +23,6 @@ use Kocuj\Di\ServiceSource\ObjectInstance\ObjectInstance;
  */
 class ServiceSourceFactory implements ServiceSourceFactoryInterface
 {
-    /**
-     * Service argument parser factory
-     *
-     * @var ArgumentParserFactoryInterface
-     */
-    private $argumentParserFactory;
-
-    /**
-     * Constructor
-     *
-     * @param ArgumentParserFactoryInterface $argumentParserFactory Service argument parser factory
-     */
-    public function __construct(ArgumentParserFactoryInterface $argumentParserFactory)
-    {
-        // remember arguments
-        $this->argumentParserFactory = $argumentParserFactory;
-    }
-
     /**
      * Create service source from anonymous function, class name or object instance
      *
@@ -62,7 +44,8 @@ class ServiceSourceFactory implements ServiceSourceFactoryInterface
                 return new ObjectInstance($serviceSource);
             case is_array($serviceSource):
             case is_string($serviceSource):
-                return new ClassName($this->argumentParserFactory, $container, $id, $serviceSource);
+                $argumentParserFactory = new ArgumentParserFactory();
+                return new ClassName($argumentParserFactory, $container, $id, $serviceSource);
             default:
                 throw new Exception('Unknown service source type');
         }

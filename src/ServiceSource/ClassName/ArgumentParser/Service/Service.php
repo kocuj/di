@@ -8,11 +8,11 @@
  * @copyright Copyright (c) 2017-2018 kocuj.pl
  */
 
-namespace Kocuj\Di\ArgumentParser\Service;
+namespace Kocuj\Di\ServiceSource\ClassName\ArgumentParser\Service;
 
-use Kocuj\Di\ArgumentParser\ArgumentParserInterface;
-use Kocuj\Di\ArgumentParser\Exception;
 use Kocuj\Di\Container\ContainerInterface;
+use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserInterface;
+use Kocuj\Di\ServiceSource\Exception;
 
 /**
  * Service argument parser for service
@@ -67,7 +67,7 @@ class Service implements ArgumentParserInterface
      *
      * @throws Exception
      * @return mixed Parsed argument
-     * @see \Kocuj\Di\ArgumentParser\ArgumentParserInterface::parse()
+     * @see \Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserInterface::parse()
      */
     public function parse()
     {

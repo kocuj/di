@@ -8,11 +8,12 @@
  * @copyright Copyright (c) 2017-2018 kocuj.pl
  */
 
-namespace Kocuj\Di\ArgumentParser;
+namespace Kocuj\Di\ServiceSource\ClassName\ArgumentParser;
 
-use Kocuj\Di\ArgumentParser\Service\Service;
-use Kocuj\Di\ArgumentParser\Value\Value;
 use Kocuj\Di\Container\ContainerInterface;
+use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\Service\Service;
+use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\Value\Value;
+use Kocuj\Di\ServiceSource\Exception;
 
 /**
  * Service argument parser factory
@@ -29,7 +30,7 @@ class ArgumentParserFactory implements ArgumentParserFactoryInterface
      * @param array $argument Service argument to parse
      * @throws Exception
      * @return ArgumentParserInterface Object with service argument parser
-     * @see \Kocuj\Di\ArgumentParser\ArgumentParserInterface::create()
+     * @see \Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserInterface::create()
      * @codeCoverageIgnore
      */
     public function create(ContainerInterface $container, string $id, array $argument): ArgumentParserInterface

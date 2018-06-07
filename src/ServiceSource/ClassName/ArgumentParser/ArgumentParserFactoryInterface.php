@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017-2018 kocuj.pl
  */
 
-namespace Kocuj\Di\ArgumentParser;
+namespace Kocuj\Di\ServiceSource\ClassName\ArgumentParser;
 
 use Kocuj\Di\Container\ContainerInterface;
 

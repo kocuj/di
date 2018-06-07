@@ -58,8 +58,7 @@ class Di
     {
         // initialize
         $this->serviceIdDecorator = new ServiceIdDecorator(new Camelizer());
-        $argumentParserFactory = new ArgumentParserFactory();
-        $serviceSourceFactory = new ServiceSourceFactory($argumentParserFactory);
+        $serviceSourceFactory = new ServiceSourceFactory();
         $this->serviceFactory = new ServiceFactory($serviceSourceFactory);
         // create default container
         $this->defaultContainer = $this->create();

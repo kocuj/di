@@ -8,10 +8,10 @@
  * @copyright Copyright (c) 2017-2018 kocuj.pl
  */
 
-namespace Kocuj\Di\ArgumentParser\Value;
+namespace Kocuj\Di\ServiceSource\ClassName\ArgumentParser\Value;
 
-use Kocuj\Di\ArgumentParser\ArgumentParserInterface;
-use Kocuj\Di\ArgumentParser\Exception;
+use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserInterface;
+use Kocuj\Di\ServiceSource\Exception;
 
 /**
  * Service argument parser for value
@@ -47,7 +47,7 @@ class Value implements ArgumentParserInterface
      * Parse service argument and return argument to service constructor
      *
      * @return mixed Parsed argument
-     * @see \Kocuj\Di\ArgumentParser\ArgumentParserInterface::parse()
+     * @see \Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserInterface::parse()
      */
     public function parse()
     {
