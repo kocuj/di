@@ -22,17 +22,24 @@ $di = new Di();
 // get DI container
 $container = $di->getDefault();
 // set DI services
-$container->addShared('input', InputService::class);
-$container->addShared('output', OutputService::class);
-$container->addStandard('main', Main::class, [
-    [
-        'type' => 'service',
-        'value' => 'input'
+$container->addShared('input', [
+    'className' => InputService::class,
+]);
+$container->addShared('output', [
+    'className' => OutputService::class,
+]);
+$container->addStandard('main', [
+    'className' => Main::class,
+    'arguments' => [
+        [
+            'type' => 'service',
+            'value' => 'input'
+        ],
+        [
+            'type' => 'service',
+            'value' => 'output'
+        ],
     ],
-    [
-        'type' => 'service',
-        'value' => 'output'
-    ]
 ]);
 // execute
 for ($z = 0; $z < 5; ++$z) {
