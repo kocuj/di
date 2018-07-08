@@ -10,8 +10,8 @@
 
 namespace Kocuj\Di\ServiceSource\ClassName;
 
-use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserFactoryInterface;
 use Kocuj\Di\Container\ContainerInterface;
+use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserFactoryInterface;
 use Kocuj\Di\ServiceSource\Exception;
 use Kocuj\Di\ServiceSource\ServiceSourceInterface;
 
