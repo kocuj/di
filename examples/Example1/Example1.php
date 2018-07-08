@@ -15,6 +15,9 @@ use Kocuj\Di\Examples\Example1\Lib\InputService;
 use Kocuj\Di\Examples\Example1\Lib\Main;
 use Kocuj\Di\Examples\Example1\Lib\OutputService;
 
+// information about example
+echo 'This is an example of adding shared services and adding them to standard services as constructor arguments.'.PHP_EOL;
+echo PHP_EOL;
 // autoloading
 require __DIR__ . '/../../vendor/autoload.php';
 // initialize DI container
