@@ -10,7 +10,7 @@
 
 namespace Kocuj\Di\ServiceSource\ClassName;
 
-use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
+use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserFactoryInterface;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\ServiceSource\Exception;
 use Kocuj\Di\ServiceSource\ServiceSourceInterface;
@@ -92,6 +92,10 @@ class ClassName implements ServiceSourceInterface
             }
         }
         // exit
-        return new ($this->serviceSource['className'])(...$parsedArgs);
+        if (isset($this->serviceSource['className'])) {
+            return new $this->serviceSource['className'](...$parsedArgs);
+        } else {
+            return new $this->serviceSource(...$parsedArgs);
+        }
     }
 }
