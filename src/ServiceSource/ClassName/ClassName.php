@@ -80,20 +80,25 @@ class ClassName implements ServiceSourceInterface
      * Resolve a service source into an object
      *
      * @return object
+     * @throws Exception
      */
     public function resolve()
     {
         // parse arguments
         $parsedArgs = [];
-        if (isset($this->serviceSource['arguments'])) {
+        if (is_array($this->serviceSource) && isset($this->serviceSource['arguments'])) {
             foreach ($this->serviceSource['arguments'] as $argument) {
                 $obj = $this->argumentParserFactory->create($this->container, $this->id, $argument);
                 $parsedArgs[] = $obj->parse();
             }
         }
         // exit
-        if (isset($this->serviceSource['className'])) {
-            return new $this->serviceSource['className'](...$parsedArgs);
+        if (is_array($this->serviceSource)) {
+            if (isset($this->serviceSource['className'])) {
+                return new $this->serviceSource['className'](...$parsedArgs);
+            } else {
+                throw new Exception('No class name in service source');
+            }
         } else {
             return new $this->serviceSource(...$parsedArgs);
         }
