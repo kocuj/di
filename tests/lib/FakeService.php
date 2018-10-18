@@ -40,9 +40,14 @@ class FakeService
      *
      * @param int $id Value identifier
      * @return mixed Fake value
+     * @throws \Exception
      */
     public function getValue(int $id)
     {
+        // check if value exists
+        if (!isset($this->values[$id])) {
+            throw new \Exception(sprintf('Value with identifier "%s" does not exist', $id));
+        }
         // exit
         return $this->values[$id];
     }
