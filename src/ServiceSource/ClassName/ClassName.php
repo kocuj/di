@@ -67,7 +67,7 @@ class ClassName implements ServiceSourceInterface
     ) {
         // check if service source is a string or array
         if (!is_string($serviceSource) && !is_array($serviceSource)) {
-            throw new Exception('Service source is a string with class name or an array with class name and arguments');
+            throw new Exception('Service source must be a string with class name or an array with class name and arguments');
         }
         // remember arguments
         $this->argumentParserFactory = $argumentParserFactory;
