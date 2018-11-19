@@ -15,7 +15,7 @@ Kontener dla wzorca projektowego "wstrzykiwanie zależności" (Dependency Inject
 
 Niniejszy pakiet jest zgodny z [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Jeżeli zauważyłeś niezgodność, proszę abyś wysłał poprawkę przez prośbę o pociągnięcie danych ("pull request").
 
-## [Pobierz 1.3.0](https://github.com/kocuj/di/releases/tag/v1.3.0)
+## [Pobierz 2.0.0](https://github.com/kocuj/di/releases/tag/v2.0.0)
 
 NIE UŻYWAJ TEJ GAŁĘZI NA PRODUKCJI! TA GAŁĄŹ ISTNIEJE TYLKO DLA PROGRAMOWANIA WERSJI 2.0.
 
@@ -41,7 +41,6 @@ W niniejszej dokumentacji zakłada się, że zaimportujesz przestrzenie nazw dla
 
 ```php
 use Kocuj\Di\Di;
-use Kocuj\Di\Service\ServiceType\ServiceType;
 ```
 
 Aby użyć biblioteki Kocuj DI musisz najpierw zainicjalizować ją:
@@ -78,7 +77,7 @@ Po utworzeniu kontenera (domyślnego lub innego), możesz dodać serwisy do nieg
 * standardowy ("standard") - serwis, który będzie konstruowany przy każdym użyciu.
 
 Aby utworzyć serwis, możesz użyć następującej metody:
-`add(ServiceType $serviceType, string $id, string $source, array $arguments = []): ContainerInterface`
+`add(ServiceType $serviceType, string $id, $serviceSource): ContainerInterface`
 
 Argument $serviceType może być jednym z następujących:
 
@@ -87,20 +86,20 @@ Argument $serviceType może być jednym z następujących:
 
 Jeżeli chcesz pominąć argument $serviceType, możesz użyć jednej z następujących metod:
 
-* aby utworzyć serwis współdzielony - `addShared(string $id, string $source, array $arguments = []): ContainerInterface`;
-* aby utworzyć serwis standardowy - `addStandard(string $id, string $source, array $arguments = []): ContainerInterface`.
+* aby utworzyć serwis współdzielony - `addShared(string $id, $serviceSource): ContainerInterface`;
+* aby utworzyć serwis standardowy - `addStandard(string $id, $serviceSource): ContainerInterface`.
 
 Argument $id jest identyfikatorem utworzonego serwisu. Wszystkie identyfikatory są automatycznie zmieniane na format "camelCase". Pamiętaj, że wewnątrz jednego kontenera możesz być tylko jeden serwis o wybranym identyfikatorze.
 
-Argument $source to w pełni kwalifikowana nazwa klasy dla serwisu. Dobrą praktyką jest użycie notacji "::class" w tym miejscu.
+Argument $serviceSource jest serwisem używanym z wybranym identyfikatorem. Argument ten może być jednym z następujących typów:
 
-Na przykład, aby dodać serwis współdzielony z klasy \Services\Service z identyfikatorem "someService", użyj następującego kodu:
+* obiekt - ten obiekt będzie używany jako serwis;
+* funkcja anonimowa - ta funkcja nie posiada argumentów i powinna zwrócić obiekt, który będzie używany jako serwis;
+* klasa - powinna to być tablica z następującymi elementami:
+  * `className` - wymagany element; jest to w pełni kwalifikowana nazwa klasy serwisu (dobrą praktyką jest użycie notacji "::class" w tym miejscu);
+  * `arguments` - opcjonalny element; więcej informacji o tym elemencie znajduje się poniżej w niniejszej dokumentacji.
 
-```php
-$myContainer->addShared('someService', \Services\Service::class);
-```
-
-Jednakże najlepszą funkcjonalnością biblioteki Kocuj DI jest automatyczne rozwiązywanie zależności pomiędzy serwisami. Aby użyć tej funkcjonalności, powinien być przynajmniej jeden argument wysłany do konstruktora serwisu. Miejscem do wykonania tego jest argument $arguments.
+Najlepszą funkcjonalnością biblioteki Kocuj DI jest automatyczne rozwiązywanie zależności pomiędzy serwisami, gdy argument $serviceSource jest tablicą. Aby użyć tej funkcjonalności, powinien być przynajmniej jeden argument wysłany do konstruktora serwisu. Miejscem do wykonania tego jest element "arguments" wewnątrz tablicy w argumencie $serviceSource.
 
 Każdy argument w $arguments zawiera tablicę z jednym elementem z indeksem "type" i z drugim z indeksem "value", którego wartość zależy od wartości ustawionej w indeksie "type". Element z indeksem "type" zawiera nazwę typu argumentu.
 
@@ -112,8 +111,9 @@ Istnieją dwa typy argumentów wybierane przez element z indeksem "type":
 Na przykład, aby dodać serwis współdzielony z klasy \Services\OtherService z identyfikatorem "otherService", który posiada konstruktor `__construct(\Services\Service $service, bool $status)` i wymaga, aby $status był ustawiony na true, użyj następującego kodu:
 
 ```php
-$myContainer->addShared('otherService', \Services\OtherService::class, [
-    [
+$myContainer->addShared('otherService', [
+    'className' => \Services\OtherService::class,
+    'arguments' => [
         'type' => 'service',
         'value' => \Services\Service::class
     ],
@@ -142,9 +142,10 @@ Dodatkowo możesz sprawdzić typ serwisu używając następującej metody: `chec
 
 Aby kontrolować wszystkie nieprawidłowe sytuacje, istnieją następujące wyjątki:
 
-* `\Kocuj\Di\ArgumentParser\Exception` - dla problemów z argumentem z innymi serwisami i/lub wartościami dla tworzonego serwisu;
 * `\Kocuj\Di\Container\Exception` - dla problemów z tworzeniem lub pobieraniem serwisu w kontenerze;
-* `\Kocuj\Di\Service\Exception` - dla problemów z typem serwisu; jednakże ten wyjątek nie będzie używany, gdy biblioteka jest używana poprawnie.
+* `\Kocuj\Di\Container\NotFoundException` - dla nieistniejących serwisów;
+* `\Kocuj\Di\Service\Exception` - dla problemów z typem serwisu; jednakże ten wyjątek nie będzie używany, gdy biblioteka jest używana poprawnie;
+* `\Kocuj\Di\ServiceSource\Exception` - dla problemów ze źródłem serwisu.
 
 Przykład użycia biblioteki:
 
@@ -158,16 +159,23 @@ $di = new Di();
 // get DI container
 $container = $di->getDefault();
 // set DI services
-$container->addShared('input', InputService::class);
-$container->addShared('output', OutputService::class);
-$container->addStandard('main', Main::class, [
-    [
-        'type' => 'service',
-        'value' => 'input'
-    ],
-    [
-        'type' => 'service',
-        'value' => 'output'
+$container->addShared('input', [
+    'className' => InputService::class
+]);
+$container->addShared('output', [
+    'className' => OutputService::class
+]);
+$container->addStandard('main', [
+    'className' => Main::class,
+    'arguments' => [
+        [
+            'type' => 'service',
+            'value' => 'input'
+        ],
+        [
+            'type' => 'service',
+            'value' => 'output'
+        ]
     ]
 ]);
 // execute

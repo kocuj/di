@@ -15,7 +15,7 @@ Container for design pattern Dependency Injection in PHP 7
 
 This package is compliant with [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). If you notice compliance oversights, please send a patch via pull request.
 
-## [Download 1.3.0](https://github.com/kocuj/di/releases/tag/v1.3.0)
+## [Download 2.0.0](https://github.com/kocuj/di/releases/tag/v2.0.0)
 
 DO NOT USE THIS BRANCH ON PRODUCTION! THIS BRANCH IS ONLY FOR DEVELOPMENT OF VERSION 2.0.
 
@@ -41,7 +41,6 @@ In this documentation it is assumed that you will import namespaces for the Kocu
 
 ```php
 use Kocuj\Di\Di;
-use Kocuj\Di\Service\ServiceType\ServiceType;
 ```
 
 To use the Kocuj DI library you must first initialize it:
@@ -78,7 +77,7 @@ After creating the container (default or other), you can add services into it. T
 * standard - service which will be constructed on each use.
 
 To create service you can use the following method:
-`add(ServiceType $serviceType, string $id, string $source, array $arguments = []): ContainerInterface`
+`add(ServiceType $serviceType, string $id, $serviceSource): ContainerInterface`
 
 The $serviceType argument can be one of the following:
 
@@ -87,20 +86,20 @@ The $serviceType argument can be one of the following:
 
 If you want to ommit a $serviceType argument, you can use one of the following methods:
 
-* to create shared service - `addShared(string $id, string $source, array $arguments = []): ContainerInterface`;
-* to create standard service - `addStandard(string $id, string $source, array $arguments = []): ContainerInterface`.
+* to create shared service - `addShared(string $id, $serviceSource): ContainerInterface`;
+* to create standard service - `addStandard(string $id, $serviceSource): ContainerInterface`.
 
 Argument $id is an identifier of created service. All identifiers will be automatically converted to camelCase format. Remember, that inside one container there can be only one service with the selected identifier.
 
-Argument $source is a fully qualified class name for service. It is a good practice to use "::class" notation in this place.
+Argument $serviceSource is a service to use with the selected identifier. It can be one of the following types:
 
-For example, to add shared service from class \Services\Service with "someService" identifier, use the following code:
+* an object - this object will be used as service;
+* an anonymous function - this function has no arguments and should return an object which will be used as service;
+* a class- it should be an array with the following elements:
+  * `className` - required element; it is fully qualified class name for service (iIt is a good practice to use "::class" notation in this place);
+  * `arguments` - optional element; more information about this element are below in this documentation.
 
-```php
-$myContainer->addShared('someService', \Services\Service::class);
-```
-
-However, the best feature of the Kocuj DI library is to automatically resolving dependencies between services. To use this feature, there should be at least one argument sent to a service constructor. The place to do so is in $arguments argument.
+The best feature of the Kocuj DI library is to automatically resolving dependencies between services when a $serviceSource argument is an array. To use this feature, there should be at least one argument sent to a service constructor. The place to do so is in element "arguments" inside an array for argument $serviceSource.
 
 Each argument in $arguments contains an array with one element with index "type" and second with index "value" which value depends on value set in index "type". Element with index "type" contains a name of argument type.
 
@@ -112,8 +111,9 @@ There are two types of arguments selected by element with index "type":
 For example, to add shared service from class \Services\OtherService with "otherService" identifier, which has constructor `__construct(\Services\Service $service, bool $status)` and require $status to set to true, use the following code:
 
 ```php
-$myContainer->addShared('otherService', \Services\OtherService::class, [
-    [
+$myContainer->addShared('otherService', [
+    'className' => \Services\OtherService::class,
+    'arguments' => [
         'type' => 'service',
         'value' => \Services\Service::class
     ],
@@ -142,9 +142,10 @@ Additionally you can check type of service by using the following method: `check
 
 To control any wrong situations, there are the following exceptions available:
 
-* `\Kocuj\Di\ArgumentParser\Exception` - for problems with argument with other services and/or values for created service;
 * `\Kocuj\Di\Container\Exception` - for problem with creating or getting service in container;
-* `\Kocuj\Di\Service\Exception` - for problems with service type; however, this exception will not be used when this library is used correctly.
+* `\Kocuj\Di\Container\NotFoundException` - for non-existent services;
+* `\Kocuj\Di\Service\Exception` - for problems with service type; however, this exception will not be used when this library is used correctly;
+* `\Kocuj\Di\ServiceSource\Exception` - for problems with service source.
 
 Example of using the library:
 
@@ -158,16 +159,23 @@ $di = new Di();
 // get DI container
 $container = $di->getDefault();
 // set DI services
-$container->addShared('input', InputService::class);
-$container->addShared('output', OutputService::class);
-$container->addStandard('main', Main::class, [
-    [
-        'type' => 'service',
-        'value' => 'input'
-    ],
-    [
-        'type' => 'service',
-        'value' => 'output'
+$container->addShared('input', [
+    'className' => InputService::class
+]);
+$container->addShared('output', [
+    'className' => OutputService::class
+]);
+$container->addStandard('main', [
+    'className' => Main::class,
+    'arguments' => [
+        [
+            'type' => 'service',
+            'value' => 'input'
+        ],
+        [
+            'type' => 'service',
+            'value' => 'output'
+        ]
     ]
 ]);
 // execute
