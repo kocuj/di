@@ -140,6 +140,8 @@ $myContainer->getOtherService();
 
 Dodatkowo możesz sprawdzić typ serwisu używając następującej metody: `checkType(string $id, ServiceType $serviceType): bool`. Możesz też sprawdzić, czy serwis istnieje w kontenerze używając następującej metody: `has($id): bool`.
 
+Możesz również sprawdzić ile serwisów jest zdefiniowanych w kontenerze używając następującej metody: `count() : int`. Alternatywnie możesz użyć funkcji `count()` na kontenerze, aby to sprawdzić.
+
 Aby kontrolować wszystkie nieprawidłowe sytuacje, istnieją następujące wyjątki:
 
 * `\Kocuj\Di\Container\Exception` - dla problemów z tworzeniem lub pobieraniem serwisu w kontenerze;

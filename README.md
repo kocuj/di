@@ -140,6 +140,8 @@ $myContainer->getOtherService();
 
 Additionally you can check type of service by using the following method: `checkType(string $id, ServiceType $serviceType): bool`. You can also check if service exists in container by using the following method: `has($id): bool`.
 
+You can also check how many services are defined in the container by using the following method: `count() : int`. Alternatively you can use the function `count()` on container check this.
+
 To control any wrong situations, there are the following exceptions available:
 
 * `\Kocuj\Di\Container\Exception` - for problem with creating or getting service in container;
