@@ -19,7 +19,7 @@ use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
  *
  * @package Kocuj\Di\Container
  */
-class Container implements ContainerInterface
+class Container implements ContainerInterface, \Countable
 {
     /**
      * Service identifier decorator
@@ -36,11 +36,18 @@ class Container implements ContainerInterface
     private $serviceFactory;
 
     /**
-     * Definitions
+     * Services definitions
      *
      * @var array
      */
     private $definitions = [];
+
+    /**
+     * Services definitions count
+     *
+     * @var int
+     */
+    private $definitionsCount = 0;
 
     /**
      * Constructor
@@ -68,7 +75,11 @@ class Container implements ContainerInterface
         // copy services definitions
         $oldDefinitions = $this->definitions;
         // recreate services
+        // TODO: change these into method to clear definitions
+        // !!!!
         $this->definitions = [];
+        $this->definitionsCount = 0;
+        // !!!!
         foreach ($oldDefinitions as $definition) {
             $this->add($definition['type'], $definition['clonedata']['id'], $definition['clonedata']['serviceSource']);
         }
@@ -101,6 +112,7 @@ class Container implements ContainerInterface
                 'serviceSource' => $serviceSource,
             ]
         ];
+        ++$this->definitionsCount;
         // exit
         return $this;
     }
@@ -186,6 +198,17 @@ class Container implements ContainerInterface
         $decoratedId = $this->serviceIdDecorator->decorate($id);
         // exit
         return isset($this->definitions[$decoratedId]);
+    }
+
+    /**
+     * Get how many services are in the container
+     *
+     * @return int
+     */
+    public function count(): int
+    {
+        // exit
+        return $this->definitionsCount;
     }
 
     /**
