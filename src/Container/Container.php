@@ -86,7 +86,8 @@ class Container implements ContainerInterface, \Countable
      *
      * @return void
      */
-    private function clearDefinitions() {
+    private function clearDefinitions()
+    {
         // clear definitions
         $this->definitions = [];
         $this->definitionsCount = 0;
