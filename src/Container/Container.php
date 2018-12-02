@@ -75,14 +75,21 @@ class Container implements ContainerInterface, \Countable
         // copy services definitions
         $oldDefinitions = $this->definitions;
         // recreate services
-        // TODO: change these into method to clear definitions
-        // !!!!
-        $this->definitions = [];
-        $this->definitionsCount = 0;
-        // !!!!
+        $this->clearDefinitions();
         foreach ($oldDefinitions as $definition) {
             $this->add($definition['type'], $definition['clonedata']['id'], $definition['clonedata']['serviceSource']);
         }
+    }
+
+    /**
+     * Clear definitions
+     *
+     * @return void
+     */
+    private function clearDefinitions() {
+        // clear definitions
+        $this->definitions = [];
+        $this->definitionsCount = 0;
     }
 
     /**
