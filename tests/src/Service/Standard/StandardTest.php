@@ -32,7 +32,8 @@ class StandardTest extends TestCase
      */
     public function testGetServiceValue(array $arguments)
     {
-        // assert
+        // ---- ASSERT ----
+
         $this->getServiceValueOrService(false, $arguments);
     }
 
@@ -44,7 +45,8 @@ class StandardTest extends TestCase
      */
     private function getServiceValueOrService(bool $argumentsAreServices, array $arguments)
     {
-        // arrange
+        // ---- ARRANGE ----
+
         $id = 'ThisService';
         $container = $this->prophesize(ContainerInterface::class);
         $argumentParserFactory = $this->prophesize(ArgumentParserFactoryInterface::class);
@@ -60,12 +62,14 @@ class StandardTest extends TestCase
         }
         $source = FakeService::class;
 
-        // act
+        // ---- ACT ----
+
         $standard = new Standard($argumentParserFactory->reveal(), $container->reveal(), $id, $source, $arguments);
         $service1 = $standard->getService();
         $service2 = $standard->getService();
 
-        // assert
+        // ---- ASSERT ----
+
         $this->assertInstanceOf(FakeService::class, $service1);
         foreach ($arguments as $key => $argument) {
             if ($argumentsAreServices) {
@@ -85,7 +89,8 @@ class StandardTest extends TestCase
      */
     public function testGetServiceService(array $arguments)
     {
-        // assert
+        // ---- ASSERT ----
+
         $this->getServiceValueOrService(true, $arguments);
     }
 

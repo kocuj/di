@@ -32,7 +32,8 @@ class SharedTest extends TestCase
      */
     public function testGetServiceValue(array $arguments)
     {
-        // assert
+        // ---- ASSERT ----
+
         $this->getServiceValueOrService(false, $arguments);
     }
 
@@ -44,7 +45,8 @@ class SharedTest extends TestCase
      */
     private function getServiceValueOrService(bool $argumentsAreServices, array $arguments)
     {
-        // arrange
+        // ---- ARRANGE ----
+
         $id = 'ThisService';
         $argumentParser = $this->prophesize(ArgumentParserInterface::class);
         $container = $this->prophesize(ContainerInterface::class);
@@ -61,12 +63,14 @@ class SharedTest extends TestCase
         }
         $source = FakeService::class;
 
-        // act
+        // ---- ACT ----
+
         $shared = new Shared($argumentParserFactory->reveal(), $container->reveal(), $id, $source, $arguments);
         $service1 = $shared->getService();
         $service2 = $shared->getService();
 
-        // assert
+        // ---- ASSERT ----
+
         $this->assertInstanceOf(FakeService::class, $service1);
         foreach ($arguments as $key => $argument) {
             if ($argumentsAreServices) {
@@ -86,7 +90,8 @@ class SharedTest extends TestCase
      */
     public function testGetServiceService(array $arguments)
     {
-        // assert
+        // ---- ASSERT ----
+
         $this->getServiceValueOrService(true, $arguments);
     }
 

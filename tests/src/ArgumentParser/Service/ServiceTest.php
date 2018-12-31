@@ -31,7 +31,8 @@ class ServiceTest extends TestCase
      */
     public function testOldVersionArgument()
     {
-        // arrange
+        // ---- ARRANGE ----
+
         $id = 'ThisService';
         $otherId = 'OtherService';
         $service = $this->prophesize(ServiceInterface::class);
@@ -42,7 +43,8 @@ class ServiceTest extends TestCase
             'service' => $otherId
         ];
 
-        // act
+        // ---- ACT ----
+
         $argumentParserService = new Service($container->reveal(), $id, $argument);
     }
 
@@ -53,7 +55,8 @@ class ServiceTest extends TestCase
      */
     public function testWrongArgument()
     {
-        // arrange
+        // ---- ARRANGE ----
+
         $id = 'ThisService';
         $service = $this->prophesize(ServiceInterface::class);
         $container = $this->prophesize(ContainerInterface::class);
@@ -62,7 +65,8 @@ class ServiceTest extends TestCase
             'type' => 'service'
         ];
 
-        // act
+        // ---- ACT ----
+
         $argumentParserService = new Service($container->reveal(), $id, $argument);
     }
 
@@ -73,7 +77,8 @@ class ServiceTest extends TestCase
      */
     public function testParseService()
     {
-        // arrange
+        // ---- ARRANGE ----
+
         $id = 'ThisService';
         $otherId = 'OtherService';
         $service = $this->prophesize(ServiceInterface::class);
@@ -84,11 +89,13 @@ class ServiceTest extends TestCase
             'value' => $otherId
         ];
 
-        // act
+        // ---- ACT ----
+
         $argumentParserService = new Service($container->reveal(), $id, $argument);
         $parsedArg = $argumentParserService->parse();
 
-        // assert
+        // ---- ASSERT ----
+
         $this->assertTrue($parsedArg instanceof ServiceInterface);
     }
 
@@ -99,7 +106,8 @@ class ServiceTest extends TestCase
      */
     public function testParseTheSameService()
     {
-        // arrange
+        // ---- ARRANGE ----
+
         $id = 'ThisService';
         $service = $this->prophesize(ServiceInterface::class);
         $container = $this->prophesize(ContainerInterface::class);
@@ -109,7 +117,8 @@ class ServiceTest extends TestCase
             'value' => $id
         ];
 
-        // act
+        // ---- ACT ----
+
         $argumentParserService = new Service($container->reveal(), $id, $argument);
         $argumentParserService->parse();
     }

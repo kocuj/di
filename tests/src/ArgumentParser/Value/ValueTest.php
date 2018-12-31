@@ -28,12 +28,14 @@ class ValueTest extends TestCase
      */
     public function testWrongArgument()
     {
-        // arrange
+        // ---- ARRANGE ----
+
         $argument = [
             'type' => 'value'
         ];
 
-        // act
+        // ---- ACT ----
+
         $argumentParserValue = new Value($argument);
     }
 
@@ -47,17 +49,20 @@ class ValueTest extends TestCase
      */
     public function testParseValue($value, $expectedValue)
     {
-        // arrange
+        // ---- ARRANGE ----
+
         $argument = [
             'type' => 'value',
             'value' => $value
         ];
 
-        // act
+        // ---- ACT ----
+
         $argumentParserValue = new Value($argument);
         $parsedArg = $argumentParserValue->parse();
 
-        // assert
+        // ---- ASSERT ----
+
         $this->assertSame($parsedArg, $value);
     }
 
