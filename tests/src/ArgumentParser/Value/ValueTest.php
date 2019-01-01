@@ -5,7 +5,7 @@
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
- * @copyright Copyright (c) 2017-2018 kocuj.pl
+ * @copyright Copyright (c) 2017-2019 kocuj.pl
  */
 
 namespace Kocuj\Di\Tests\ArgumentParser\Value;
