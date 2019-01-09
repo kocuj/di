@@ -8,30 +8,30 @@
  * @copyright Copyright (c) 2017-2019 kocuj.pl
  */
 
-namespace Kocuj\Di\Tests\ArgumentParser\Value;
+namespace Kocuj\Di\Tests\ServiceSource\ClassName\ArgumentParser\Value;
 
-use Kocuj\Di\ArgumentParser\Exception;
-use Kocuj\Di\ArgumentParser\Value\Value;
+use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\Value\Value;
+use Kocuj\Di\ServiceSource\Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for Value object
  *
- * @package Kocuj\Di\Tests\ArgumentParser\Value
+ * @package Kocuj\Di\Tests\ServiceSource\ClassName\ArgumentParser\Value
  */
 class ValueTest extends TestCase
 {
     /**
      * Testing wrong argument
      *
-     * @expectedException \Kocuj\Di\ArgumentParser\Exception
+     * @expectedException Exception
      */
     public function testWrongArgument()
     {
         // ---- ARRANGE ----
 
         $argument = [
-            'type' => 'value'
+            'somewrongkey' => 'something',
         ];
 
         // ---- ACT ----
@@ -43,16 +43,14 @@ class ValueTest extends TestCase
      * Testing parsing value as argument
      *
      * @param mixed $value Value
-     * @param mixed $expectedValue Expected value
      * @throws Exception
      * @dataProvider parseValueProvider
      */
-    public function testParseValue($value, $expectedValue)
+    public function testParseValue($value)
     {
         // ---- ARRANGE ----
 
         $argument = [
-            'type' => 'value',
             'value' => $value
         ];
 
@@ -73,29 +71,22 @@ class ValueTest extends TestCase
      */
     public function parseValueProvider(): array
     {
-        // initialize standard object
-        $obj = new \stdClass();
         // exit
         return [
             [
                 10,
-                10
             ],
             [
                 'Test string',
-                'Test string'
             ],
             [
                 12.4,
-                12.4
             ],
             [
                 true,
-                true
             ],
             [
-                $obj,
-                $obj
+                new \stdClass(),
             ]
         ];
     }
