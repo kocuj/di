@@ -18,7 +18,7 @@ use Kocuj\Di\ServiceSource\Exception;
 /**
  * Service argument parser factory
  *
- * @package Kocuj\Di\ArgumentParser
+ * @package Kocuj\Di\ServiceSource\ClassName\ArgumentParser
  */
 class ArgumentParserFactory implements ArgumentParserFactoryInterface
 {

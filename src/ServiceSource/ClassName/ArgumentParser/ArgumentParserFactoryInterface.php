@@ -15,7 +15,7 @@ use Kocuj\Di\Container\ContainerInterface;
 /**
  * Service argument parser factory interface
  *
- * @package Kocuj\Di\ArgumentParser
+ * @package Kocuj\Di\ServiceSource\ClassName\ArgumentParser
  */
 interface ArgumentParserFactoryInterface
 {

@@ -13,7 +13,7 @@ namespace Kocuj\Di\ServiceSource\ClassName\ArgumentParser;
 /**
  * Service argument parser interface
  *
- * @package Kocuj\Di\ArgumentParser
+ * @package Kocuj\Di\ServiceSource\ClassName\ArgumentParser
  */
 interface ArgumentParserInterface
 {

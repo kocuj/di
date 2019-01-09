@@ -16,7 +16,7 @@ use Kocuj\Di\ServiceSource\Exception;
 /**
  * Service argument parser for value
  *
- * @package Kocuj\Di\ArgumentParser\Value
+ * @package Kocuj\Di\ServiceSource\ClassName\ArgumentParser\Value
  */
 class Value implements ArgumentParserInterface
 {
