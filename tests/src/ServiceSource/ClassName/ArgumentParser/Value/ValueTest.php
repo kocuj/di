@@ -61,6 +61,7 @@ class ValueTest extends TestCase
 
         // ---- ASSERT ----
 
+        // check if output value is the same as input value
         $this->assertSame($parsedArg, $value);
     }
 

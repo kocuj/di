@@ -88,7 +88,7 @@ class ServiceTest extends TestCase
 
         // ---- ASSERT ----
 
-        // check if correct service has been returned
+        // check if output service is based on input service identifier
         $this->assertSame($serviceReveal, $parsedArg);
     }
 
