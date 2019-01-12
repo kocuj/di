@@ -60,6 +60,47 @@ class ContainerTest extends TestCase
     private $serviceFactory = null;
 
     /**
+     * Preparing objects for testing
+     *
+     * @param ServiceType $serviceType
+     * @param array $services
+     */
+    private function prepare(ServiceType $serviceType, array $services)
+    {
+        $this->serviceIdDecorator = $this->prophesize(ServiceIdDecoratorInterface::class);
+
+        foreach ($services as $serviceId => $decoratedServiceId) {
+            /** @var MethodProphecy $serviceIdDecoratorDecorate */
+            $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($serviceId);
+            $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
+
+            /** @var MethodProphecy $serviceIdDecoratorDecorate */
+            $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($decoratedServiceId);
+            $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
+        }
+
+        /** @var ContainerInterface $containerInterface */
+        $containerInterface = Argument::type(ContainerInterface::class);
+
+        $this->fakeService = new FakeService();
+
+        $this->service = $this->prophesize(ServiceInterface::class);
+
+        /** @var MethodProphecy $serviceGetService */
+        $serviceGetService = $this->service->getService();
+        $serviceGetService->willReturn($this->fakeService);
+
+        $this->serviceFactory = $this->prophesize(ServiceFactoryInterface::class);
+
+        foreach ($services as $serviceId => $decoratedServiceId) {
+            /** @var MethodProphecy $serviceFactoryCreate */
+            $serviceFactoryCreate = $this->serviceFactory->create($containerInterface, $serviceType,
+                $decoratedServiceId, FakeService::class);
+            $serviceFactoryCreate->willReturn($this->service);
+        }
+    }
+
+    /**
      * Testing cloning container; any service in the cloned container should have the same identifier and should be the same type as in the original container
      *
      * @param ServiceType $serviceType Service type
@@ -78,25 +119,25 @@ class ContainerTest extends TestCase
 
         $clonedObject = new FakeService();
 
-        $clonedService = $this->prophesize(ServiceInterface::class);
         /** @var ServiceInterface $clonedService */
+        $clonedService = $this->prophesize(ServiceInterface::class);
         $clonedService->getService()->willReturn($clonedObject);
 
-        $containerInterface = Argument::type(ContainerInterface::class);
         /** @var ContainerInterface $containerInterface */
+        $containerInterface = Argument::type(ContainerInterface::class);
 
+        /** @var MethodProphecy $serviceFactoryCreate */
         $serviceFactoryCreate = $this->serviceFactory->create($containerInterface, $serviceType, $decoratedServiceId,
             FakeService::class);
-        /** @var MethodProphecy $serviceFactoryCreate */
         $serviceFactoryCreate->willReturn($clonedService);
 
-        // ---- ACT ----
-
-        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
+        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
 
-        $serviceFactoryReveal = $this->serviceFactory->reveal();
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
+        $serviceFactoryReveal = $this->serviceFactory->reveal();
+
+        // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
 
@@ -108,47 +149,6 @@ class ContainerTest extends TestCase
 
         // check if containers are not the same
         $this->assertNotSame($clonedContainer, $container);
-    }
-
-    /**
-     * Preparing objects for testing
-     *
-     * @param ServiceType $serviceType
-     * @param array $services
-     */
-    private function prepare(ServiceType $serviceType, array $services)
-    {
-        $this->serviceIdDecorator = $this->prophesize(ServiceIdDecoratorInterface::class);
-
-        foreach ($services as $serviceId => $decoratedServiceId) {
-            $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($serviceId);
-            /** @var MethodProphecy $serviceIdDecoratorDecorate */
-            $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
-
-            $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($decoratedServiceId);
-            /** @var MethodProphecy $serviceIdDecoratorDecorate */
-            $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
-        }
-
-        $containerInterface = Argument::type(ContainerInterface::class);
-        /** @var ContainerInterface $containerInterface */
-
-        $this->fakeService = new FakeService();
-
-        $this->service = $this->prophesize(ServiceInterface::class);
-
-        $serviceGetService = $this->service->getService();
-        /** @var MethodProphecy $serviceGetService */
-        $serviceGetService->willReturn($this->fakeService);
-
-        $this->serviceFactory = $this->prophesize(ServiceFactoryInterface::class);
-
-        foreach ($services as $serviceId => $decoratedServiceId) {
-            $serviceFactoryCreate = $this->serviceFactory->create($containerInterface, $serviceType,
-                $decoratedServiceId, FakeService::class);
-            /** @var MethodProphecy $serviceFactoryCreate */
-            $serviceFactoryCreate->willReturn($this->service);
-        }
     }
 
     /**
@@ -192,13 +192,13 @@ class ContainerTest extends TestCase
             $serviceId => $decoratedServiceId
         ]);
 
-        // ---- ACT ----
-
-        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
+        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
 
-        $serviceFactoryReveal = $this->serviceFactory->reveal();
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
+        $serviceFactoryReveal = $this->serviceFactory->reveal();
+
+        // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
 
@@ -234,13 +234,13 @@ class ContainerTest extends TestCase
             $serviceId => $decoratedServiceId
         ]);
 
-        // ---- ACT ----
-
-        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
+        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
 
-        $serviceFactoryReveal = $this->serviceFactory->reveal();
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
+        $serviceFactoryReveal = $this->serviceFactory->reveal();
+
+        // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
         $container->add($serviceType, $serviceId, FakeService::class);
@@ -269,13 +269,13 @@ class ContainerTest extends TestCase
             $serviceId => $decoratedServiceId
         ]);
 
-        // ---- ACT ----
-
-        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
+        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
 
-        $serviceFactoryReveal = $this->serviceFactory->reveal();
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
+        $serviceFactoryReveal = $this->serviceFactory->reveal();
+
+        // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
         $container->add($serviceType, $serviceId, FakeService::class);
@@ -352,13 +352,13 @@ class ContainerTest extends TestCase
 
         $this->prepare($serviceType, $services);
 
-        // ---- ACT ----
-
-        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
+        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
 
-        $serviceFactoryReveal = $this->serviceFactory->reveal();
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
+        $serviceFactoryReveal = $this->serviceFactory->reveal();
+
+        // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
 
@@ -397,13 +397,13 @@ class ContainerTest extends TestCase
             $serviceId => $decoratedServiceId
         ]);
 
-        // ---- ACT ----
-
-        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
+        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
 
-        $serviceFactoryReveal = $this->serviceFactory->reveal();
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
+        $serviceFactoryReveal = $this->serviceFactory->reveal();
+
+        // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
 
@@ -488,13 +488,13 @@ class ContainerTest extends TestCase
             $serviceId => $decoratedServiceId
         ]);
 
-        // ---- ACT ----
-
-        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
+        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
 
-        $serviceFactoryReveal = $this->serviceFactory->reveal();
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
+        $serviceFactoryReveal = $this->serviceFactory->reveal();
+
+        // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
         $container->add($serviceType, $serviceId, FakeService::class);
@@ -521,17 +521,17 @@ class ContainerTest extends TestCase
             $serviceId => $decoratedServiceId
         ]);
 
-        $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($wrongServiceId);
         /** @var MethodProphecy $serviceIdDecoratorDecorate */
+        $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($wrongServiceId);
         $serviceIdDecoratorDecorate->willReturn($wrongServiceId);
 
-        // ---- ACT ----
-
-        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
+        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
 
-        $serviceFactoryReveal = $this->serviceFactory->reveal();
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
+        $serviceFactoryReveal = $this->serviceFactory->reveal();
+
+        // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
         $container->add($serviceType, $serviceId, FakeService::class);
@@ -556,13 +556,13 @@ class ContainerTest extends TestCase
             $serviceId => $decoratedServiceId
         ]);
 
-        // ---- ACT ----
-
-        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
+        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
 
-        $serviceFactoryReveal = $this->serviceFactory->reveal();
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
+        $serviceFactoryReveal = $this->serviceFactory->reveal();
+
+        // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
         call_user_func([$container, 'wrongMethodSupportedByCall']);
@@ -586,13 +586,13 @@ class ContainerTest extends TestCase
             $serviceId => $decoratedServiceId
         ]);
 
-        // ---- ACT ----
-
-        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
+        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
 
-        $serviceFactoryReveal = $this->serviceFactory->reveal();
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
+        $serviceFactoryReveal = $this->serviceFactory->reveal();
+
+        // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
 

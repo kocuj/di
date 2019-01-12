@@ -36,7 +36,7 @@ class ValueTest extends TestCase
 
         // ---- ACT ----
 
-        $argumentParserValue = new Value($argument);
+        new Value($argument);
     }
 
     /**

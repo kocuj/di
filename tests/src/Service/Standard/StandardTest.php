@@ -10,12 +10,13 @@
 
 namespace Kocuj\Di\Tests\Service\Standard;
 
-use Kocuj\Di\ArgumentParser\ArgumentParserFactoryInterface;
-use Kocuj\Di\ArgumentParser\ArgumentParserInterface;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\Standard\Standard;
+use Kocuj\Di\ServiceSource\ServiceSourceFactoryInterface;
+use Kocuj\Di\ServiceSource\ServiceSourceInterface;
 use Kocuj\Di\TestsLib\FakeService;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Prophecy\MethodProphecy;
 
 /**
  * Tests for Standard object
@@ -25,118 +26,52 @@ use PHPUnit\Framework\TestCase;
 class StandardTest extends TestCase
 {
     /**
-     * Testing get value for the selected service
+     * Testing get the selected service
      *
-     * @param array $arguments Arguments
-     * @dataProvider getServiceValueProvider
      */
-    public function testGetServiceValue(array $arguments)
-    {
-        // ---- ASSERT ----
-
-        $this->getServiceValueOrService(false, $arguments);
-    }
-
-    /**
-     * Get value or service for the selected service
-     *
-     * @param bool $argumentsAreServices Arguments are services (true) or values (false)
-     * @param array $arguments Arguments
-     */
-    private function getServiceValueOrService(bool $argumentsAreServices, array $arguments)
+    public function testGetService()
     {
         // ---- ARRANGE ----
 
         $id = 'ThisService';
+
+        $serviceSourceFactory = $this->prophesize(ServiceSourceFactoryInterface::class);
+
         $container = $this->prophesize(ContainerInterface::class);
-        $argumentParserFactory = $this->prophesize(ArgumentParserFactoryInterface::class);
-        foreach ($arguments as $key => $argument) {
-            $argumentParser = $this->prophesize(ArgumentParserInterface::class);
-            if ($argumentsAreServices) {
-                $argumentParserFactory->create($container, $id, $argument)->willReturn($argumentParser);
-                $argumentParser->parse()->willReturn($argument['service']);
-            } else {
-                $argumentParserFactory->create($container, $id, $argument)->willReturn($argumentParser);
-                $argumentParser->parse()->willReturn($argument['value']);
-            }
-        }
-        $source = FakeService::class;
+
+        $fakeService = new FakeService();
+
+        /** @var ServiceSourceFactoryInterface $serviceSourceFactoryReveal */
+        $serviceSourceFactoryReveal = $serviceSourceFactory->reveal();
+
+        /** @var ContainerInterface $containerReveal */
+        $containerReveal = $container->reveal();
+
+        $serviceSource = $this->prophesize(ServiceSourceInterface::class);
+
+        /** @var ServiceSourceInterface $serviceSourceReveal */
+        $serviceSourceReveal = $serviceSource->reveal();
+
+        /** @var ServiceSourceInterface $serviceSource */
+
+        /** @var MethodProphecy $serviceSourceResolve */
+        $serviceSourceResolve = $serviceSource->resolve();
+        $serviceSourceResolve->willReturn($fakeService);
+
+        /** @var ServiceSourceFactoryInterface $serviceSourceFactory */
+        $serviceSourceFactoryCreate = $serviceSourceFactory->create($containerReveal, $id, $fakeService);
+        /** @var MethodProphecy $serviceSourceFactoryCreate */
+        $serviceSourceFactoryCreate->willReturn($serviceSourceReveal);
 
         // ---- ACT ----
 
-        $standard = new Standard($argumentParserFactory->reveal(), $container->reveal(), $id, $source, $arguments);
-        $service1 = $standard->getService();
-        $service2 = $standard->getService();
+        $standard = new Standard($serviceSourceFactoryReveal, $containerReveal, $id, $fakeService);
+
+        $returnedService = $standard->getService();
 
         // ---- ASSERT ----
 
-        $this->assertInstanceOf(FakeService::class, $service1);
-        foreach ($arguments as $key => $argument) {
-            if ($argumentsAreServices) {
-                $this->assertEquals($argument['service'], $service1->getValue($key));
-            } else {
-                $this->assertEquals($argument['value'], $service1->getValue($key));
-            }
-        }
-        $this->assertNotSame($service1, $service2);
-    }
-
-    /**
-     * Testing get service for the selected service
-     *
-     * @param array $arguments Arguments
-     * @dataProvider getServiceServiceProvider
-     */
-    public function testGetServiceService(array $arguments)
-    {
-        // ---- ASSERT ----
-
-        $this->getServiceValueOrService(true, $arguments);
-    }
-
-    /**
-     * Provider for testing get value for the selected service
-     *
-     * @return array Data for get value for the selected service
-     */
-    public function getServiceValueProvider(): array
-    {
-        // exit
-        return [
-            [
-                []
-            ],
-            [
-                [
-                    [
-                        'type' => 'value',
-                        'value' => 1
-                    ]
-                ]
-            ]
-        ];
-    }
-
-    /**
-     * Provider for testing get service for the selected service
-     *
-     * @return array Data for get service for the selected service
-     */
-    public function getServiceServiceProvider(): array
-    {
-        // exit
-        return [
-            [
-                []
-            ],
-            [
-                [
-                    [
-                        'type' => 'service',
-                        'service' => new FakeService()
-                    ]
-                ]
-            ]
-        ];
+        // check if service is the same
+        $this->assertSame($returnedService, $fakeService);
     }
 }

@@ -34,23 +34,18 @@ class ServiceTest extends TestCase
 
         $id = 'ThisService';
 
-        $service = $this->prophesize(ServiceInterface::class);
-
         $container = $this->prophesize(ContainerInterface::class);
-        /** @var ContainerInterface $container */
-
-        $serviceReveal = $service->reveal();
 
         $argument = [
             'somewrongkey' => 'something',
         ];
 
+        /** @var ContainerInterface $containerReveal */
+        $containerReveal = $container->reveal();
+
         // ---- ACT ----
 
-        $containerReveal = $container->reveal();
-        /** @var ContainerInterface $containerReveal */
-
-        $argumentParserService = new Service($containerReveal, $id, $argument);
+        new Service($containerReveal, $id, $argument);
     }
 
     /**
@@ -68,6 +63,9 @@ class ServiceTest extends TestCase
         $service = $this->prophesize(ServiceInterface::class);
 
         $container = $this->prophesize(ContainerInterface::class);
+
+        /** @var ContainerInterface $containerReveal */
+        $containerReveal = $container->reveal();
         /** @var ContainerInterface $container */
 
         $serviceReveal = $service->reveal();
@@ -79,9 +77,6 @@ class ServiceTest extends TestCase
         ];
 
         // ---- ACT ----
-
-        $containerReveal = $container->reveal();
-        /** @var ContainerInterface $containerReveal */
 
         $argumentParserService = new Service($containerReveal, $id, $argument);
         $parsedArg = $argumentParserService->parse();
@@ -106,6 +101,9 @@ class ServiceTest extends TestCase
         $service = $this->prophesize(ServiceInterface::class);
 
         $container = $this->prophesize(ContainerInterface::class);
+
+        /** @var ContainerInterface $containerReveal */
+        $containerReveal = $container->reveal();
         /** @var ContainerInterface $container */
 
         $serviceReveal = $service->reveal();
@@ -117,9 +115,6 @@ class ServiceTest extends TestCase
         ];
 
         // ---- ACT ----
-
-        $containerReveal = $container->reveal();
-        /** @var ContainerInterface $containerReveal */
 
         $argumentParserService = new Service($containerReveal, $id, $argument);
         $argumentParserService->parse();
