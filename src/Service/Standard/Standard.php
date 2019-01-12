@@ -55,7 +55,7 @@ class Standard implements ServiceInterface
      * @param ServiceSourceFactoryInterface $serviceSourceFactory Service source factory
      * @param ContainerInterface $container Dependency injection container for services
      * @param string $id Service identifier
-     * @param string $source Source for service to create
+     * @param mixed $serviceSource Source for service to create
      */
     public function __construct(
         ServiceSourceFactoryInterface $serviceSourceFactory,
