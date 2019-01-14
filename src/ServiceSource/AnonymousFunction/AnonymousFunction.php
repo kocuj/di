@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017-2019 kocuj.pl
  */
 
-namespace Kocuj\Di\ServiceSource\ClassName;
+namespace Kocuj\Di\ServiceSource\AnonymousFunction;
 
 use Kocuj\Di\ServiceSource\Exception;
 use Kocuj\Di\ServiceSource\ServiceSourceInterface;
