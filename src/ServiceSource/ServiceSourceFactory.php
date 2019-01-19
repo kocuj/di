@@ -11,7 +11,7 @@
 namespace Kocuj\Di\ServiceSource;
 
 use Kocuj\Di\Container\ContainerInterface;
-use Kocuj\Di\ServiceSource\ClassName\AnonymousFunction;
+use Kocuj\Di\ServiceSource\AnonymousFunction\AnonymousFunction;
 use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserFactory;
 use Kocuj\Di\ServiceSource\ClassName\ClassName;
 use Kocuj\Di\ServiceSource\ObjectInstance\ObjectInstance;

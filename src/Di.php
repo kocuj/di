@@ -10,7 +10,6 @@
 
 namespace Kocuj\Di;
 
-use Kocuj\Di\ArgumentParser\ArgumentParserFactory;
 use Kocuj\Di\Container\Container;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\ServiceFactory;
