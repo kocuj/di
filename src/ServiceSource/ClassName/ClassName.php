@@ -95,11 +95,17 @@ class ClassName implements ServiceSourceInterface
         // exit
         if (is_array($this->serviceSource)) {
             if (isset($this->serviceSource['className'])) {
+                if (!class_exists($this->serviceSource['className'])) {
+                    throw new Exception('Class does not exist');
+                }
                 return new $this->serviceSource['className'](...$parsedArgs);
             } else {
                 throw new Exception('No class name in service source');
             }
         } else {
+            if (!class_exists($this->serviceSource)) {
+                throw new Exception('Class does not exist');
+            }
             return new $this->serviceSource(...$parsedArgs);
         }
     }
