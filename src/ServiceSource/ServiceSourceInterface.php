@@ -20,7 +20,7 @@ interface ServiceSourceInterface
     /**
      * Resolve a service source into an object
      *
-     * @return object
+     * @return object Resolved service source
      */
     public function resolve();
 }
