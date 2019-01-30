@@ -14,6 +14,7 @@ use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\ServiceSource\AnonymousFunction\AnonymousFunction;
 use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserFactory;
 use Kocuj\Di\ServiceSource\ClassName\ClassName;
+use Kocuj\Di\ServiceSource\ClassName\ServiceFactory;
 use Kocuj\Di\ServiceSource\ObjectInstance\ObjectInstance;
 
 /**
@@ -44,8 +45,9 @@ class ServiceSourceFactory implements ServiceSourceFactoryInterface
                 return new ObjectInstance($serviceSource);
             case is_array($serviceSource):
             case is_string($serviceSource):
+                $serviceFactory = new ServiceFactory();
                 $argumentParserFactory = new ArgumentParserFactory();
-                return new ClassName($argumentParserFactory, $container, $id, $serviceSource);
+                return new ClassName($serviceFactory, $argumentParserFactory, $container, $id, $serviceSource);
             default:
                 throw new Exception('Unknown service source type');
         }

@@ -23,6 +23,13 @@ use Kocuj\Di\ServiceSource\ServiceSourceInterface;
 class ClassName implements ServiceSourceInterface
 {
     /**
+     * Service factory
+     *
+     * @var ServiceFactoryInterface
+     */
+    private $serviceFactory;
+
+    /**
      * Service argument parser factory
      *
      * @var ArgumentParserFactoryInterface
@@ -53,6 +60,7 @@ class ClassName implements ServiceSourceInterface
     /**
      * Constructor
      *
+     * @param ServiceFactoryInterface $serviceFactory Service factory
      * @param ArgumentParserFactoryInterface $argumentParserFactory Service argument parser factory
      * @param ContainerInterface $container Dependency injection container for services
      * @param string $id Service identifier
@@ -60,6 +68,7 @@ class ClassName implements ServiceSourceInterface
      * @throws Exception
      */
     public function __construct(
+        ServiceFactoryInterface $serviceFactory,
         ArgumentParserFactoryInterface $argumentParserFactory,
         ContainerInterface $container,
         string $id,
@@ -70,6 +79,7 @@ class ClassName implements ServiceSourceInterface
             throw new Exception('Service source must be a string with class name or an array with class name and arguments');
         }
         // remember arguments
+        $this->serviceFactory = $serviceFactory;
         $this->argumentParserFactory = $argumentParserFactory;
         $this->container = $container;
         $this->id = $id;
@@ -79,7 +89,7 @@ class ClassName implements ServiceSourceInterface
     /**
      * Resolve a service source into an object
      *
-     * @return object
+     * @return object Resolved service source
      * @throws Exception
      */
     public function resolve()
@@ -87,6 +97,9 @@ class ClassName implements ServiceSourceInterface
         // parse arguments
         $parsedArgs = [];
         if (is_array($this->serviceSource) && isset($this->serviceSource['arguments'])) {
+            if (!is_array($this->serviceSource['arguments'])) {
+                throw new Exception('Service arguments must be an array');
+            }
             foreach ($this->serviceSource['arguments'] as $argument) {
                 $obj = $this->argumentParserFactory->create($this->container, $this->id, $argument);
                 $parsedArgs[] = $obj->parse();
@@ -98,7 +111,7 @@ class ClassName implements ServiceSourceInterface
                 if (!class_exists($this->serviceSource['className'])) {
                     throw new Exception('Class does not exist');
                 }
-                return new $this->serviceSource['className'](...$parsedArgs);
+                return $this->serviceFactory->create($this->serviceSource['className'], $parsedArgs);
             } else {
                 throw new Exception('No class name in service source');
             }
@@ -106,7 +119,7 @@ class ClassName implements ServiceSourceInterface
             if (!class_exists($this->serviceSource)) {
                 throw new Exception('Class does not exist');
             }
-            return new $this->serviceSource(...$parsedArgs);
+            return $this->serviceFactory->create($this->serviceSource, $parsedArgs);
         }
     }
 }
