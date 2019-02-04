@@ -86,7 +86,7 @@ class Container implements ContainerInterface, \Countable
      *
      * @return void
      */
-    private function clearDefinitions()
+    private function clearDefinitions(): void
     {
         // clear definitions
         $this->definitions = [];
@@ -181,7 +181,7 @@ class Container implements ContainerInterface, \Countable
      * @return array Service definition
      * @throws NotFoundException
      */
-    private function getServiceDefinition(string $id)
+    private function getServiceDefinition(string $id): array
     {
         // decorate service identifier
         $decoratedId = $this->serviceIdDecorator->decorate($id);
