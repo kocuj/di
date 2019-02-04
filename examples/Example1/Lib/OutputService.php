@@ -32,7 +32,7 @@ class OutputService implements OutputServiceInterface
      * @param string $output String to display
      * @see \Kocuj\Di\Examples\Example1\Lib\OutputServiceInterface::displayOutput()
      */
-    public function displayOutput(string $output)
+    public function displayOutput(string $output): void
     {
         // display output
         echo 'Test output: ';

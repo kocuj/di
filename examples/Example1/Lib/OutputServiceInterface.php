@@ -22,5 +22,5 @@ interface OutputServiceInterface
      *
      * @param string $output String to display
      */
-    public function displayOutput(string $output);
+    public function displayOutput(string $output): void;
 }

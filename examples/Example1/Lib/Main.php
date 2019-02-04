@@ -49,7 +49,7 @@ class Main
     /**
      * Display
      */
-    public function display()
+    public function display(): void
     {
         // display output
         $this->outputService->displayOutput($this->inputService->getInput());
