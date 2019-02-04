@@ -24,12 +24,12 @@ class ServiceType extends Enum
      *
      * @var integer
      */
-    const STANDARD = 0;
+    public const STANDARD = 0;
 
     /**
      * Shared service
      *
      * @var integer
      */
-    const SHARED = 1;
+    public const SHARED = 1;
 }
