@@ -28,7 +28,7 @@ class ServiceTest extends TestCase
      *
      * @expectedException Exception
      */
-    public function testWrongArgument()
+    public function testWrongArgument(): void
     {
         // ---- ARRANGE ----
 
@@ -53,7 +53,7 @@ class ServiceTest extends TestCase
      *
      * @throws Exception
      */
-    public function testParseService()
+    public function testParseService(): void
     {
         // ---- ARRANGE ----
 
@@ -92,7 +92,7 @@ class ServiceTest extends TestCase
      *
      * @expectedException Exception
      */
-    public function testParseTheSameService()
+    public function testParseTheSameService(): void
     {
         // ---- ARRANGE ----
 

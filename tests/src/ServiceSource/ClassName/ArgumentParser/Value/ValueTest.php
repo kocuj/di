@@ -26,7 +26,7 @@ class ValueTest extends TestCase
      *
      * @expectedException Exception
      */
-    public function testWrongArgument()
+    public function testWrongArgument(): void
     {
         // ---- ARRANGE ----
 
@@ -46,7 +46,7 @@ class ValueTest extends TestCase
      * @throws Exception
      * @dataProvider parseValueProvider
      */
-    public function testParseValue($value)
+    public function testParseValue($value): void
     {
         // ---- ARRANGE ----
 

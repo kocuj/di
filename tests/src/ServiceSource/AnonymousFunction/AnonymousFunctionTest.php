@@ -28,7 +28,7 @@ class AnonymousFunctionTest extends TestCase
      * @throws Exception
      * @expectedException Exception
      */
-    public function testWrongServiceSource()
+    public function testWrongServiceSource(): void
     {
         // ---- ARRANGE ----
 
@@ -45,7 +45,7 @@ class AnonymousFunctionTest extends TestCase
      * @throws Exception
      * @expectedException Exception
      */
-    public function testResolveWithoutObject()
+    public function testResolveWithoutObject(): void
     {
         // ---- ARRANGE ----
 
@@ -64,7 +64,7 @@ class AnonymousFunctionTest extends TestCase
      *
      * @throws Exception
      */
-    public function testResolve()
+    public function testResolve(): void
     {
         // ---- ARRANGE ----
 

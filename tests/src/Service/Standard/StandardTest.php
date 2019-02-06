@@ -29,7 +29,7 @@ class StandardTest extends TestCase
      * Testing get the selected service
      *
      */
-    public function testGetService()
+    public function testGetService(): void
     {
         // ---- ARRANGE ----
 

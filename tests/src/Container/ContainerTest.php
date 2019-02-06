@@ -65,7 +65,7 @@ class ContainerTest extends TestCase
      * @param ServiceType $serviceType
      * @param array $services
      */
-    private function prepare(ServiceType $serviceType, array $services)
+    private function prepare(ServiceType $serviceType, array $services): void
     {
         $this->serviceIdDecorator = $this->prophesize(ServiceIdDecoratorInterface::class);
 
@@ -109,7 +109,7 @@ class ContainerTest extends TestCase
      * @throws Exception
      * @dataProvider cloneProvider
      */
-    public function testClone(ServiceType $serviceType, string $serviceId, string $decoratedServiceId)
+    public function testClone(ServiceType $serviceType, string $serviceId, string $decoratedServiceId): void
     {
         // ---- ARRANGE ----
 
@@ -184,7 +184,7 @@ class ContainerTest extends TestCase
      * @throws Exception
      * @throws NotFoundException
      */
-    public function testAdd(ServiceType $serviceType, string $serviceId, string $decoratedServiceId)
+    public function testAdd(ServiceType $serviceType, string $serviceId, string $decoratedServiceId): void
     {
         // ---- ARRANGE ----
 
@@ -226,7 +226,7 @@ class ContainerTest extends TestCase
      * @throws NotFoundException
      * @dataProvider addCheckTypeHasProvider
      */
-    public function testCheckType(ServiceType $serviceType, string $serviceId, string $decoratedServiceId)
+    public function testCheckType(ServiceType $serviceType, string $serviceId, string $decoratedServiceId): void
     {
         // ---- ARRANGE ----
 
@@ -261,7 +261,7 @@ class ContainerTest extends TestCase
      * @throws Exception
      * @dataProvider addCheckTypeHasProvider
      */
-    public function testHas(ServiceType $serviceType, string $serviceId, string $decoratedServiceId)
+    public function testHas(ServiceType $serviceType, string $serviceId, string $decoratedServiceId): void
     {
         // ---- ARRANGE ----
 
@@ -338,7 +338,7 @@ class ContainerTest extends TestCase
      * @throws Exception
      * @dataProvider servicesTypesProvider
      */
-    public function testCount(ServiceType $serviceType)
+    public function testCount(ServiceType $serviceType): void
     {
         // ---- ARRANGE ----
 
@@ -390,7 +390,7 @@ class ContainerTest extends TestCase
         string $serviceId,
         string $decoratedServiceId,
         string $callMethod
-    ) {
+    ): void {
         // ---- ARRANGE ----
 
         $this->prepare($serviceType, [
@@ -477,7 +477,7 @@ class ContainerTest extends TestCase
      * @dataProvider servicesTypesProvider
      * @expectedException \Kocuj\Di\Container\Exception
      */
-    public function testErrorAddAlreadyExists(ServiceType $serviceType)
+    public function testErrorAddAlreadyExists(ServiceType $serviceType): void
     {
         // ---- ARRANGE ----
 
@@ -509,7 +509,7 @@ class ContainerTest extends TestCase
      * @dataProvider servicesTypesProvider
      * @expectedException \Kocuj\Di\Container\NotFoundException
      */
-    public function testErrorAddWithWrongGet(ServiceType $serviceType)
+    public function testErrorAddWithWrongGet(ServiceType $serviceType): void
     {
         // ---- ARRANGE ----
 
@@ -545,7 +545,7 @@ class ContainerTest extends TestCase
      * @dataProvider servicesTypesProvider
      * @expectedException \PHPUnit\Framework\Error\Error
      */
-    public function testErrorWrongCallMethod(ServiceType $serviceType)
+    public function testErrorWrongCallMethod(ServiceType $serviceType): void
     {
         // ---- ARRANGE ----
 
@@ -575,7 +575,7 @@ class ContainerTest extends TestCase
      * @dataProvider servicesTypesProvider
      * @expectedException \Kocuj\Di\Container\Exception
      */
-    public function testCallMethodWithArguments(ServiceType $serviceType)
+    public function testCallMethodWithArguments(ServiceType $serviceType): void
     {
         // ---- ARRANGE ----
 

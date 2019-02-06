@@ -29,7 +29,7 @@ class SharedTest extends TestCase
      * Testing get the selected service
      *
      */
-    public function testGetService()
+    public function testGetService(): void
     {
         // ---- ARRANGE ----
 

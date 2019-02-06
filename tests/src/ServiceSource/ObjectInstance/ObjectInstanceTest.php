@@ -28,7 +28,7 @@ class ObjectInstanceTest extends TestCase
      * @throws Exception
      * @expectedException Exception
      */
-    public function testServiceSourceNoObject()
+    public function testServiceSourceNoObject(): void
     {
         // ---- ARRANGE ----
 
@@ -45,7 +45,7 @@ class ObjectInstanceTest extends TestCase
      * @throws Exception
      * @expectedException Exception
      */
-    public function testServiceSourceAnonymousFunction()
+    public function testServiceSourceAnonymousFunction(): void
     {
         // ---- ARRANGE ----
 
@@ -63,7 +63,7 @@ class ObjectInstanceTest extends TestCase
      *
      * @throws Exception
      */
-    public function testResolve()
+    public function testResolve(): void
     {
         // ---- ARRANGE ----
 
