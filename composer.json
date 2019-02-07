@@ -40,6 +40,7 @@
 		"psr-1",
 		"psr-2",
 		"psr-4",
+		"psr-11",
 		"php7",
 		"oop",
 		"container"
