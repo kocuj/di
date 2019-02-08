@@ -64,6 +64,41 @@ class ClassNameTest extends TestCase
     }
 
     /**
+     * Testing when service source class does not exist
+     *
+     * @throws Exception
+     * @expectedException Exception
+     */
+    public function testServiceSourceClassNotExists(): void
+    {
+        // ---- ARRANGE ----
+
+        $serviceId = 'Service';
+        $serviceSource = 'ClassNotExists';
+
+        $serviceFactory = $this->prophesize(ServiceFactoryInterface::class);
+
+        $argumentParserFactory = $this->prophesize(ArgumentParserFactoryInterface::class);
+
+        $container = $this->prophesize(ContainerInterface::class);
+
+        /** @var ServiceFactoryInterface $serviceFactoryReveal */
+        $serviceFactoryReveal = $serviceFactory->reveal();
+
+        /** @var ArgumentParserFactoryInterface $argumentParserFactoryReveal */
+        $argumentParserFactoryReveal = $argumentParserFactory->reveal();
+
+        /** @var ContainerInterface $containerReveal */
+        $containerReveal = $container->reveal();
+
+        // ---- ACT ----
+
+        $className = new ClassName($serviceFactoryReveal, $argumentParserFactoryReveal, $containerReveal, $serviceId,
+            $serviceSource);
+        $className->resolve();
+    }
+
+    /**
      * Provider for wrong service source
      *
      * @return array Data for services types
