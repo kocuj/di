@@ -26,7 +26,6 @@ use Kocuj\Di\Tools\Camelizer\Camelizer;
  */
 class Di
 {
-
     /**
      * Service identifier decorator
      *
