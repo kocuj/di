@@ -23,6 +23,7 @@ class ServiceFactory implements ServiceFactoryInterface
      * @param string $className Class name
      * @param array $arguments Arguments
      * @return object
+     * @codeCoverageIgnore
      */
     public function create(string $className, array $arguments)
     {
