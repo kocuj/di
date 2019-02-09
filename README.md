@@ -97,7 +97,7 @@ Argument $serviceSource is a service to use with the selected identifier. It can
 * an object - this object will be used as service;
 * an anonymous function - this function has no arguments and should return an object which will be used as service;
 * a class- it should be an array with the following elements:
-  * `className` - required element; it is fully qualified class name for service (iIt is a good practice to use "::class" notation in this place);
+  * `className` - required element; it is fully qualified class name for service (it is a good practice to use "::class" notation in this place);
   * `arguments` - optional element; more information about this element are below in this documentation.
 
 The best feature of the Kocuj DI library is to automatically resolving dependencies between services when a $serviceSource argument is an array. To use this feature, there should be at least one argument sent to a service constructor. The place to do so is in element "arguments" inside an array for argument $serviceSource.
