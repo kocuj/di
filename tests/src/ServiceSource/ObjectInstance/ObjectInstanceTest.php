@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AnonymousFunctionTest.php
+ * ObjectInstanceTest.php
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
