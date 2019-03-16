@@ -31,7 +31,6 @@ $ composer require kocuj/di
 
 Następujące wersje PHP są obsługiwane przez tą wersję:
 
-* PHP 7.0
 * PHP 7.1
 * PHP 7.2
 * PHP 7.3
