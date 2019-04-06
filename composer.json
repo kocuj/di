@@ -29,6 +29,7 @@
 	"autoload-dev" : {
 		"psr-4" : {
 			"Kocuj\\Di\\Examples\\" : "examples",
+			"Kocuj\\Di\\Examples\\Lib\\" : "examples/lib",
 			"Kocuj\\Di\\Tests\\" : "tests/src",
 			"Kocuj\\Di\\TestsLib\\" : "tests/lib"
 		}

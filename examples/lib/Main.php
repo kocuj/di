@@ -8,12 +8,12 @@
  * @copyright Copyright (c) 2017-2019 kocuj.pl
  */
 
-namespace Kocuj\Di\Examples\Example1\Lib;
+namespace Kocuj\Di\Examples\Lib;
 
 /**
  * Main service
  *
- * @package Kocuj\Di\Examples\Example1\Lib
+ * @package Kocuj\Di\Examples\Lib
  */
 class Main
 {
