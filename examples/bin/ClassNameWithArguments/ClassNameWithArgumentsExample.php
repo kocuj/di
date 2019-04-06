@@ -23,7 +23,6 @@ $di = new Di();
 // get DI container
 $container = $di->getDefault();
 // set DI services
-// TODO: maybe also test as shared services
 $container->addStandard('input', [
     'className' => InputService::class,
 ]);
