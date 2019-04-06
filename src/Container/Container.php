@@ -94,14 +94,8 @@ class Container implements ContainerInterface, \Countable
     }
 
     /**
-     * Add standard or shared service
-     *
-     * @param ServiceType $serviceType Service type
-     * @param string $id Service identifier
-     * @param mixed $serviceSource Source for service to create
-     * @return ContainerInterface This object
+     * {@inheritdoc}
      * @throws Exception
-     * @see \Kocuj\Di\Container\ContainerInterface::add()
      */
     public function add(ServiceType $serviceType, string $id, $serviceSource): ContainerInterface
     {
@@ -126,14 +120,9 @@ class Container implements ContainerInterface, \Countable
     }
 
     /**
-     * Add standard service
-     *
-     * @param string $id Service identifier
-     * @param mixed $serviceSource Source for service to create
-     * @return ContainerInterface This object
+     * {@inheritdoc}
      * @throws Exception
      * @throws \Exception
-     * @see \Kocuj\Di\Container\ContainerInterface::addStandard()
      * @codeCoverageIgnore
      */
     public function addStandard(string $id, $serviceSource): ContainerInterface
@@ -143,14 +132,9 @@ class Container implements ContainerInterface, \Countable
     }
 
     /**
-     * Add shared service
-     *
-     * @param string $id Service identifier
-     * @param mixed $serviceSource Source for service to create
-     * @return ContainerInterface This object
+     * {@inheritdoc}
      * @throws Exception
      * @throws \Exception
-     * @see \Kocuj\Di\Container\ContainerInterface::addShared()
      * @codeCoverageIgnore
      */
     public function addShared(string $id, $serviceSource): ContainerInterface
@@ -160,13 +144,8 @@ class Container implements ContainerInterface, \Countable
     }
 
     /**
-     * Check service type
-     *
-     * @param string $id Service identifier
-     * @param ServiceType $serviceType Service type
-     * @return bool This service has selected type (true) or not (false)
+     * {@inheritdoc}
      * @throws NotFoundException
-     * @see \Kocuj\Di\Container\ContainerInterface::checkType()
      */
     public function checkType(string $id, ServiceType $serviceType): bool
     {
@@ -194,11 +173,7 @@ class Container implements ContainerInterface, \Countable
     }
 
     /**
-     * Check if service exists
-     *
-     * @param string $id Service
-     * @return bool Service exists (true) or not (false)
-     * @see \Psr\Container\ContainerInterface::has()
+     * {@inheritdoc}
      */
     public function has($id): bool
     {
@@ -209,9 +184,7 @@ class Container implements ContainerInterface, \Countable
     }
 
     /**
-     * Get how many services are in the container
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function count(): int
     {
@@ -246,12 +219,8 @@ class Container implements ContainerInterface, \Countable
     }
 
     /**
-     * Get service
-     *
-     * @param string $id Service identifier
-     * @return object Service object
+     * {@inheritdoc}
      * @throws NotFoundException
-     * @see \Psr\Container\ContainerInterface::get()
      */
     public function get($id)
     {

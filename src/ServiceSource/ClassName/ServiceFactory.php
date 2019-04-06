@@ -18,11 +18,7 @@ namespace Kocuj\Di\ServiceSource\ClassName;
 class ServiceFactory implements ServiceFactoryInterface
 {
     /**
-     * Create service
-     *
-     * @param string $className Class name
-     * @param array $arguments Arguments
-     * @return object
+     * {@inheritdoc}
      * @codeCoverageIgnore
      */
     public function create(string $className, array $arguments)

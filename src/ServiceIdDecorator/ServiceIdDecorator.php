@@ -39,11 +39,7 @@ class ServiceIdDecorator implements ServiceIdDecoratorInterface
     }
 
     /**
-     * Decorate identifier
-     *
-     * @param string $id Identifier to decorate
-     * @return string Decorated identifier
-     * @see \Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface::decorate()
+     * {@inheritdoc}
      * @codeCoverageIgnore
      */
     public function decorate(string $id): string

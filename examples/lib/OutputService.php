@@ -27,10 +27,7 @@ class OutputService implements OutputServiceInterface
     }
 
     /**
-     * Display output string
-     *
-     * @param string $output String to display
-     * @see \Kocuj\Di\Examples\Example1\Lib\OutputServiceInterface::displayOutput()
+     * {@inheritdoc}
      */
     public function displayOutput(string $output): void
     {

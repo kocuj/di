@@ -44,9 +44,7 @@ class AnonymousFunction implements ServiceSourceInterface
     }
 
     /**
-     * Resolve a service source into an object
-     *
-     * @return object Resolved service source
+     * {@inheritdoc}
      * @throws Exception
      */
     public function resolve()

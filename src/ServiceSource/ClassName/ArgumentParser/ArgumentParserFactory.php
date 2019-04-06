@@ -23,14 +23,8 @@ use Kocuj\Di\ServiceSource\Exception;
 class ArgumentParserFactory implements ArgumentParserFactoryInterface
 {
     /**
-     * Create object with parser for service argument
-     *
-     * @param ContainerInterface $container Dependency injection container for services
-     * @param string $id Service identifier
-     * @param array $argument Service argument to parse
+     * {@inheritdoc}
      * @throws Exception
-     * @return ArgumentParserInterface Object with service argument parser
-     * @see \Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserInterface::create()
      * @codeCoverageIgnore
      */
     public function create(ContainerInterface $container, string $id, array $argument): ArgumentParserInterface

@@ -47,9 +47,7 @@ class ObjectInstance implements ServiceSourceInterface
     }
 
     /**
-     * Resolve a service source into an object
-     *
-     * @return object Resolved service source
+     * {@inheritdoc}
      */
     public function resolve()
     {

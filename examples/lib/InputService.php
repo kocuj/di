@@ -27,10 +27,7 @@ class InputService implements InputServiceInterface
     }
 
     /**
-     * Get input
-     *
-     * @return string Input string
-     * @see \Kocuj\Di\Examples\Example1\Lib\InputServiceInterface::getInput()
+     * {@inheritdoc}
      */
     public function getInput(): string
     {

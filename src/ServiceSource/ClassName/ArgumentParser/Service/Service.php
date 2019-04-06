@@ -63,11 +63,8 @@ class Service implements ArgumentParserInterface
     }
 
     /**
-     * Parse service argument and return argument to service constructor
-     *
+     * {@inheritdoc}
      * @throws Exception
-     * @return mixed Parsed argument
-     * @see \Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserInterface::parse()
      */
     public function parse()
     {

@@ -20,11 +20,7 @@ use Stringy\Stringy;
 class Camelizer implements CamelizerInterface
 {
     /**
-     * Camelize string
-     *
-     * @param string $text Text to camelize
-     * @return string Camelized text
-     * @see \Kocuj\Di\Tools\Camelizer\CamelizerInterface::camelize()
+     * {@inheritdoc}
      * @codeCoverageIgnore
      */
     public function camelize(string $text): string

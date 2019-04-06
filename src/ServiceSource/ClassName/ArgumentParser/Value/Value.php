@@ -44,10 +44,7 @@ class Value implements ArgumentParserInterface
     }
 
     /**
-     * Parse service argument and return argument to service constructor
-     *
-     * @return mixed Parsed argument
-     * @see \Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserInterface::parse()
+     * {@inheritdoc}
      */
     public function parse()
     {

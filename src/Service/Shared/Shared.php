@@ -78,10 +78,7 @@ class Shared implements ServiceInterface
     }
 
     /**
-     * Get service
-     *
-     * @return object Service object
-     * @see \Kocuj\Di\Service\ServiceInterface::getService()
+     * {@inheritdoc}
      */
     public function getService()
     {

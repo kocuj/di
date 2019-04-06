@@ -42,15 +42,8 @@ class ServiceFactory implements ServiceFactoryInterface
     }
 
     /**
-     * Create standard or shared service
-     *
-     * @param ContainerInterface $container Dependency injection container for services
-     * @param ServiceType $serviceType Service type
-     * @param string $id Service identifier
-     * @param mixed $serviceSource Source for service to create
-     * @return ServiceInterface Service creator object
+     * {@inheritdoc}
      * @throws Exception
-     * @see \Kocuj\Di\Service\ServiceFactoryInterface::create()
      * @codeCoverageIgnore
      */
     public function create(
