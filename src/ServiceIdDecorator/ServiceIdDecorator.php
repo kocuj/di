@@ -44,9 +44,7 @@ class ServiceIdDecorator implements ServiceIdDecoratorInterface
      */
     public function decorate(string $id): string
     {
-        // set decorated identifier
-        $decoratedId = $this->camelizer->camelize($id);
         // exit
-        return $decoratedId;
+        return $this->camelizer->camelize($id);
     }
 }

@@ -10,6 +10,7 @@
 
 namespace Kocuj\Di\Container;
 
+use Countable;
 use Kocuj\Di\Service\ServiceFactoryInterface;
 use Kocuj\Di\Service\ServiceType;
 use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
@@ -19,7 +20,7 @@ use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
  *
  * @package Kocuj\Di\Container
  */
-class Container implements ContainerInterface, \Countable
+class Container implements ContainerInterface, Countable
 {
     /**
      * Service identifier decorator
@@ -212,10 +213,8 @@ class Container implements ContainerInterface, \Countable
         if ($prefix !== 'get') {
             trigger_error(sprintf('Call to undefined method %s()', __CLASS__ . '::' . $method), E_USER_ERROR);
         }
-        // get service
-        $service = $this->get(substr($method, 3));
         // exit
-        return $service;
+        return $this->get(substr($method, 3));
     }
 
     /**

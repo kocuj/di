@@ -10,6 +10,7 @@
 
 namespace Kocuj\Di\ServiceSource;
 
+use Closure;
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\ServiceSource\AnonymousFunction\AnonymousFunction;
 use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserFactory;
@@ -33,9 +34,9 @@ class ServiceSourceFactory implements ServiceSourceFactoryInterface
     {
         // exit
         switch (true) {
-            case is_object($serviceSource) && $serviceSource instanceof \Closure:
+            case is_object($serviceSource) && $serviceSource instanceof Closure:
                 return new AnonymousFunction($serviceSource);
-            case is_object($serviceSource) && !($serviceSource instanceof \Closure):
+            case is_object($serviceSource) && !($serviceSource instanceof Closure):
                 return new ObjectInstance($serviceSource);
             case is_array($serviceSource):
             case is_string($serviceSource):

@@ -10,6 +10,7 @@
 
 namespace Kocuj\Di\ServiceSource\ObjectInstance;
 
+use Closure;
 use Kocuj\Di\ServiceSource\Exception;
 use Kocuj\Di\ServiceSource\ServiceSourceInterface;
 
@@ -39,7 +40,7 @@ class ObjectInstance implements ServiceSourceInterface
         if (!is_object($serviceSource)) {
             throw new Exception('Service source is not an object');
         }
-        if ($serviceSource instanceof \Closure) {
+        if ($serviceSource instanceof Closure) {
             throw new Exception('Service source is an anonymous function when object is required');
         }
         // remember arguments

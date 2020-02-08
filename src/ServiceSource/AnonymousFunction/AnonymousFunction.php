@@ -10,6 +10,7 @@
 
 namespace Kocuj\Di\ServiceSource\AnonymousFunction;
 
+use Closure;
 use Kocuj\Di\ServiceSource\Exception;
 use Kocuj\Di\ServiceSource\ServiceSourceInterface;
 
@@ -36,7 +37,7 @@ class AnonymousFunction implements ServiceSourceInterface
     public function __construct($serviceSource)
     {
         // check if service source is a closure
-        if (!is_object($serviceSource) || !($serviceSource instanceof \Closure)) {
+        if (!is_object($serviceSource) || !($serviceSource instanceof Closure)) {
             throw new Exception('Service source is not an anonymous function');
         }
         // remember arguments
