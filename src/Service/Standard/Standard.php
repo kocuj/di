@@ -45,7 +45,7 @@ class Standard implements ServiceInterface
     /**
      * Source for service to create
      *
-     * @var string
+     * @var mixed
      */
     private $serviceSource;
 
