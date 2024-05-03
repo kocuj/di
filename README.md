@@ -198,7 +198,3 @@ If you discover any security related issues, please contact me by using [contact
 ## License
 
 The MIT License (MIT). Please see [License File](https://github.com/kocuj/di/blob/master/LICENSE.md) for more information.
-
-## Can I hire you to other programming projects?
-
-Yes! Visit my homepage [kocuj.pl](http://kocuj.pl/) (currently only in Polish language) or simply leave me a note by using the [contact form](http://kocuj.pl/kontakt) (currently only in Polish language).
