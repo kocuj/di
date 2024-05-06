@@ -19,17 +19,13 @@ class Main
 {
     /**
      * Input service
-     *
-     * @var InputServiceInterface
      */
-    private $inputService;
+    private InputServiceInterface $inputService;
 
     /**
      * Output service
-     *
-     * @var OutputServiceInterface
      */
-    private $outputService;
+    private OutputServiceInterface $outputService;
 
     /**
      * Constructor
