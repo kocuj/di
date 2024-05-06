@@ -23,24 +23,18 @@ class Shared implements ServiceInterface
 {
     /**
      * Service source factory
-     *
-     * @var ServiceSourceFactoryInterface
      */
-    private $serviceSourceFactory;
+    private ServiceSourceFactoryInterface $serviceSourceFactory;
 
     /**
      * Dependency injection container for services
-     *
-     * @var ContainerInterface
      */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * Service identifier
-     *
-     * @var string
      */
-    private $id;
+    private string $id;
 
     /**
      * Source for service to create
@@ -51,10 +45,8 @@ class Shared implements ServiceInterface
 
     /**
      * Service object
-     *
-     * @var object
      */
-    private $serviceObject = null;
+    private ?object $serviceObject = null;
 
     /**
      * Constructor
@@ -80,7 +72,7 @@ class Shared implements ServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function getService()
+    public function getService(): object
     {
         // optionally use shared object
         if (!is_null($this->serviceObject)) {

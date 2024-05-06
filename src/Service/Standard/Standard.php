@@ -23,24 +23,18 @@ class Standard implements ServiceInterface
 {
     /**
      * Service source factory
-     *
-     * @var ServiceSourceFactoryInterface
      */
-    private $serviceSourceFactory;
+    private ServiceSourceFactoryInterface $serviceSourceFactory;
 
     /**
      * Dependency injection container for services
-     *
-     * @var ContainerInterface
      */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * Service identifier
-     *
-     * @var string
      */
-    private $id;
+    private string $id;
 
     /**
      * Source for service to create
@@ -73,7 +67,7 @@ class Standard implements ServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function getService()
+    public function getService(): object
     {
         // execute service constructor
         $service = $this->serviceSourceFactory->create($this->container, $this->id, $this->serviceSource);

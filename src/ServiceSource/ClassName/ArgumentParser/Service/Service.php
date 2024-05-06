@@ -23,24 +23,18 @@ class Service implements ArgumentParserInterface
 {
     /**
      * Dependency injection container for services
-     *
-     * @var ContainerInterface
      */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * Service identifier
-     *
-     * @var string
      */
-    private $id;
+    private string $id;
 
     /**
      * Service argument to parse
-     *
-     * @var array
      */
-    private $argument;
+    private array $argument;
 
     /**
      * Constructor

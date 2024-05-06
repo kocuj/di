@@ -48,7 +48,7 @@ class AnonymousFunction implements ServiceSourceInterface
      * {@inheritdoc}
      * @throws Exception
      */
-    public function resolve()
+    public function resolve(): object
     {
         // call anonymous function
         $output = ($this->serviceSource)();

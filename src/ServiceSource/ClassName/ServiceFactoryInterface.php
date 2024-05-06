@@ -22,7 +22,7 @@ interface ServiceFactoryInterface
      *
      * @param string $className Class name
      * @param array $arguments Arguments
-     * @return object
+     * @return object Created service object
      */
-    public function create(string $className, array $arguments);
+    public function create(string $className, array $arguments): object;
 }

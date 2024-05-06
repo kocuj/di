@@ -24,31 +24,23 @@ class ClassName implements ServiceSourceInterface
 {
     /**
      * Service factory
-     *
-     * @var ServiceFactoryInterface
      */
-    private $serviceFactory;
+    private ServiceFactoryInterface $serviceFactory;
 
     /**
      * Service argument parser factory
-     *
-     * @var ArgumentParserFactoryInterface
      */
-    private $argumentParserFactory;
+    private ArgumentParserFactoryInterface $argumentParserFactory;
 
     /**
      * Dependency injection container for services
-     *
-     * @var ContainerInterface
      */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * Service identifier
-     *
-     * @var string
      */
-    private $id;
+    private string $id;
 
     /**
      * Service source
@@ -90,7 +82,7 @@ class ClassName implements ServiceSourceInterface
      * {@inheritdoc}
      * @throws Exception
      */
-    public function resolve()
+    public function resolve(): object
     {
         // parse arguments
         $parsedArgs = [];

@@ -50,7 +50,7 @@ class ObjectInstance implements ServiceSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve()
+    public function resolve(): object
     {
         // exit
         return $this->serviceSource;

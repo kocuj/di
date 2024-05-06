@@ -22,5 +22,5 @@ interface ServiceInterface
      *
      * @return object Service object
      */
-    public function getService();
+    public function getService(): object;
 }

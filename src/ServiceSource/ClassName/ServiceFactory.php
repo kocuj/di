@@ -21,7 +21,7 @@ class ServiceFactory implements ServiceFactoryInterface
      * {@inheritdoc}
      * @codeCoverageIgnore
      */
-    public function create(string $className, array $arguments)
+    public function create(string $className, array $arguments): object
     {
         // exit
         return new $className(...$arguments);

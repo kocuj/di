@@ -28,24 +28,18 @@ class Di
 {
     /**
      * Service identifier decorator
-     *
-     * @var ServiceIdDecoratorInterface
      */
-    private $serviceIdDecorator;
+    private ServiceIdDecoratorInterface $serviceIdDecorator;
 
     /**
      * Service factory
-     *
-     * @var ServiceFactoryInterface
      */
-    private $serviceFactory;
+    private ServiceFactoryInterface $serviceFactory;
 
     /**
      * Default dependency injection container for services
-     *
-     * @var ContainerInterface
      */
-    private $defaultContainer;
+    private ContainerInterface $defaultContainer;
 
     /**
      * Constructor

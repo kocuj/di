@@ -24,10 +24,8 @@ class ServiceFactory implements ServiceFactoryInterface
 {
     /**
      * Service source factory
-     *
-     * @var ServiceSourceFactoryInterface
      */
-    private $serviceSourceFactory;
+    private ServiceSourceFactoryInterface $serviceSourceFactory;
 
     /**
      * Constructor

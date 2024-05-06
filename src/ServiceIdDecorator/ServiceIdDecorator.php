@@ -21,10 +21,8 @@ class ServiceIdDecorator implements ServiceIdDecoratorInterface
 {
     /**
      * Camelizer object
-     *
-     * @var CamelizerInterface
      */
-    private $camelizer;
+    private CamelizerInterface $camelizer;
 
     /**
      * Constructor

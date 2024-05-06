@@ -24,31 +24,23 @@ class Container implements ContainerInterface, Countable
 {
     /**
      * Service identifier decorator
-     *
-     * @var ServiceIdDecoratorInterface
      */
-    private $serviceIdDecorator;
+    private ServiceIdDecoratorInterface $serviceIdDecorator;
 
     /**
      * Service factory
-     *
-     * @var ServiceFactoryInterface
      */
-    private $serviceFactory;
+    private ServiceFactoryInterface $serviceFactory;
 
     /**
      * Services definitions
-     *
-     * @var array
      */
-    private $definitions = [];
+    private array $definitions = [];
 
     /**
      * Services definitions count
-     *
-     * @var int
      */
-    private $definitionsCount = 0;
+    private int $definitionsCount = 0;
 
     /**
      * Constructor
@@ -80,18 +72,6 @@ class Container implements ContainerInterface, Countable
         foreach ($oldDefinitions as $definition) {
             $this->add($definition['type'], $definition['clonedata']['id'], $definition['clonedata']['serviceSource']);
         }
-    }
-
-    /**
-     * Clear definitions
-     *
-     * @return void
-     */
-    private function clearDefinitions(): void
-    {
-        // clear definitions
-        $this->definitions = [];
-        $this->definitionsCount = 0;
     }
 
     /**
@@ -155,28 +135,9 @@ class Container implements ContainerInterface, Countable
     }
 
     /**
-     * Get service definition
-     *
-     * @param string $id Service identifier
-     * @return array Service definition
-     * @throws NotFoundException
-     */
-    private function getServiceDefinition(string $id): array
-    {
-        // decorate service identifier
-        $decoratedId = $this->serviceIdDecorator->decorate($id);
-        // check if service exists
-        if (!$this->has($decoratedId)) {
-            throw new NotFoundException(sprintf('Service "%s" does not exist', $decoratedId));
-        }
-        // exit
-        return $this->definitions[$decoratedId];
-    }
-
-    /**
      * {@inheritdoc}
      */
-    public function has($id): bool
+    public function has(string $id): bool
     {
         // decorate service identifier
         $decoratedId = $this->serviceIdDecorator->decorate($id);
@@ -221,9 +182,40 @@ class Container implements ContainerInterface, Countable
      * {@inheritdoc}
      * @throws NotFoundException
      */
-    public function get($id)
+    public function get(string $id)
     {
         // exit
         return $this->getServiceDefinition($id)['service']->getService();
+    }
+
+    /**
+     * Clear definitions
+     *
+     * @return void
+     */
+    private function clearDefinitions(): void
+    {
+        // clear definitions
+        $this->definitions = [];
+        $this->definitionsCount = 0;
+    }
+
+    /**
+     * Get service definition
+     *
+     * @param string $id Service identifier
+     * @return array Service definition
+     * @throws NotFoundException
+     */
+    private function getServiceDefinition(string $id): array
+    {
+        // decorate service identifier
+        $decoratedId = $this->serviceIdDecorator->decorate($id);
+        // check if service exists
+        if (!$this->has($decoratedId)) {
+            throw new NotFoundException(sprintf('Service "%s" does not exist', $decoratedId));
+        }
+        // exit
+        return $this->definitions[$decoratedId];
     }
 }

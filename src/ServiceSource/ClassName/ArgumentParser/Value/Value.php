@@ -22,10 +22,8 @@ class Value implements ArgumentParserInterface
 {
     /**
      * Service argument to parse
-     *
-     * @var array
      */
-    private $argument;
+    private array $argument;
 
     /**
      * Constructor
