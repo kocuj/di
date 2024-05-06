@@ -11,9 +11,7 @@ Container for design pattern Dependency Injection in PHP 7
 [![Quality Score](https://img.shields.io/scrutinizer/g/kocuj/di.svg?style=flat-square)](https://scrutinizer-ci.com/g/kocuj/di)
 [![Total Downloads](https://img.shields.io/packagist/dt/kocuj/di.svg?style=flat-square)](https://packagist.org/packages/kocuj/di)
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/8445db3c-571b-48e3-a71b-e46de879c955/big.png)](https://insight.sensiolabs.com/projects/8445db3c-571b-48e3-a71b-e46de879c955)
-
-This package is compliant with [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md), [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) and [PSR-11](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md). If you notice compliance oversights, please send a patch via pull request.
+This package is compliant with [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md), [PSR-11](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md) and [PSR-12](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-12-extended-coding-style-guide.md). If you notice compliance oversights, please send a patch via pull request.
 
 ## [Download 2.0.0](https://github.com/kocuj/di/releases/tag/v2.0.0)
 
@@ -31,9 +29,11 @@ $ composer require kocuj/di
 
 The following versions of PHP are supported by this version:
 
-* PHP 7.1
-* PHP 7.2
-* PHP 7.3
+* PHP 7.4
+* PHP 8.0
+* PHP 8.1
+* PHP 8.2
+* PHP 8.3
 
 ## Documentation
 
@@ -209,7 +209,3 @@ If you discover any security related issues, please contact me by using [contact
 ## License
 
 The MIT License (MIT). Please see [License File](https://github.com/kocuj/di/blob/master/LICENSE.md) for more information.
-
-## Can I hire you to other programming projects?
-
-Yes! Visit my homepage [kocuj.pl](http://kocuj.pl/) (currently only in Polish language) or simply leave me a note by using the [contact form](http://kocuj.pl/kontakt) (currently only in Polish language).

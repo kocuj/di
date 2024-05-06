@@ -11,9 +11,7 @@ Kontener dla wzorca projektowego "wstrzykiwanie zależności" (Dependency Inject
 [![Punkty za jakość](https://img.shields.io/scrutinizer/g/kocuj/di.svg?style=flat-square)](https://scrutinizer-ci.com/g/kocuj/di)
 [![Całkowita ilość pobrań](https://img.shields.io/packagist/dt/kocuj/di.svg?style=flat-square)](https://packagist.org/packages/kocuj/di)
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/8445db3c-571b-48e3-a71b-e46de879c955/big.png)](https://insight.sensiolabs.com/projects/8445db3c-571b-48e3-a71b-e46de879c955)
-
-Niniejszy pakiet jest zgodny z [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md), [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) i [PSR-11](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md). Jeżeli zauważyłeś niezgodność, proszę abyś wysłał poprawkę przez prośbę o pociągnięcie danych ("pull request").
+Niniejszy pakiet jest zgodny z [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md), [PSR-11](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md) i [PSR-12](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-12-extended-coding-style-guide.md). Jeżeli zauważyłeś niezgodność, proszę abyś wysłał poprawkę przez prośbę o pociągnięcie danych ("pull request").
 
 ## [Pobierz 2.0.0](https://github.com/kocuj/di/releases/tag/v2.0.0)
 
@@ -30,10 +28,12 @@ $ composer require kocuj/di
 ## Wymagania
 
 Następujące wersje PHP są obsługiwane przez tą wersję:
-
-* PHP 7.1
-* PHP 7.2
-* PHP 7.3
+ 
+* PHP 7.4
+* PHP 8.0
+* PHP 8.1
+* PHP 8.2
+* PHP 8.3
 
 ## Dokumentacja
 
@@ -209,7 +209,3 @@ Jeżeli odkryłeś jakikolwiek problem z bezpieczeństwem, proszę abyś się ze
 ## Licencja
 
 Licencja MIT. Proszę zapoznać się z [plikiem licencji](https://github.com/kocuj/di/blob/master/LICENSE.md) (tylko w języku angielskim), aby uzyskać więcej informacji.
-
-## Czy mogę Cię wynająć do innych projektów programistycznych?
-
-Tak! Zobacz moją domową stronę internetową [kocuj.pl](http://kocuj.pl/) lub po prostu pozostaw mi informację używając [formularza kontaktowego](http://kocuj.pl/kontakt).
