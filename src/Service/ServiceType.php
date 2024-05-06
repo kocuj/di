@@ -10,7 +10,7 @@
 
 namespace Kocuj\Di\Service;
 
-use Esky\Enum\Enum;
+use MyCLabs\Enum\Enum;
 
 /**
  * Service type
@@ -22,14 +22,14 @@ class ServiceType extends Enum
     /**
      * Standard service
      *
-     * @var integer
+     * @var int
      */
     public const STANDARD = 0;
 
     /**
      * Shared service
      *
-     * @var integer
+     * @var int
      */
     public const SHARED = 1;
 }
