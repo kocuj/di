@@ -10,8 +10,6 @@
 
 namespace Kocuj\Di\Tools\Camelizer;
 
-use Stringy\Stringy;
-
 /**
  * Camelizer
  *
@@ -25,9 +23,30 @@ class Camelizer implements CamelizerInterface
      */
     public function camelize(string $text): string
     {
-        // initialize library
-        $stringy = new Stringy($text);
-        // exit
-        return $stringy->camelize();
+        $text = strtolower(substr($text, 0, 1)) . substr($text, 1);
+
+        $text = ltrim($text, '-_');
+
+        $text = preg_replace_callback(
+            '/[-_\s]+(.)?/u',
+            function ($match) {
+                if (isset($match[1])) {
+                    return strtoupper($match[1]);
+                }
+
+                return '';
+            },
+            $text
+        );
+
+        $text = preg_replace_callback(
+            '/[\d]+(.)?/u',
+            function ($match) {
+                return strtoupper($match[0]);
+            },
+            $text
+        );
+
+        return $text;
     }
 }
