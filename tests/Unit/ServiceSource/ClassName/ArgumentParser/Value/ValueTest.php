@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
-namespace Kocuj\Di\Tests\ServiceSource\ClassName\ArgumentParser\Value;
+namespace Kocuj\Di\Tests\Unit\ServiceSource\ClassName\ArgumentParser\Value;
 
 use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\Value\Value;
 use Kocuj\Di\ServiceSource\Exception;
@@ -23,8 +23,6 @@ class ValueTest extends TestCase
 {
     /**
      * Testing wrong argument
-     *
-     * @expectedException Exception
      */
     public function testWrongArgument(): void
     {
@@ -33,6 +31,8 @@ class ValueTest extends TestCase
         $argument = [
             'somewrongkey' => 'something',
         ];
+
+        $this->expectException(Exception::class);
 
         // ---- ACT ----
 

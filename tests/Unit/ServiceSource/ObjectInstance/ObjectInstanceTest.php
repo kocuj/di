@@ -8,11 +8,11 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
-namespace Kocuj\Di\Tests\ServiceSource\ObjectInstance;
+namespace Kocuj\Di\Tests\Unit\ServiceSource\ObjectInstance;
 
 use Kocuj\Di\ServiceSource\Exception;
 use Kocuj\Di\ServiceSource\ObjectInstance\ObjectInstance;
-use Kocuj\Di\TestsLib\FakeService;
+use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -26,13 +26,14 @@ class ObjectInstanceTest extends TestCase
      * Testing service source when it is not an object
      *
      * @throws Exception
-     * @expectedException Exception
      */
     public function testServiceSourceNoObject(): void
     {
         // ---- ARRANGE ----
 
         $serviceSource = 'test';
+
+        $this->expectException(Exception::class);
 
         // ---- ACT ----
 
@@ -43,7 +44,6 @@ class ObjectInstanceTest extends TestCase
      * Testing service source when it is an anonymous function
      *
      * @throws Exception
-     * @expectedException Exception
      */
     public function testServiceSourceAnonymousFunction(): void
     {
@@ -52,6 +52,8 @@ class ObjectInstanceTest extends TestCase
         $serviceSource = function () {
             return null;
         };
+
+        $this->expectException(Exception::class);
 
         // ---- ACT ----
 

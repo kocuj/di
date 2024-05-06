@@ -8,11 +8,11 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
-namespace Kocuj\Di\Tests\ServiceSource\AnonymousFunction;
+namespace Kocuj\Di\Tests\Unit\ServiceSource\AnonymousFunction;
 
 use Kocuj\Di\ServiceSource\AnonymousFunction\AnonymousFunction;
 use Kocuj\Di\ServiceSource\Exception;
-use Kocuj\Di\TestsLib\FakeService;
+use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -26,13 +26,14 @@ class AnonymousFunctionTest extends TestCase
      * Testing wrong service source
      *
      * @throws Exception
-     * @expectedException Exception
      */
     public function testWrongServiceSource(): void
     {
         // ---- ARRANGE ----
 
         $serviceSource = new FakeService();
+
+        $this->expectException(Exception::class);
 
         // ---- ACT ----
 
@@ -43,7 +44,6 @@ class AnonymousFunctionTest extends TestCase
      * Testing resolving service without returning an object
      *
      * @throws Exception
-     * @expectedException Exception
      */
     public function testResolveWithoutObject(): void
     {
@@ -52,6 +52,8 @@ class AnonymousFunctionTest extends TestCase
         $serviceSource = function () {
             return null;
         };
+
+        $this->expectException(Exception::class);
 
         // ---- ACT ----
 

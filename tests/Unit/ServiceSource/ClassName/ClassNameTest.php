@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
-namespace Kocuj\Di\Tests\ServiceSource\ClassName;
+namespace Kocuj\Di\Tests\Unit\ServiceSource\ClassName;
 
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserFactoryInterface;
@@ -16,11 +16,10 @@ use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserInterface;
 use Kocuj\Di\ServiceSource\ClassName\ClassName;
 use Kocuj\Di\ServiceSource\ClassName\ServiceFactoryInterface;
 use Kocuj\Di\ServiceSource\Exception;
-use Kocuj\Di\TestsLib\FakeService;
+use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\MethodProphecy;
 use Prophecy\Prophecy\ObjectProphecy;
-use Symfony\Component\Finder\Expression\ValueInterface;
 
 /**
  * Tests for ClassName object
@@ -33,7 +32,6 @@ class ClassNameTest extends TestCase
      * Testing wrong service source
      *
      * @throws Exception
-     * @expectedException Exception
      */
     public function testWrongServiceSource(): void
     {
@@ -57,6 +55,8 @@ class ClassNameTest extends TestCase
         /** @var ContainerInterface $containerReveal */
         $containerReveal = $container->reveal();
 
+        $this->expectException(Exception::class);
+
         // ---- ACT ----
 
         new ClassName($serviceFactoryReveal, $argumentParserFactoryReveal, $containerReveal, $serviceId,
@@ -67,7 +67,6 @@ class ClassNameTest extends TestCase
      * Testing when service source class does not exist
      *
      * @throws Exception
-     * @expectedException Exception
      */
     public function testServiceSourceClassNotExists(): void
     {
@@ -90,6 +89,8 @@ class ClassNameTest extends TestCase
 
         /** @var ContainerInterface $containerReveal */
         $containerReveal = $container->reveal();
+
+        $this->expectException(Exception::class);
 
         // ---- ACT ----
 
@@ -119,7 +120,6 @@ class ClassNameTest extends TestCase
      *
      * @param mixed $serviceSource Service source
      * @throws Exception
-     * @expectedException Exception
      * @dataProvider resolveWrongServiceSourceProvider
      */
     public function testResolveWrongServiceSource($serviceSource): void
@@ -142,6 +142,8 @@ class ClassNameTest extends TestCase
 
         /** @var ContainerInterface $containerReveal */
         $containerReveal = $container->reveal();
+
+        $this->expectException(Exception::class);
 
         // ---- ACT ----
 

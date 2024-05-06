@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
-namespace Kocuj\Di\Tests\Container;
+namespace Kocuj\Di\Tests\Unit\Container;
 
 use Kocuj\Di\Container\Container;
 use Kocuj\Di\Container\ContainerInterface;
@@ -18,7 +18,7 @@ use Kocuj\Di\Service\ServiceFactoryInterface;
 use Kocuj\Di\Service\ServiceInterface;
 use Kocuj\Di\Service\ServiceType;
 use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
-use Kocuj\Di\TestsLib\FakeService;
+use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\MethodProphecy;
@@ -34,71 +34,28 @@ class ContainerTest extends TestCase
     /**
      * Service identifier decorator
      *
-     * @var ObjectProphecy|ServiceIdDecoratorInterface
+     * @var ObjectProphecy|ServiceIdDecoratorInterface|null
      */
     private $serviceIdDecorator = null;
 
     /**
      * Service creator
      *
-     * @var ObjectProphecy|ServiceInterface
+     * @var ObjectProphecy|ServiceInterface|null
      */
     private $service = null;
 
     /**
      * Fake service
-     *
-     * @var FakeService
      */
-    private $fakeService = null;
+    private ?FakeService $fakeService = null;
 
     /**
      * Service factory
      *
-     * @var ObjectProphecy|ServiceFactoryInterface
+     * @var ObjectProphecy|ServiceFactoryInterface|null
      */
     private $serviceFactory = null;
-
-    /**
-     * Preparing objects for testing
-     *
-     * @param ServiceType $serviceType
-     * @param array $services
-     */
-    private function prepare(ServiceType $serviceType, array $services): void
-    {
-        $this->serviceIdDecorator = $this->prophesize(ServiceIdDecoratorInterface::class);
-
-        foreach ($services as $serviceId => $decoratedServiceId) {
-            /** @var MethodProphecy $serviceIdDecoratorDecorate */
-            $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($serviceId);
-            $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
-
-            /** @var MethodProphecy $serviceIdDecoratorDecorate */
-            $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($decoratedServiceId);
-            $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
-        }
-
-        /** @var ContainerInterface $containerInterface */
-        $containerInterface = Argument::type(ContainerInterface::class);
-
-        $this->fakeService = new FakeService();
-
-        $this->service = $this->prophesize(ServiceInterface::class);
-
-        /** @var MethodProphecy $serviceGetService */
-        $serviceGetService = $this->service->getService();
-        $serviceGetService->willReturn($this->fakeService);
-
-        $this->serviceFactory = $this->prophesize(ServiceFactoryInterface::class);
-
-        foreach ($services as $serviceId => $decoratedServiceId) {
-            /** @var MethodProphecy $serviceFactoryCreate */
-            $serviceFactoryCreate = $this->serviceFactory->create($containerInterface, $serviceType,
-                $decoratedServiceId, FakeService::class);
-            $serviceFactoryCreate->willReturn($this->service);
-        }
-    }
 
     /**
      * Testing cloning container; any service in the cloned container should have the same identifier and should be the same type as in the original container
@@ -163,13 +120,13 @@ class ContainerTest extends TestCase
         return [
             [
                 new ServiceType(ServiceType::STANDARD),
-                'ThisService',
-                'ThisService'
+                'thisService',
+                'thisService'
             ],
             [
                 new ServiceType(ServiceType::SHARED),
-                'ThisService',
-                'ThisService'
+                'thisService',
+                'thisService'
             ]
         ];
     }
@@ -300,33 +257,33 @@ class ContainerTest extends TestCase
         return [
             [
                 new ServiceType(ServiceType::STANDARD),
-                'ThisService',
-                'ThisService'
+                'thisService',
+                'thisService'
             ],
             [
                 new ServiceType(ServiceType::STANDARD),
                 'this-service',
-                'ThisService'
+                'thisService'
             ],
             [
                 new ServiceType(ServiceType::STANDARD),
                 'this_service',
-                'ThisService'
+                'thisService'
             ],
             [
                 new ServiceType(ServiceType::SHARED),
                 'ThisService',
-                'ThisService'
+                'thisService'
             ],
             [
                 new ServiceType(ServiceType::SHARED),
                 'this-service',
-                'ThisService'
+                'thisService'
             ],
             [
                 new ServiceType(ServiceType::SHARED),
                 'this_service',
-                'ThisService'
+                'thisService'
             ]
         ];
     }
@@ -342,8 +299,8 @@ class ContainerTest extends TestCase
     {
         // ---- ARRANGE ----
 
-        $serviceId = 'Service';
-        $decoratedServiceId = 'Service';
+        $serviceId = 'service';
+        $decoratedServiceId = 'service';
 
         $services = [];
         for ($z = 1; $z < 10; $z++) {
@@ -475,7 +432,6 @@ class ContainerTest extends TestCase
      *
      * @param ServiceType $serviceType Service type
      * @dataProvider servicesTypesProvider
-     * @expectedException \Kocuj\Di\Container\Exception
      */
     public function testErrorAddAlreadyExists(ServiceType $serviceType): void
     {
@@ -494,6 +450,8 @@ class ContainerTest extends TestCase
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
         $serviceFactoryReveal = $this->serviceFactory->reveal();
 
+        $this->expectException(\Kocuj\Di\Container\Exception::class);
+
         // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
@@ -507,7 +465,6 @@ class ContainerTest extends TestCase
      * @param ServiceType $serviceType Service type
      * @throws Exception
      * @dataProvider servicesTypesProvider
-     * @expectedException \Kocuj\Di\Container\NotFoundException
      */
     public function testErrorAddWithWrongGet(ServiceType $serviceType): void
     {
@@ -531,6 +488,8 @@ class ContainerTest extends TestCase
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
         $serviceFactoryReveal = $this->serviceFactory->reveal();
 
+        $this->expectException(\Kocuj\Di\Container\NotFoundException::class);
+
         // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
@@ -543,7 +502,6 @@ class ContainerTest extends TestCase
      *
      * @param ServiceType $serviceType Service type
      * @dataProvider servicesTypesProvider
-     * @expectedException \PHPUnit\Framework\Error\Error
      */
     public function testErrorWrongCallMethod(ServiceType $serviceType): void
     {
@@ -562,6 +520,8 @@ class ContainerTest extends TestCase
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
         $serviceFactoryReveal = $this->serviceFactory->reveal();
 
+        $this->expectException(\PHPUnit\Framework\Error\Error::class);
+
         // ---- ACT ----
 
         $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
@@ -573,7 +533,6 @@ class ContainerTest extends TestCase
      *
      * @param ServiceType $serviceType Service type
      * @dataProvider servicesTypesProvider
-     * @expectedException \Kocuj\Di\Container\Exception
      */
     public function testCallMethodWithArguments(ServiceType $serviceType): void
     {
@@ -591,6 +550,8 @@ class ContainerTest extends TestCase
 
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
         $serviceFactoryReveal = $this->serviceFactory->reveal();
+
+        $this->expectException(\Kocuj\Di\Container\Exception::class);
 
         // ---- ACT ----
 
@@ -622,5 +583,46 @@ class ContainerTest extends TestCase
                 new ServiceType(ServiceType::SHARED)
             ]
         ];
+    }
+
+    /**
+     * Preparing objects for testing
+     *
+     * @param ServiceType $serviceType
+     * @param array $services
+     */
+    private function prepare(ServiceType $serviceType, array $services): void
+    {
+        $this->serviceIdDecorator = $this->prophesize(ServiceIdDecoratorInterface::class);
+
+        foreach ($services as $serviceId => $decoratedServiceId) {
+            /** @var MethodProphecy $serviceIdDecoratorDecorate */
+            $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($serviceId);
+            $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
+
+            /** @var MethodProphecy $serviceIdDecoratorDecorate */
+            $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($decoratedServiceId);
+            $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
+        }
+
+        /** @var ContainerInterface $containerInterface */
+        $containerInterface = Argument::type(ContainerInterface::class);
+
+        $this->fakeService = new FakeService();
+
+        $this->service = $this->prophesize(ServiceInterface::class);
+
+        /** @var MethodProphecy $serviceGetService */
+        $serviceGetService = $this->service->getService();
+        $serviceGetService->willReturn($this->fakeService);
+
+        $this->serviceFactory = $this->prophesize(ServiceFactoryInterface::class);
+
+        foreach ($services as $serviceId => $decoratedServiceId) {
+            /** @var MethodProphecy $serviceFactoryCreate */
+            $serviceFactoryCreate = $this->serviceFactory->create($containerInterface, $serviceType,
+                $decoratedServiceId, FakeService::class);
+            $serviceFactoryCreate->willReturn($this->service);
+        }
     }
 }

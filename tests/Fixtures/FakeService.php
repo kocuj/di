@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
-namespace Kocuj\Di\TestsLib;
+namespace Kocuj\Di\Tests\Fixtures;
 
 /**
  * Fake service
@@ -19,10 +19,8 @@ class FakeService
 {
     /**
      * Fake values
-     *
-     * @var array
      */
-    public $values = [];
+    public array $values = [];
 
     /**
      * Constructor

@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
-namespace Kocuj\Di\Tests\ServiceSource\ClassName\ArgumentParser\Service;
+namespace Kocuj\Di\Tests\Unit\ServiceSource\ClassName\ArgumentParser\Service;
 
 use Kocuj\Di\Container\ContainerInterface;
 use Kocuj\Di\Service\ServiceInterface;
@@ -25,8 +25,6 @@ class ServiceTest extends TestCase
 {
     /**
      * Testing wrong argument
-     *
-     * @expectedException Exception
      */
     public function testWrongArgument(): void
     {
@@ -42,6 +40,8 @@ class ServiceTest extends TestCase
 
         /** @var ContainerInterface $containerReveal */
         $containerReveal = $container->reveal();
+
+        $this->expectException(Exception::class);
 
         // ---- ACT ----
 
@@ -89,8 +89,6 @@ class ServiceTest extends TestCase
 
     /**
      * Testing parsing the same service twice as argument
-     *
-     * @expectedException Exception
      */
     public function testParseTheSameService(): void
     {
@@ -113,6 +111,8 @@ class ServiceTest extends TestCase
         $argument = [
             'value' => $id,
         ];
+
+        $this->expectException(Exception::class);
 
         // ---- ACT ----
 
