@@ -1,6 +1,6 @@
 {
 	"name" : "kocuj/di",
-	"description" : "Container for design pattern Dependency Injection in PHP 7",
+	"description" : "Container for design pattern Dependency Injection in PHP 7 and 8",
 	"type" : "library",
 	"license" : "MIT",
 	"homepage" : "http://libs.kocuj.pl/php-libraries/kocuj-di/",
