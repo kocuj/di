@@ -19,7 +19,6 @@ class Camelizer implements CamelizerInterface
 {
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnore
      */
     public function camelize(string $text): string
     {
@@ -48,5 +47,15 @@ class Camelizer implements CamelizerInterface
         );
 
         return $text;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function camelizeWithUpperFirstChar(string $text): string
+    {
+        $output = $this->camelize($text);
+
+        return strtoupper(substr($output, 0, 1)) . substr($output, 1);
     }
 }
