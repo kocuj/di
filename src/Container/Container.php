@@ -81,7 +81,7 @@ class Container implements ContainerInterface, Countable
     public function add(ServiceType $serviceType, string $id, $serviceSource): ContainerInterface
     {
         // decorate service identifier
-        $decoratedId = $this->serviceIdDecorator->decorate($id);
+        $decoratedId = $this->serviceIdDecorator->decorateForServiceId($id);
         // check if service does not exist already
         if (isset($this->definitions[$decoratedId])) {
             throw new Exception(sprintf('Service "%s" already exists', $decoratedId));
@@ -140,7 +140,7 @@ class Container implements ContainerInterface, Countable
     public function has(string $id): bool
     {
         // decorate service identifier
-        $decoratedId = $this->serviceIdDecorator->decorate($id);
+        $decoratedId = $this->serviceIdDecorator->decorateForServiceId($id);
         // exit
         return isset($this->definitions[$decoratedId]);
     }
@@ -155,7 +155,7 @@ class Container implements ContainerInterface, Countable
     }
 
     /**
-     * Call service by method get*(), where "*" is service identifier written in camel case
+     * Call service by method get*(), where "*" is service identifier written in camel case with first upper character
      *
      * @param string $method Method to call
      * @param array $arguments Arguments for called method
@@ -174,8 +174,10 @@ class Container implements ContainerInterface, Countable
         if ($prefix !== 'get') {
             trigger_error(sprintf('Call to undefined method %s()', __CLASS__ . '::' . $method), E_USER_ERROR);
         }
+        // decorate service identifier
+        $serviceId = $this->serviceIdDecorator->decorateForGetMethod(substr($method, 3));
         // exit
-        return $this->get(substr($method, 3));
+        return $this->get($serviceId);
     }
 
     /**
@@ -210,7 +212,7 @@ class Container implements ContainerInterface, Countable
     private function getServiceDefinition(string $id): array
     {
         // decorate service identifier
-        $decoratedId = $this->serviceIdDecorator->decorate($id);
+        $decoratedId = $this->serviceIdDecorator->decorateForServiceId($id);
         // check if service exists
         if (!$this->has($decoratedId)) {
             throw new NotFoundException(sprintf('Service "%s" does not exist', $decoratedId));

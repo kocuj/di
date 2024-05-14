@@ -40,9 +40,19 @@ class ServiceIdDecorator implements ServiceIdDecoratorInterface
      * {@inheritdoc}
      * @codeCoverageIgnore
      */
-    public function decorate(string $id): string
+    public function decorateForServiceId(string $id): string
     {
         // exit
         return $this->camelizer->camelize($id);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @codeCoverageIgnore
+     */
+    public function decorateForGetMethod(string $id): string
+    {
+        // exit
+        return $this->camelizer->camelizeWithUpperFirstChar($id);
     }
 }

@@ -18,10 +18,18 @@ namespace Kocuj\Di\ServiceIdDecorator;
 interface ServiceIdDecoratorInterface
 {
     /**
-     * Decorate identifier
+     * Decorate identifier for service identifier
      *
      * @param string $id Identifier to decorate
      * @return string Decorated identifier
      */
-    public function decorate(string $id): string;
+    public function decorateForServiceId(string $id): string;
+
+    /**
+     * Decorate identifier for get service by get* method
+     *
+     * @param string $id Identifier to decorate
+     * @return string Decorated identifier
+     */
+    public function decorateForGetMethod(string $id): string;
 }
