@@ -1,0 +1,17 @@
+version: "3.5"
+
+services:
+  kocujdi_php74:
+    container_name: kocujdi_php74
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: docker/build/php/7.4/Dockerfile
+    volumes:
+      - .:/usr/src/kocuj-di
+    networks:
+      - kocuj
+
+networks:
+  kocuj:
