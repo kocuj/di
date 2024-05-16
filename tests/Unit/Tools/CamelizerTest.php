@@ -81,4 +81,66 @@ class CamelizerTest extends TestCase
             ],
         ];
     }
+
+    /**
+     * Testing camelize (with first character uppercase) of strings
+     *
+     * @dataProvider camelizeWithUpperFirstCharProvider
+     */
+    public function testCamelizeWithUpperFirstChar(string $inputText, string $expectedOutputText): void
+    {
+        // ---- ACT ----
+
+        // initialize Camelizer
+        $camelizer = new Camelizer();
+        // camelize text
+        $outputText = $camelizer->camelizeWithUpperFirstChar($inputText);
+
+        // ---- ASSERT ----
+
+        // check if output text is the same as expected
+        $this->assertEquals($expectedOutputText, $outputText);
+    }
+
+    /**
+     * Provider for testing camelize (with first character uppercase) of strings
+     */
+    public function camelizeWithUpperFirstCharProvider(): array
+    {
+        // exit
+        return [
+            [
+                'thisService',
+                'ThisService'
+            ],
+            [
+                'ThisService',
+                'ThisService'
+            ],
+            [
+                'this_service',
+                'ThisService'
+            ],
+            [
+                '_this_service',
+                'ThisService'
+            ],
+            [
+                '-this_service',
+                'ThisService'
+            ],
+            [
+                'this-service',
+                'ThisService'
+            ],
+            [
+                '-this-service',
+                'ThisService'
+            ],
+            [
+                '_this-service',
+                'ThisService'
+            ],
+        ];
+    }
 }

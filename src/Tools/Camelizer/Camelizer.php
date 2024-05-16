@@ -29,19 +29,7 @@ class Camelizer implements CamelizerInterface
         $text = preg_replace_callback(
             '/[-_\s]+(.)?/u',
             function ($match) {
-                if (isset($match[1])) {
-                    return strtoupper($match[1]);
-                }
-
-                return '';
-            },
-            $text
-        );
-
-        $text = preg_replace_callback(
-            '/[\d]+(.)?/u',
-            function ($match) {
-                return strtoupper($match[0]);
+                return isset($match[1]) ? strtoupper($match[1]) : '';
             },
             $text
         );
