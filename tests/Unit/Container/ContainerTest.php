@@ -58,7 +58,7 @@ class ContainerTest extends TestCase
     private $serviceFactory = null;
 
     /**
-     * Testing cloning container; any service in the cloned container should have the same identifier and should be the same type as in the original container
+     * Testing cloning container; any service in the cloned container should have the same identifier and should be the same type and instance as in the original container
      *
      * @param ServiceType $serviceType Service type
      * @param string $serviceId Service identifier
@@ -66,13 +66,15 @@ class ContainerTest extends TestCase
      * @throws Exception
      * @dataProvider cloneProvider
      */
-    public function testClone(ServiceType $serviceType, string $serviceId, string $decoratedServiceId): void
-    {
+    public function testClone(
+        ServiceType $serviceType,
+        string $serviceId,
+        string $decoratedServiceId,
+        string $decoratedServiceIdForGetMethod
+    ): void {
         // ---- ARRANGE ----
 
-        $this->prepare($serviceType, [
-            $serviceId => $decoratedServiceId
-        ]);
+        $this->prepareService($serviceType, $serviceId, $decoratedServiceId, $decoratedServiceIdForGetMethod);
 
         $clonedObject = new FakeService();
 
@@ -106,6 +108,9 @@ class ContainerTest extends TestCase
 
         // check if containers are not the same
         $this->assertNotSame($clonedContainer, $container);
+        $this->assertEquals($clonedContainer->count(), $container->count());
+        $this->assertEquals(count($clonedContainer), count($container));
+        $this->assertSame($clonedContainer->get($serviceId), $container->get($serviceId));
     }
 
     /**
@@ -121,12 +126,14 @@ class ContainerTest extends TestCase
             [
                 new ServiceType(ServiceType::STANDARD),
                 'thisService',
-                'thisService'
+                'thisService',
+                'ThisService',
             ],
             [
                 new ServiceType(ServiceType::SHARED),
                 'thisService',
-                'thisService'
+                'thisService',
+                'ThisService',
             ]
         ];
     }
@@ -141,13 +148,15 @@ class ContainerTest extends TestCase
      * @throws Exception
      * @throws NotFoundException
      */
-    public function testAdd(ServiceType $serviceType, string $serviceId, string $decoratedServiceId): void
-    {
+    public function testAdd(
+        ServiceType $serviceType,
+        string $serviceId,
+        string $decoratedServiceId,
+        string $decoratedServiceIdForGetMethod
+    ): void {
         // ---- ARRANGE ----
 
-        $this->prepare($serviceType, [
-            $serviceId => $decoratedServiceId
-        ]);
+        $this->prepareService($serviceType, $serviceId, $decoratedServiceId, $decoratedServiceIdForGetMethod);
 
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
         $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
@@ -183,13 +192,15 @@ class ContainerTest extends TestCase
      * @throws NotFoundException
      * @dataProvider addCheckTypeHasProvider
      */
-    public function testCheckType(ServiceType $serviceType, string $serviceId, string $decoratedServiceId): void
-    {
+    public function testCheckType(
+        ServiceType $serviceType,
+        string $serviceId,
+        string $decoratedServiceId,
+        string $decoratedServiceIdForGetMethod
+    ): void {
         // ---- ARRANGE ----
 
-        $this->prepare($serviceType, [
-            $serviceId => $decoratedServiceId
-        ]);
+        $this->prepareService($serviceType, $serviceId, $decoratedServiceId, $decoratedServiceIdForGetMethod);
 
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
         $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
@@ -218,13 +229,15 @@ class ContainerTest extends TestCase
      * @throws Exception
      * @dataProvider addCheckTypeHasProvider
      */
-    public function testHas(ServiceType $serviceType, string $serviceId, string $decoratedServiceId): void
-    {
+    public function testHas(
+        ServiceType $serviceType,
+        string $serviceId,
+        string $decoratedServiceId,
+        string $decoratedServiceIdForGetMethod
+    ): void {
         // ---- ARRANGE ----
 
-        $this->prepare($serviceType, [
-            $serviceId => $decoratedServiceId
-        ]);
+        $this->prepareService($serviceType, $serviceId, $decoratedServiceId, $decoratedServiceIdForGetMethod);
 
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
         $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
@@ -258,32 +271,38 @@ class ContainerTest extends TestCase
             [
                 new ServiceType(ServiceType::STANDARD),
                 'thisService',
-                'thisService'
+                'thisService',
+                'ThisService',
             ],
             [
                 new ServiceType(ServiceType::STANDARD),
                 'this-service',
-                'thisService'
+                'thisService',
+                'ThisService',
             ],
             [
                 new ServiceType(ServiceType::STANDARD),
                 'this_service',
-                'thisService'
+                'thisService',
+                'ThisService',
             ],
             [
                 new ServiceType(ServiceType::SHARED),
                 'ThisService',
-                'thisService'
+                'thisService',
+                'ThisService',
             ],
             [
                 new ServiceType(ServiceType::SHARED),
                 'this-service',
-                'thisService'
+                'thisService',
+                'ThisService',
             ],
             [
                 new ServiceType(ServiceType::SHARED),
                 'this_service',
-                'thisService'
+                'thisService',
+                'ThisService',
             ]
         ];
     }
@@ -299,15 +318,26 @@ class ContainerTest extends TestCase
     {
         // ---- ARRANGE ----
 
+        $maxIterations = 10;
+
         $serviceId = 'service';
         $decoratedServiceId = 'service';
+        $decoratedServiceIdForGetMethod = 'Service';
 
         $services = [];
-        for ($z = 1; $z < 10; $z++) {
-            $services[$serviceId . $z] = $decoratedServiceId . $z;
-        }
+        for ($i = 1; $i < $maxIterations; $i++) {
+            $serviceIdForIteration = $serviceId . $i;
+            $decoratedServiceIdForIteration = $decoratedServiceId . $i;
 
-        $this->prepare($serviceType, $services);
+            $services[$serviceIdForIteration] = $decoratedServiceIdForIteration;
+
+            $this->prepareService(
+                $serviceType,
+                $serviceIdForIteration,
+                $decoratedServiceIdForIteration,
+                $decoratedServiceIdForGetMethod
+            );
+        }
 
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
         $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
@@ -317,23 +347,30 @@ class ContainerTest extends TestCase
 
         // ---- ACT ----
 
-        $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
+        for ($i = 0; $i < $maxIterations; $i++) {
+            $containers[$i] = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
+            if ($i > 0) {
+                for ($j = 1; $j <= $i; $j++) {
+                    $containers[$i]->add($serviceType, $serviceId . $j, FakeService::class);
+                }
+            }
+        }
 
-        // ---- ACT & ASSERT ----
+        // ---- ASSERT ----
 
         // check services count
-        $this->assertEquals(0, $container->count());
+        $this->assertEquals(0, $containers[0]->count());
+        $this->assertEquals(0, count($containers[0]));
 
-        for ($z = 1; $z < 10; $z++) {
-            $container->add($serviceType, $serviceId . $z, FakeService::class);
-
+        for ($i = 1; $i < $maxIterations; $i++) {
             // check services count
-            $this->assertEquals($z, $container->count());
+            $this->assertEquals($i, $containers[$i]->count());
+            $this->assertEquals($i, count($containers[$i]));
         }
     }
 
     /**
-     * Testing get standard or shared service
+     * Testing get standard or shared service by "__call" method
      *
      * @param ServiceType $serviceType Service type
      * @param string $serviceId Service identifier
@@ -346,13 +383,12 @@ class ContainerTest extends TestCase
         ServiceType $serviceType,
         string $serviceId,
         string $decoratedServiceId,
+        string $decoratedServiceIdForGetMethod,
         string $callMethod
     ): void {
         // ---- ARRANGE ----
 
-        $this->prepare($serviceType, [
-            $serviceId => $decoratedServiceId
-        ]);
+        $this->prepareService($serviceType, $serviceId, $decoratedServiceId, $decoratedServiceIdForGetMethod);
 
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
         $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
@@ -379,7 +415,7 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * Provider for testing standard and shared services
+     * Provider for testing standard and shared services by "__call" method
      *
      * @return array Data for testing standard and shared services
      * @throws \Exception
@@ -391,38 +427,133 @@ class ContainerTest extends TestCase
             [
                 new ServiceType(ServiceType::STANDARD),
                 'ThisService',
+                'thisService',
                 'ThisService',
                 'getThisService'
             ],
             [
                 new ServiceType(ServiceType::STANDARD),
                 'this-service',
+                'thisService',
                 'ThisService',
                 'getThisService'
             ],
             [
                 new ServiceType(ServiceType::STANDARD),
                 'this_service',
+                'thisService',
                 'ThisService',
                 'getThisService'
             ],
             [
                 new ServiceType(ServiceType::SHARED),
                 'ThisService',
+                'thisService',
                 'ThisService',
                 'getThisService'
             ],
             [
                 new ServiceType(ServiceType::SHARED),
                 'this-service',
+                'thisService',
                 'ThisService',
                 'getThisService'
             ],
             [
                 new ServiceType(ServiceType::SHARED),
                 'this_service',
+                'thisService',
                 'ThisService',
                 'getThisService'
+            ]
+        ];
+    }
+
+    /**
+     * Testing get standard or shared service
+     *
+     * @param ServiceType $serviceType Service type
+     * @param string $serviceId Service identifier
+     * @param string $decoratedServiceId Decorated service identifier
+     * @param string $callMethod Method to call to get service
+     * @dataProvider getMethodProvider
+     */
+    public function testGetMethod(
+        ServiceType $serviceType,
+        string $serviceId,
+        string $decoratedServiceId,
+        string $decoratedServiceIdForGetMethod
+    ): void {
+        // ---- ARRANGE ----
+
+        $this->prepareService($serviceType, $serviceId, $decoratedServiceId, $decoratedServiceIdForGetMethod);
+
+        /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
+        $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
+
+        /** @var ServiceFactoryInterface $serviceFactoryReveal */
+        $serviceFactoryReveal = $this->serviceFactory->reveal();
+
+        // ---- ACT ----
+
+        $container = new Container($serviceIdDecoratorReveal, $serviceFactoryReveal);
+
+        $objectReturnedBySet = $container->add($serviceType, $serviceId, FakeService::class);
+        $returnedService = $container->get($serviceId);
+
+        // ---- ASSERT ----
+
+        // check if the same container has been returned by this method
+        $this->assertSame($container, $objectReturnedBySet);
+        // check if the same service has been returned by this method
+        $this->assertSame($this->fakeService, $returnedService);
+    }
+
+    /**
+     * Provider for testing standard and shared services
+     *
+     * @return array Data for testing standard and shared services
+     * @throws \Exception
+     */
+    public function getMethodProvider(): array
+    {
+        // exit
+        return [
+            [
+                new ServiceType(ServiceType::STANDARD),
+                'ThisService',
+                'thisService',
+                'ThisService',
+            ],
+            [
+                new ServiceType(ServiceType::STANDARD),
+                'this-service',
+                'thisService',
+                'ThisService',
+            ],
+            [
+                new ServiceType(ServiceType::STANDARD),
+                'this_service',
+                'thisService',
+                'ThisService',
+            ],
+            [
+                new ServiceType(ServiceType::SHARED),
+                'ThisService',
+                'thisService',
+                'ThisService',
+            ],
+            [
+                new ServiceType(ServiceType::SHARED),
+                'this-service',
+                'thisService',
+                'ThisService',
+            ],
+            [
+                new ServiceType(ServiceType::SHARED),
+                'this_service',
+                'thisService',
+                'ThisService',
             ]
         ];
     }
@@ -438,11 +569,10 @@ class ContainerTest extends TestCase
         // ---- ARRANGE ----
 
         $serviceId = 'Service';
-        $decoratedServiceId = 'Service';
+        $decoratedServiceId = 'service';
+        $decoratedServiceIdForGetMethod = 'Service';
 
-        $this->prepare($serviceType, [
-            $serviceId => $decoratedServiceId
-        ]);
+        $this->prepareService($serviceType, $serviceId, $decoratedServiceId, $decoratedServiceIdForGetMethod);
 
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
         $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
@@ -472,14 +602,13 @@ class ContainerTest extends TestCase
 
         $serviceId = 'Service';
         $decoratedServiceId = 'Service';
+        $decoratedServiceIdForGetMethod = 'Service';
         $wrongServiceId = 'OtherService';
 
-        $this->prepare($serviceType, [
-            $serviceId => $decoratedServiceId
-        ]);
+        $this->prepareService($serviceType, $serviceId, $decoratedServiceId, $decoratedServiceIdForGetMethod);
 
         /** @var MethodProphecy $serviceIdDecoratorDecorate */
-        $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($wrongServiceId);
+        $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorateForServiceId($wrongServiceId);
         $serviceIdDecoratorDecorate->willReturn($wrongServiceId);
 
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
@@ -509,10 +638,9 @@ class ContainerTest extends TestCase
 
         $serviceId = 'Service';
         $decoratedServiceId = 'Service';
+        $decoratedServiceIdForGetMethod = 'Service';
 
-        $this->prepare($serviceType, [
-            $serviceId => $decoratedServiceId
-        ]);
+        $this->prepareService($serviceType, $serviceId, $decoratedServiceId, $decoratedServiceIdForGetMethod);
 
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
         $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
@@ -540,10 +668,9 @@ class ContainerTest extends TestCase
 
         $serviceId = 'Service';
         $decoratedServiceId = 'Service';
+        $decoratedServiceIdForGetMethod = 'Service';
 
-        $this->prepare($serviceType, [
-            $serviceId => $decoratedServiceId
-        ]);
+        $this->prepareService($serviceType, $serviceId, $decoratedServiceId, $decoratedServiceIdForGetMethod);
 
         /** @var ServiceIdDecoratorInterface $serviceIdDecoratorReveal */
         $serviceIdDecoratorReveal = $this->serviceIdDecorator->reveal();
@@ -585,28 +712,9 @@ class ContainerTest extends TestCase
         ];
     }
 
-    /**
-     * Preparing objects for testing
-     *
-     * @param ServiceType $serviceType
-     * @param array $services
-     */
-    private function prepare(ServiceType $serviceType, array $services): void
+    protected function setUp(): void
     {
         $this->serviceIdDecorator = $this->prophesize(ServiceIdDecoratorInterface::class);
-
-        foreach ($services as $serviceId => $decoratedServiceId) {
-            /** @var MethodProphecy $serviceIdDecoratorDecorate */
-            $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($serviceId);
-            $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
-
-            /** @var MethodProphecy $serviceIdDecoratorDecorate */
-            $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorate($decoratedServiceId);
-            $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
-        }
-
-        /** @var ContainerInterface $containerInterface */
-        $containerInterface = Argument::type(ContainerInterface::class);
 
         $this->fakeService = new FakeService();
 
@@ -617,12 +725,43 @@ class ContainerTest extends TestCase
         $serviceGetService->willReturn($this->fakeService);
 
         $this->serviceFactory = $this->prophesize(ServiceFactoryInterface::class);
+    }
 
-        foreach ($services as $serviceId => $decoratedServiceId) {
-            /** @var MethodProphecy $serviceFactoryCreate */
-            $serviceFactoryCreate = $this->serviceFactory->create($containerInterface, $serviceType,
-                $decoratedServiceId, FakeService::class);
-            $serviceFactoryCreate->willReturn($this->service);
-        }
+    /**
+     * Preparing objects for testing
+     *
+     * @param ServiceType $serviceType
+     * @param array $services
+     */
+    private function prepareService(
+        ServiceType $serviceType,
+        string $serviceId,
+        string $decoratedServiceId,
+        string $decoratedServiceIdForGetMethod
+    ): void {
+        /** @var ContainerInterface $containerInterface */
+        $containerInterface = Argument::type(ContainerInterface::class);
+
+        /** @var MethodProphecy $serviceIdDecoratorDecorate */
+        $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorateForServiceId($serviceId);
+        $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
+
+        $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorateForServiceId($decoratedServiceId);
+        $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
+
+        $serviceIdDecoratorDecorate = $this->serviceIdDecorator->decorateForServiceId($decoratedServiceIdForGetMethod);
+        $serviceIdDecoratorDecorate->willReturn($decoratedServiceId);
+
+        /** @var MethodProphecy $serviceIdDecoratorDecorateForGetMethod */
+        $serviceIdDecoratorDecorateForGetMethod = $this->serviceIdDecorator->decorateForGetMethod($serviceId);
+        $serviceIdDecoratorDecorateForGetMethod->willReturn($decoratedServiceIdForGetMethod);
+
+        $serviceIdDecoratorDecorateForGetMethod = $this->serviceIdDecorator->decorateForGetMethod($decoratedServiceIdForGetMethod);
+        $serviceIdDecoratorDecorateForGetMethod->willReturn($decoratedServiceIdForGetMethod);
+
+        /** @var MethodProphecy $serviceFactoryCreate */
+        $serviceFactoryCreate = $this->serviceFactory->create($containerInterface, $serviceType,
+            $decoratedServiceId, FakeService::class);
+        $serviceFactoryCreate->willReturn($this->service);
     }
 }
