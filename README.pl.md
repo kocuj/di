@@ -30,10 +30,6 @@ $ composer require kocuj/di
 Następujące wersje PHP są obsługiwane przez tą wersję:
  
 * PHP 7.4
-* PHP 8.0
-* PHP 8.1
-* PHP 8.2
-* PHP 8.3
 
 ## Dokumentacja
 
