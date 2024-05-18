@@ -41,6 +41,3 @@ jobs:
 
             - name: Send results to Scrutinizer
               run: php ocular.phar code-coverage:upload --format=php-clover coverage.clover
-
-    build-all:
-        needs: [build-for-php-74]
