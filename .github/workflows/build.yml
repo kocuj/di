@@ -7,16 +7,16 @@ permissions:
     contents: read
 
 jobs:
-    build-for-php-74:
+    build-for-php-73:
         runs-on: ubuntu-latest
 
         steps:
             - uses: actions/checkout@v4
 
-            - name: Setup PHP 7.4
+            - name: Setup PHP 7.3
               uses: shivammathur/setup-php@v2
               with:
-                  php-version: 7.4
+                  php-version: 7.3
 
             - name: Update Composer
               run: composer self-update
@@ -40,4 +40,4 @@ jobs:
               run: vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
             - name: Send results to Scrutinizer
-              run: php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+              run: wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.clover
