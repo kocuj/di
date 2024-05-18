@@ -3,8 +3,8 @@ Kontener dla wzorca projektowego "wstrzykiwanie zależności" (Dependency Inject
 
 [![Autor](http://img.shields.io/badge/author-kocuj.pl-blue.svg?style=flat-square)](http://kocuj.pl)
 [![Najnowsza wersja](https://img.shields.io/github/release/kocuj/di.svg?style=flat-square)](https://github.com/kocuj/di/releases)
-[![Problemy](http://githubbadges.herokuapp.com/kocuj/di/issues.svg)](https://github.com/kocuj/di/issues)
-[![Oczekujące prośby o pociągnięcie danych](http://githubbadges.herokuapp.com/kocuj/di/pulls.svg)](https://github.com/kocuj/di/pulls)
+[![Problemy](https://img.shields.io/github/issues/kocuj/di)](https://github.com/kocuj/di/issues)
+[![Oczekujące prośby o pociągnięcie danych](https://img.shields.io/github/issues-pr/kocuj/di)](https://github.com/kocuj/di/pulls)
 [![Licencja](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/kocuj/di/blob/master/LICENSE.md)
 ![Status budowy](https://github.com/kocuj/di/actions/workflows/build.yml/badge.svg)
 [![Status pokrycia kodu](https://img.shields.io/scrutinizer/coverage/g/kocuj/di.svg?style=flat-square)](https://scrutinizer-ci.com/g/kocuj/di/code-structure)

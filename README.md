@@ -3,8 +3,8 @@ Container for design pattern Dependency Injection in PHP 7
 
 [![Author](http://img.shields.io/badge/author-kocuj.pl-blue.svg?style=flat-square)](http://kocuj.pl)
 [![Latest Version](https://img.shields.io/github/release/kocuj/di.svg?style=flat-square)](https://github.com/kocuj/di/releases)
-[![Github Issues](http://githubbadges.herokuapp.com/kocuj/di/issues.svg)](https://github.com/kocuj/di/issues)
-[![Pending Pull-Requests](http://githubbadges.herokuapp.com/kocuj/di/pulls.svg)](https://github.com/kocuj/di/pulls)
+[![Github Issues](https://img.shields.io/github/issues/kocuj/di)](https://github.com/kocuj/di/issues)
+[![Pending Pull-Requests](https://img.shields.io/github/issues-pr/kocuj/di)](https://github.com/kocuj/di/pulls)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/kocuj/di/blob/master/LICENSE.md)
 ![Build status](https://github.com/kocuj/di/actions/workflows/build.yml/badge.svg)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/kocuj/di.svg?style=flat-square)](https://scrutinizer-ci.com/g/kocuj/di/code-structure)
