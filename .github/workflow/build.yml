@@ -1,0 +1,39 @@
+name: Build
+
+on:
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    build:
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Update Composer
+              run: composer self-update
+
+            - name: Validate composer.json and composer.lock
+              run: composer validate --strict
+
+            - name: Cache Composer packages
+              id: composer-cache
+              uses: actions/cache@v3
+              with:
+                  path: vendor
+                  key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-php-
+
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress
+
+            - name: Run all test suites with coverage
+              run: vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+            - name: Send results to Scrutinizer
+              run: php ocular.phar code-coverage:upload --format=php-clover coverage.clover
