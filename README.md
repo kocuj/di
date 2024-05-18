@@ -22,7 +22,7 @@ DO NOT USE THIS BRANCH ON PRODUCTION! THIS BRANCH IS ONLY FOR DEVELOPMENT OF VER
 Via Composer:
 
 ``` bash
-$ composer require kocuj/di
+composer require kocuj/di
 ```
 
 ## Requirements
@@ -182,16 +182,44 @@ $container->get('main')->display();
 
 For more information you can see examples included in this project or by looking on [project website](http://libs.kocuj.pl/en/kocuj-di).
 
+## Developer environment
+
+To participate in the development of this project, you can use the configuration for Docker. To prepare it, you should use the following command:
+
+``` bash
+docker-compose build
+```
+
+You can then start the Docker container using the following command:
+
+``` bash
+docker-compose up -d
+```
+
+From now on, you can execute commands in a Docker container. Currently there is one container `kocujdi_74` with PHP 7.4. To execute any commands inside it you should type:
+
+``` bash
+docker exec -it kocujdi_php74 COMMAND
+```
+
+where `COMMAND` is the command to be executed inside the Docker container, for example `bash`.
+
 ## Testing
 
 ``` bash
-$ vendor/bin/phpunit
+vendor/bin/phpunit
+```
+
+Optionally you can do it in Docker container:
+
+``` bash
+docker exec -it kocujdi_php74 vendor/bin/phpunit
 ```
 
 ## Creating programming documentation
 
 ``` bash
-$ vendor/bin/phpdoc
+vendor/bin/phpdoc
 ```
 
 ## Contributing

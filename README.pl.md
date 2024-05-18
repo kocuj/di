@@ -22,7 +22,7 @@ NIE UŻYWAJ TEJ GAŁĘZI NA PRODUKCJI! TA GAŁĄŹ ISTNIEJE TYLKO DLA PROGRAMOWA
 Przy użyciu Composera:
 
 ``` bash
-$ composer require kocuj/di
+composer require kocuj/di
 ```
 
 ## Wymagania
@@ -182,16 +182,44 @@ $container->get('main')->display();
 
 Więcej informacji możesz uzyskać przeglądając przykłady dołączone do projektu lub zaglądając na [stronę internetową projektu](http://libs.kocuj.pl/pl/kocuj-di).
 
+## Środowisko programistyczne
+
+W celu wzięcia udziału w programowaniu tego projektu można wykorzystać konfigurację dla Dockera. Aby ją przygotować, powinieneś użyć następującej komendy:
+
+``` bash
+docker-compose build
+```
+
+Następnie możesz uruchomić kontener Dockera używając następującej komendy:
+
+``` bash
+docker-compose up -d
+```
+
+Od teraz możesz wywoływać komendy w kontenerze Dockera. Obecnie istnieje jeden kontener `kocujdi_74` z PHP 7.4. Aby wywołać jakieś komendy wewnątrz niego powinieneś wpisać:
+
+``` bash
+docker exec -it kocujdi_php74 COMMAND
+```
+
+gdzie `COMMAND` to komenda do wykonania wewnątrz kontenera Dockera, np. `bash`.
+
 ## Testowanie
 
 ``` bash
-$ vendor/bin/phpunit
+vendor/bin/phpunit
+```
+
+Opcjonalnie możesz to zrobić w kontenerze Dockera:
+
+``` bash
+docker exec -it kocujdi_php74 vendor/bin/phpunit
 ```
 
 ## Tworzenie dokumentacji programistycznej
 
 ``` bash
-$ vendor/bin/phpdoc
+vendor/bin/phpdoc
 ```
 
 ## Współpraca
