@@ -6,7 +6,7 @@ Kontener dla wzorca projektowego "wstrzykiwanie zależności" (Dependency Inject
 [![Problemy](http://githubbadges.herokuapp.com/kocuj/di/issues.svg)](https://github.com/kocuj/di/issues)
 [![Oczekujące prośby o pociągnięcie danych](http://githubbadges.herokuapp.com/kocuj/di/pulls.svg)](https://github.com/kocuj/di/pulls)
 [![Licencja](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/kocuj/di/blob/master/LICENSE.md)
-[![Status budowy](https://github.com/kocuj/di/actions/workflows/build.yml/badge.svg)]
+![Status budowy](https://github.com/kocuj/di/actions/workflows/build.yml/badge.svg)
 [![Status pokrycia kodu](https://img.shields.io/scrutinizer/coverage/g/kocuj/di.svg?style=flat-square)](https://scrutinizer-ci.com/g/kocuj/di/code-structure)
 [![Punkty za jakość](https://img.shields.io/scrutinizer/g/kocuj/di.svg?style=flat-square)](https://scrutinizer-ci.com/g/kocuj/di)
 [![Całkowita ilość pobrań](https://img.shields.io/packagist/dt/kocuj/di.svg?style=flat-square)](https://packagist.org/packages/kocuj/di)
