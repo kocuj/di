@@ -8,6 +8,8 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
+declare(strict_types=1);
+
 use Kocuj\Di\Di;
 use Kocuj\Di\Examples\Lib\InputService;
 use Kocuj\Di\Examples\Lib\Main;
