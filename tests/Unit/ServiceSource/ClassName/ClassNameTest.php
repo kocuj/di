@@ -109,7 +109,6 @@ class ClassNameTest extends TestCase
      */
     public function wrongServiceSourceProvider(): array
     {
-        // exit
         return [
             [
                 new FakeService(),
@@ -162,7 +161,6 @@ class ClassNameTest extends TestCase
      */
     public function resolveWrongServiceSourceProvider(): array
     {
-        // exit
         return [
             [
                 [
@@ -225,7 +223,6 @@ class ClassNameTest extends TestCase
 
         // ---- ASSERT ----
 
-        // check if output service is based on input service identifier
         $this->assertEquals(FakeService::class, get_class($resolve));
     }
 
@@ -300,7 +297,6 @@ class ClassNameTest extends TestCase
 
         // ---- ASSERT ----
 
-        // check if output service is based on input service identifier
         $this->assertEquals(FakeService::class, get_class($resolve));
     }
 
@@ -311,7 +307,6 @@ class ClassNameTest extends TestCase
      */
     public function resolveFromArrayProvider(): array
     {
-        // exit
         return [
             [
                 [],

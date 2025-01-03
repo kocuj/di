@@ -53,7 +53,6 @@ class Container implements ContainerInterface, Countable
         ServiceFactoryInterface $serviceFactory,
         ClassDefinitionFactoryInterface $classDefinitionFactory
     ) {
-        // remember arguments
         $this->serviceIdDecorator = $serviceIdDecorator;
         $this->serviceFactory = $serviceFactory;
         $this->classDefinitionFactory = $classDefinitionFactory;
@@ -67,9 +66,8 @@ class Container implements ContainerInterface, Countable
      */
     public function __clone()
     {
-        // copy services definitions
         $oldDefinitions = $this->definitions;
-        // recreate services
+
         $this->clearDefinitions();
         foreach ($oldDefinitions as $definition) {
             $this->add($definition['type'], $definition['clonedata']['id'], $definition['clonedata']['serviceSource']);
@@ -82,15 +80,14 @@ class Container implements ContainerInterface, Countable
      */
     public function add(ServiceType $serviceType, string $id, $serviceSource, array $arguments = []): ContainerInterface
     {
-        // check if deprecated argument has been used
         $serviceSource = $this->getDeprecatedServiceSource($serviceSource, $arguments, __METHOD__);
-        // decorate service identifier
+
         $decoratedId = $this->serviceIdDecorator->decorateForServiceId($id);
-        // check if service does not exist already
+
         if (isset($this->definitions[$decoratedId])) {
             throw new Exception(sprintf('Service "%s" already exists', $decoratedId));
         }
-        // set service definition
+
         $this->definitions[$decoratedId] = [
             'service' => $this->serviceFactory->create($this, $serviceType, $decoratedId, $serviceSource),
             'type' => $serviceType,
@@ -100,7 +97,7 @@ class Container implements ContainerInterface, Countable
             ]
         ];
         ++$this->definitionsCount;
-        // exit
+
         return $this;
     }
 
@@ -112,9 +109,8 @@ class Container implements ContainerInterface, Countable
      */
     public function addStandard(string $id, $serviceSource, array $arguments = []): ContainerInterface
     {
-        // check if deprecated argument has been used
         $serviceSource = $this->getDeprecatedServiceSource($serviceSource, $arguments, __METHOD__);
-        // exit
+
         return $this->add(new ServiceType(ServiceType::STANDARD), $id, $serviceSource);
     }
 
@@ -126,9 +122,8 @@ class Container implements ContainerInterface, Countable
      */
     public function addShared(string $id, $serviceSource, array $arguments = []): ContainerInterface
     {
-        // check if deprecated argument has been used
         $serviceSource = $this->getDeprecatedServiceSource($serviceSource, $arguments, __METHOD__);
-        // exit
+
         return $this->add(new ServiceType(ServiceType::SHARED), $id, $serviceSource);
     }
 
@@ -138,7 +133,6 @@ class Container implements ContainerInterface, Countable
      */
     public function checkType(string $id, ServiceType $serviceType): bool
     {
-        // exit
         return $this->getServiceDefinition($id)['type']->getValue() === $serviceType->getValue();
     }
 
@@ -147,9 +141,8 @@ class Container implements ContainerInterface, Countable
      */
     public function has(string $id): bool
     {
-        // decorate service identifier
         $decoratedId = $this->serviceIdDecorator->decorateForServiceId($id);
-        // exit
+
         return isset($this->definitions[$decoratedId]);
     }
 
@@ -158,7 +151,6 @@ class Container implements ContainerInterface, Countable
      */
     public function count(): int
     {
-        // exit
         return $this->definitionsCount;
     }
 
@@ -173,18 +165,17 @@ class Container implements ContainerInterface, Countable
      */
     public function __call(string $method, array $arguments)
     {
-        // disallow any arguments
         if (!empty($arguments)) {
             throw new Exception('Service must be get without arguments');
         }
-        // check prefix
+
         $prefix = substr($method, 0, 3);
         if ($prefix !== 'get') {
             trigger_error(sprintf('Call to undefined method %s()', __CLASS__ . '::' . $method), E_USER_ERROR);
         }
-        // decorate service identifier
+
         $serviceId = $this->serviceIdDecorator->decorateForGetMethod(substr($method, 3));
-        // exit
+
         return $this->get($serviceId);
     }
 
@@ -194,7 +185,6 @@ class Container implements ContainerInterface, Countable
      */
     public function get(string $id)
     {
-        // exit
         return $this->getServiceDefinition($id)['service']->getService();
     }
 
@@ -205,7 +195,6 @@ class Container implements ContainerInterface, Countable
      */
     private function clearDefinitions(): void
     {
-        // clear definitions
         $this->definitions = [];
         $this->definitionsCount = 0;
     }
@@ -219,13 +208,12 @@ class Container implements ContainerInterface, Countable
      */
     private function getServiceDefinition(string $id): array
     {
-        // decorate service identifier
         $decoratedId = $this->serviceIdDecorator->decorateForServiceId($id);
-        // check if service exists
+
         if (!$this->has($decoratedId)) {
             throw new NotFoundException(sprintf('Service "%s" does not exist', $decoratedId));
         }
-        // exit
+
         return $this->definitions[$decoratedId];
     }
 
@@ -238,13 +226,12 @@ class Container implements ContainerInterface, Countable
      * @return mixed
      */
     private function getDeprecatedServiceSource($serviceSource, array $arguments, string $deprecatedMethod) {
-        // trigger deprecated information and optionally change service source
         if (!empty($arguments)) {
             $serviceSource = $this->classDefinitionFactory->create($serviceSource, new ClassArgumentsCollectionImmutable($arguments));
 
             trigger_error('Argument $arguments for ' . $deprecatedMethod . ' method is deprecated and will be removed in version 3.0.0; please use second argument $serviceSource instead based on documentation', E_USER_DEPRECATED);
         }
-        // exit
+
         return $serviceSource;
     }
 }

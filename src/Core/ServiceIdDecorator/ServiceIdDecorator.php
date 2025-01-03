@@ -34,7 +34,6 @@ class ServiceIdDecorator implements ServiceIdDecoratorInterface
      */
     public function __construct(CamelizerInterface $camelizer)
     {
-        // remember arguments
         $this->camelizer = $camelizer;
     }
 
@@ -43,7 +42,6 @@ class ServiceIdDecorator implements ServiceIdDecoratorInterface
      */
     public function decorateForServiceId(string $id): string
     {
-        // exit
         return $this->camelizer->camelize($id);
     }
 
@@ -52,7 +50,6 @@ class ServiceIdDecorator implements ServiceIdDecoratorInterface
      */
     public function decorateForGetMethod(string $id): string
     {
-        // exit
         return $this->camelizer->camelizeWithUpperFirstChar($id);
     }
 }

@@ -58,13 +58,12 @@ class Di
      */
     public function __construct()
     {
-        // initialize
         $this->serviceIdDecorator = new ServiceIdDecorator(new Camelizer());
         $serviceSourceFactory = new ServiceSourceFactory(new CoreServiceSourceClassNameServiceFactory(), new ClassDefinitionFactory(), new ClassArgumentParserFactory());
         $serviceSourceResolver = new ServiceSourceResolver($serviceSourceFactory);
         $this->serviceFactory = new ServiceFactory($serviceSourceResolver);
         $this->classDefinitionFactory = new ClassDefinitionFactory();
-        // create default container
+
         $this->defaultContainer = $this->create();
     }
 
@@ -76,7 +75,6 @@ class Di
      */
     public function create(): ContainerInterface
     {
-        // exit
         return new Container($this->serviceIdDecorator, $this->serviceFactory, $this->classDefinitionFactory);
     }
 
@@ -89,7 +87,6 @@ class Di
      */
     public function copy(ContainerInterface $fromContainer): ContainerInterface
     {
-        // exit
         return clone $fromContainer;
     }
 
@@ -101,7 +98,6 @@ class Di
      */
     public function getDefault(): ContainerInterface
     {
-        // exit
         return $this->defaultContainer;
     }
 }

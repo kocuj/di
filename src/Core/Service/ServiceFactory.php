@@ -32,7 +32,6 @@ class ServiceFactory implements ServiceFactoryInterface
 
     public function __construct(ServiceSourceResolverInterface $serviceSourceResolver)
     {
-        // remember arguments
         $this->serviceSourceResolver = $serviceSourceResolver;
     }
 
@@ -47,7 +46,6 @@ class ServiceFactory implements ServiceFactoryInterface
         string $id,
         $serviceSource
     ): ServiceInterface {
-        // exit
         switch ($serviceType->getValue()) {
             case ServiceType::STANDARD:
                 return new Standard($this->serviceSourceResolver, $container, $id, $serviceSource);

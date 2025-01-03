@@ -33,7 +33,6 @@ class ObjectInstance implements ServiceSourceInterface
      */
     public function __construct($serviceSource)
     {
-        // remember arguments
         $this->serviceSource = $serviceSource;
     }
 
@@ -50,7 +49,6 @@ class ObjectInstance implements ServiceSourceInterface
             throw new Exception('Service source is not supported by this class');
         }
 
-        // exit
         return $this->serviceSource;
     }
 }

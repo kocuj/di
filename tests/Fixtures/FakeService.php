@@ -31,7 +31,6 @@ class FakeService
      */
     public function __construct(...$values)
     {
-        // remember arguments
         $this->values = $values;
     }
 
@@ -44,11 +43,10 @@ class FakeService
      */
     public function getValue(int $id)
     {
-        // check if value exists
         if (!isset($this->values[$id])) {
             throw new \Exception(sprintf('Value with identifier "%s" does not exist', $id));
         }
-        // exit
+
         return $this->values[$id];
     }
 }

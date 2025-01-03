@@ -57,7 +57,6 @@ class Shared implements ServiceInterface
         string $id,
         $serviceSource
     ) {
-        // remember arguments
         $this->serviceSourceResolver = $serviceSourceResolver;
         $this->container = $container;
         $this->id = $id;
@@ -69,13 +68,12 @@ class Shared implements ServiceInterface
      */
     public function getService(): object
     {
-        // optionally use shared object
         if (!is_null($this->serviceObject)) {
             return $this->serviceObject;
         }
-        // execute service constructor
+
         $this->serviceObject = $this->serviceSourceResolver->resolve($this->container, $this->id, $this->serviceSource);
-        // exit
+
         return $this->serviceObject;
     }
 }

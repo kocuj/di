@@ -74,9 +74,7 @@ class SharedTest extends TestCase
 
         // ---- ASSERT ----
 
-        // check if service is the same
         $this->assertSame($returnedService, $fakeService);
-        // check if service is the same when second time it will be get
         $this->assertSame($returnedService2, $fakeService);
     }
 }

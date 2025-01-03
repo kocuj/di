@@ -108,7 +108,6 @@ class ContainerTest extends TestCase
 
         // ---- ASSERT ----
 
-        // check if containers are not the same
         $this->assertNotSame($clonedContainer, $container);
         $this->assertEquals($clonedContainer->count(), $container->count());
         $this->assertEquals(count($clonedContainer), count($container));
@@ -123,7 +122,6 @@ class ContainerTest extends TestCase
      */
     public function cloneProvider(): array
     {
-        // exit
         return [
             [
                 new ServiceType(ServiceType::STANDARD),
@@ -176,11 +174,8 @@ class ContainerTest extends TestCase
 
         // ---- ASSERT ----
 
-        // check if the same container has been returned by this method
         $this->assertSame($container, $objectReturnedBySet);
-        // check if service has been added
         $this->assertSame($this->fakeService, $returnedService);
-        // check if service has been added
         $this->assertSame($this->fakeService, $returnedServiceByDecoratedId);
     }
 
@@ -217,7 +212,6 @@ class ContainerTest extends TestCase
 
         // ---- ASSERT ----
 
-        // check if service has the correct type
         $this->assertTrue($container->checkType($serviceId, $serviceType));
         $this->assertTrue($container->checkType($decoratedServiceId, $serviceType));
     }
@@ -254,9 +248,7 @@ class ContainerTest extends TestCase
 
         // ---- ASSERT ----
 
-        // check if there is a service in container
         $this->assertTrue($container->has($serviceId));
-        // check if there is a service with decorated identifier in container
         $this->assertTrue($container->has($decoratedServiceId));
     }
 
@@ -268,7 +260,6 @@ class ContainerTest extends TestCase
      */
     public function addCheckTypeHasProvider(): array
     {
-        // exit
         return [
             [
                 new ServiceType(ServiceType::STANDARD),
@@ -360,12 +351,10 @@ class ContainerTest extends TestCase
 
         // ---- ASSERT ----
 
-        // check services count
         $this->assertEquals(0, $containers[0]->count());
         $this->assertEquals(0, count($containers[0]));
 
         for ($i = 1; $i < $maxIterations; $i++) {
-            // check services count
             $this->assertEquals($i, $containers[$i]->count());
             $this->assertEquals($i, count($containers[$i]));
         }
@@ -410,9 +399,7 @@ class ContainerTest extends TestCase
 
         // ---- ASSERT ----
 
-        // check if the same container has been returned by this method
         $this->assertSame($container, $objectReturnedBySet);
-        // check if the same service has been returned by this method
         $this->assertSame($this->fakeService, $returnedService);
     }
 
@@ -424,7 +411,6 @@ class ContainerTest extends TestCase
      */
     public function callMethodProvider(): array
     {
-        // exit
         return [
             [
                 new ServiceType(ServiceType::STANDARD),
@@ -505,9 +491,7 @@ class ContainerTest extends TestCase
 
         // ---- ASSERT ----
 
-        // check if the same container has been returned by this method
         $this->assertSame($container, $objectReturnedBySet);
-        // check if the same service has been returned by this method
         $this->assertSame($this->fakeService, $returnedService);
     }
 
@@ -519,7 +503,6 @@ class ContainerTest extends TestCase
      */
     public function getMethodProvider(): array
     {
-        // exit
         return [
             [
                 new ServiceType(ServiceType::STANDARD),
@@ -703,7 +686,6 @@ class ContainerTest extends TestCase
      */
     public function servicesTypesProvider(): array
     {
-        // exit
         return [
             [
                 new ServiceType(ServiceType::STANDARD)

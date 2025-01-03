@@ -33,7 +33,6 @@ class AnonymousFunction implements ServiceSourceInterface
      */
     public function __construct($serviceSource)
     {
-        // remember arguments
         $this->serviceSource = $serviceSource;
     }
 
@@ -51,13 +50,12 @@ class AnonymousFunction implements ServiceSourceInterface
             throw new Exception('Service source is not supported by this class');
         }
 
-        // call anonymous function
         $output = ($this->serviceSource)();
-        // check if anonymous function has returned an object
+
         if (!is_object($output)) {
             throw new Exception('An anonymous function has not returned an object');
         }
-        // exit
+
         return $output;
     }
 }

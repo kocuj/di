@@ -15,18 +15,16 @@ use Kocuj\Di\Examples\Lib\InputService;
 use Kocuj\Di\Examples\Lib\Main;
 use Kocuj\Di\Examples\Lib\OutputService;
 
-// information about example
 echo 'This is an example of adding standard service by using object instance.' . PHP_EOL;
 echo PHP_EOL;
-// autoloading
+
 require __DIR__ . '/../../../vendor/autoload.php';
-// initialize DI container
+
 $di = new Di();
-// get DI container
 $container = $di->getDefault();
-// set DI services
+
 $container->addShared('mainShared', new Main(new InputService(), new OutputService()));
-// execute
+
 echo PHP_EOL;
 echo 'SHARED:' . PHP_EOL;
 echo PHP_EOL;

@@ -24,7 +24,6 @@ class OutputService implements OutputServiceInterface
      */
     public function __construct()
     {
-        // display information
         echo 'OutputService created' . PHP_EOL;
     }
 
@@ -33,7 +32,6 @@ class OutputService implements OutputServiceInterface
      */
     public function displayOutput(string $output): void
     {
-        // display output
         echo 'Test output: ';
         echo $output;
         echo PHP_EOL;

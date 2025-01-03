@@ -15,18 +15,16 @@ use Kocuj\Di\Examples\Lib\InputService;
 use Kocuj\Di\Examples\Lib\Main;
 use Kocuj\Di\Examples\Lib\OutputService;
 
-// information about example
 echo 'This is an example of adding services to different containers.' . PHP_EOL;
 echo PHP_EOL;
-// autoloading
+
 require __DIR__ . '/../../../vendor/autoload.php';
-// initialize DI container
 $di = new Di();
-// get DI containers
+
 $containers = [];
 $containers[] = $di->getDefault();
 $containers[] = $di->create();
-// set DI services
+
 foreach ($containers as $container) {
     $container->addStandard('input', InputService::class);
     $container->addStandard('output', OutputService::class);
@@ -35,7 +33,7 @@ foreach ($containers as $container) {
         \Kocuj\Di\ClassArgument::createForService('output'),
     ]));
 }
-// execute
+
 foreach ($containers as $id => $container) {
     echo sprintf('CONTAINER %d:', $id + 1) . PHP_EOL;
     echo PHP_EOL;

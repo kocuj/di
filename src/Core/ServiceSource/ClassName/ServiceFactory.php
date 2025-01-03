@@ -25,7 +25,6 @@ class ServiceFactory implements ServiceFactoryInterface
      */
     public function create(string $className, array $arguments): object
     {
-        // exit
         return new $className(...$arguments);
     }
 }

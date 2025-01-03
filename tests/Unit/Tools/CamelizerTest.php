@@ -31,14 +31,11 @@ class CamelizerTest extends TestCase
     {
         // ---- ACT ----
 
-        // initialize Camelizer
         $camelizer = new Camelizer();
-        // camelize text
         $outputText = $camelizer->camelize($inputText);
 
         // ---- ASSERT ----
 
-        // check if output text is the same as expected
         $this->assertEquals($expectedOutputText, $outputText);
     }
 
@@ -47,7 +44,6 @@ class CamelizerTest extends TestCase
      */
     public function camelizeProvider(): array
     {
-        // exit
         return [
             [
                 'thisService',
@@ -93,14 +89,11 @@ class CamelizerTest extends TestCase
     {
         // ---- ACT ----
 
-        // initialize Camelizer
         $camelizer = new Camelizer();
-        // camelize text
         $outputText = $camelizer->camelizeWithUpperFirstChar($inputText);
 
         // ---- ASSERT ----
 
-        // check if output text is the same as expected
         $this->assertEquals($expectedOutputText, $outputText);
     }
 
@@ -109,7 +102,6 @@ class CamelizerTest extends TestCase
      */
     public function camelizeWithUpperFirstCharProvider(): array
     {
-        // exit
         return [
             [
                 'thisService',

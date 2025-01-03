@@ -52,7 +52,6 @@ class Standard implements ServiceInterface
         string $id,
         $serviceSource
     ) {
-        // remember arguments
         $this->serviceSourceResolver = $serviceSourceResolver;
         $this->container = $container;
         $this->id = $id;

@@ -24,7 +24,6 @@ class InputService implements InputServiceInterface
      */
     public function __construct()
     {
-        // display information
         echo 'InputService created' . PHP_EOL;
     }
 
@@ -33,7 +32,6 @@ class InputService implements InputServiceInterface
      */
     public function getInput(): string
     {
-        // exit
         return 'This is test of input in example class.';
     }
 }

@@ -73,7 +73,6 @@ class StandardTest extends TestCase
 
         // ---- ASSERT ----
 
-        // check if service is the same
         $this->assertSame($returnedService, $fakeService);
     }
 }

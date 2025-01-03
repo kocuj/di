@@ -48,7 +48,6 @@ class ServiceSourceFactory implements ServiceSourceFactoryInterface
      */
     public function create(ServiceSourceType $serviceSourceType, ContainerInterface $container, string $id, $serviceSource): ServiceSourceInterface
     {
-        // exit
         switch ($serviceSourceType->getValue()) {
             case ServiceSourceType::ANONYMOUS_FUNCTION:
                 return new AnonymousFunction($serviceSource);

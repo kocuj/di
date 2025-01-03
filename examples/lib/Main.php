@@ -37,10 +37,9 @@ class Main
      */
     public function __construct(InputServiceInterface $inputService, OutputServiceInterface $outputService)
     {
-        // remember arguments
         $this->inputService = $inputService;
         $this->outputService = $outputService;
-        // display information
+
         echo 'Main created' . PHP_EOL;
     }
 
@@ -49,7 +48,6 @@ class Main
      */
     public function display(): void
     {
-        // display output
         $this->outputService->displayOutput($this->inputService->getInput());
     }
 }
