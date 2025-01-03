@@ -11,9 +11,6 @@ trait CheckTypeInCollectionTrait {
     protected ?string $requiredClass = null;
 
     private function checkElementsTypesInArray($array, string $exceptionText): void {
-        // TODO: check it $array is array or object !!!!
-        // ...
-
         if (
             !is_array($array)
             && !($array instanceof ArrayObject)

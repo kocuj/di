@@ -12,9 +12,6 @@ abstract class AbstractCollectionImmutable extends ArrayObject implements Collec
     use CheckTypeInCollectionTrait;
 
     public function __construct($array = [], int $flags = 0, string $iteratorClass = ArrayIterator::class) {
-        // TODO: check it $array is array or object !!!!
-        // ...
-
         $this->checkElementsTypesInArray($array, 'Wrong type in array from which immutable collection should be created');
 
         parent::__construct($array, $flags, $iteratorClass);
@@ -29,9 +26,6 @@ abstract class AbstractCollectionImmutable extends ArrayObject implements Collec
     }
 
     public function exchangeArray($array): array {
-        // TODO: check it $array is array or object !!!!
-        // ...
-
         throw new Exception('Method is not supported');
     }
 

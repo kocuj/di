@@ -11,9 +11,6 @@ abstract class AbstractCollection extends ArrayObject implements CollectionInter
     use CheckTypeInCollectionTrait;
 
     public function __construct($array = [], int $flags = 0, string $iteratorClass = ArrayIterator::class) {
-        // TODO: check it $array is array or object !!!!
-        // ...
-
         $this->checkElementsTypesInArray($array, 'Wrong type in array from which collection should be created');
 
         parent::__construct($array, $flags, $iteratorClass);
@@ -30,9 +27,6 @@ abstract class AbstractCollection extends ArrayObject implements CollectionInter
     }
 
     public function exchangeArray($array): array {
-        // TODO: check it $array is array or object !!!!
-        // ...
-
         $this->checkElementsTypesInArray($array, 'Wrong type in array for which collection tried to exchange');
 
         return parent::exchangeArray($array);
