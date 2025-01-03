@@ -8,16 +8,24 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
+declare(strict_types=1);
+
 namespace Kocuj\Di;
 
-use Kocuj\Di\Container\Container;
-use Kocuj\Di\Container\ContainerInterface;
-use Kocuj\Di\Service\ServiceFactory;
-use Kocuj\Di\Service\ServiceFactoryInterface;
-use Kocuj\Di\ServiceIdDecorator\ServiceIdDecorator;
-use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
-use Kocuj\Di\ServiceSource\ServiceSourceFactory;
-use Kocuj\Di\Tools\Camelizer\Camelizer;
+use Kocuj\Di\Core\Container\Container;
+use Kocuj\Di\Core\Container\ContainerInterface;
+use Kocuj\Di\Core\Service\ServiceFactory;
+use Kocuj\Di\Core\Service\ServiceFactoryInterface;
+use Kocuj\Di\Core\ServiceIdDecorator\ServiceIdDecorator;
+use Kocuj\Di\Core\ServiceIdDecorator\ServiceIdDecoratorInterface;
+use Kocuj\Di\Core\ServiceSource\ClassName\ClassArgumentParser\ClassArgumentParserFactory;
+use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassDefinitionFactory;
+use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassDefinitionFactoryInterface;
+use Kocuj\Di\Core\ServiceSource\ClassName\ServiceFactory as CoreServiceSourceClassNameServiceFactory;
+use Kocuj\Di\Core\ServiceSource\ServiceSourceFactory;
+use Kocuj\Di\Common\Camelizer\Camelizer;
+use Kocuj\Di\Core\ServiceSource\ServiceSourceResolver;
+use Metadata\Tests\Driver\Fixture\C\SubDir\C;
 
 /**
  * Dependency injection containers library
@@ -36,6 +44,8 @@ class Di
      */
     private ServiceFactoryInterface $serviceFactory;
 
+    private ClassDefinitionFactoryInterface $classDefinitionFactory;
+
     /**
      * Default dependency injection container for services
      */
@@ -50,8 +60,10 @@ class Di
     {
         // initialize
         $this->serviceIdDecorator = new ServiceIdDecorator(new Camelizer());
-        $serviceSourceFactory = new ServiceSourceFactory();
-        $this->serviceFactory = new ServiceFactory($serviceSourceFactory);
+        $serviceSourceFactory = new ServiceSourceFactory(new CoreServiceSourceClassNameServiceFactory(), new ClassDefinitionFactory(), new ClassArgumentParserFactory());
+        $serviceSourceResolver = new ServiceSourceResolver($serviceSourceFactory);
+        $this->serviceFactory = new ServiceFactory($serviceSourceResolver);
+        $this->classDefinitionFactory = new ClassDefinitionFactory();
         // create default container
         $this->defaultContainer = $this->create();
     }
@@ -65,7 +77,7 @@ class Di
     public function create(): ContainerInterface
     {
         // exit
-        return new Container($this->serviceIdDecorator, $this->serviceFactory);
+        return new Container($this->serviceIdDecorator, $this->serviceFactory, $this->classDefinitionFactory);
     }
 
     /**

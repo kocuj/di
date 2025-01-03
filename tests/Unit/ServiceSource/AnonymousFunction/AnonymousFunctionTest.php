@@ -8,10 +8,12 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
+declare(strict_types=1);
+
 namespace Kocuj\Di\Tests\Unit\ServiceSource\AnonymousFunction;
 
-use Kocuj\Di\ServiceSource\AnonymousFunction\AnonymousFunction;
-use Kocuj\Di\ServiceSource\Exception;
+use Kocuj\Di\Core\ServiceSource\AnonymousFunction\AnonymousFunction;
+use Kocuj\Di\Core\ServiceSource\Exception;
 use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 

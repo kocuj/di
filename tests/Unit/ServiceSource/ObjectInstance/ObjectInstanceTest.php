@@ -8,10 +8,12 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
+declare(strict_types=1);
+
 namespace Kocuj\Di\Tests\Unit\ServiceSource\ObjectInstance;
 
-use Kocuj\Di\ServiceSource\Exception;
-use Kocuj\Di\ServiceSource\ObjectInstance\ObjectInstance;
+use Kocuj\Di\Core\ServiceSource\Exception;
+use Kocuj\Di\Core\ServiceSource\ObjectInstance\ObjectInstance;
 use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 

@@ -28,25 +28,12 @@ $containers[] = $di->getDefault();
 $containers[] = $di->create();
 // set DI services
 foreach ($containers as $container) {
-    $container->addShared('input', [
-        'className' => InputService::class,
-    ]);
-    $container->addShared('output', [
-        'className' => OutputService::class,
-    ]);
-    $container->addShared('mainShared', [
-        'className' => Main::class,
-        'arguments' => [
-            [
-                'type' => 'service',
-                'value' => 'input'
-            ],
-            [
-                'type' => 'service',
-                'value' => 'output'
-            ],
-        ],
-    ]);
+    $container->addStandard('input', InputService::class);
+    $container->addStandard('output', OutputService::class);
+    $container->addShared('mainShared', \Kocuj\Di\ClassDefinitionFactory::createWithArgumentsArray(Main::class, [
+        \Kocuj\Di\ClassArgument::createForService('input'),
+        \Kocuj\Di\ClassArgument::createForService('output'),
+    ]));
 }
 // execute
 foreach ($containers as $id => $container) {

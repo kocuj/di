@@ -8,10 +8,12 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
+declare(strict_types=1);
+
 namespace Kocuj\Di\Tests\Unit\ServiceSource\ClassName\ArgumentParser\Value;
 
-use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\Value\Value;
-use Kocuj\Di\ServiceSource\Exception;
+use Kocuj\Di\Core\ServiceSource\____ClassName\ArgumentParser\Value\Value;
+use Kocuj\Di\Core\ServiceSource\Exception;
 use PHPUnit\Framework\TestCase;
 
 /**

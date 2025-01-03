@@ -8,14 +8,16 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
+declare(strict_types=1);
+
 namespace Kocuj\Di\Tests\Unit\ServiceSource\ClassName;
 
-use Kocuj\Di\Container\ContainerInterface;
-use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserFactoryInterface;
-use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\ArgumentParserInterface;
-use Kocuj\Di\ServiceSource\ClassName\ClassName;
-use Kocuj\Di\ServiceSource\ClassName\ServiceFactoryInterface;
-use Kocuj\Di\ServiceSource\Exception;
+use Kocuj\Di\Core\Container\ContainerInterface;
+use Kocuj\Di\Core\ServiceSource\____ClassName\ArgumentParser\ArgumentParserFactoryInterface;
+use Kocuj\Di\Core\ServiceSource\____ClassName\ArgumentParser\ArgumentParserInterface;
+use Kocuj\Di\Core\ServiceSource\____ClassName\ClassName;
+use Kocuj\Di\Core\ServiceSource\____ClassName\ServiceFactoryInterface;
+use Kocuj\Di\Core\ServiceSource\Exception;
 use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\MethodProphecy;

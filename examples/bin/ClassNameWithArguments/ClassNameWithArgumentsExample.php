@@ -25,38 +25,16 @@ $di = new Di();
 // get DI container
 $container = $di->getDefault();
 // set DI services
-$container->addStandard('input', [
-    'className' => InputService::class,
-]);
-$container->addStandard('output', [
-    'className' => OutputService::class,
-]);
-$container->addStandard('mainStandard', [
-    'className' => Main::class,
-    'arguments' => [
-        [
-            'type' => 'service',
-            'value' => 'input'
-        ],
-        [
-            'type' => 'service',
-            'value' => 'output'
-        ],
-    ],
-]);
-$container->addShared('mainShared', [
-    'className' => Main::class,
-    'arguments' => [
-        [
-            'type' => 'service',
-            'value' => 'input'
-        ],
-        [
-            'type' => 'service',
-            'value' => 'output'
-        ],
-    ],
-]);
+$container->addStandard('input', InputService::class);
+$container->addStandard('output', OutputService::class);
+$container->addStandard('mainStandard', \Kocuj\Di\ClassDefinitionFactory::createWithArgumentsArray(Main::class, [
+    \Kocuj\Di\ClassArgument::createForService('input'),
+    \Kocuj\Di\ClassArgument::createForService('output'),
+]));
+$container->addShared('mainShared', \Kocuj\Di\ClassDefinitionFactory::createWithArgumentsArray(Main::class, [
+    \Kocuj\Di\ClassArgument::createForService('input'),
+    \Kocuj\Di\ClassArgument::createForService('output'),
+]));
 // execute
 echo 'STANDARD:' . PHP_EOL;
 echo PHP_EOL;

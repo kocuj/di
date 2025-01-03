@@ -8,12 +8,14 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
+declare(strict_types=1);
+
 namespace Kocuj\Di\Tests\Unit\ServiceSource\ClassName\ArgumentParser\Service;
 
-use Kocuj\Di\Container\ContainerInterface;
-use Kocuj\Di\Service\ServiceInterface;
-use Kocuj\Di\ServiceSource\ClassName\ArgumentParser\Service\Service;
-use Kocuj\Di\ServiceSource\Exception;
+use Kocuj\Di\Core\Container\ContainerInterface;
+use Kocuj\Di\Core\Service\ServiceInterface;
+use Kocuj\Di\Core\ServiceSource\____ClassName\ArgumentParser\Service\Service;
+use Kocuj\Di\Core\ServiceSource\Exception;
 use PHPUnit\Framework\TestCase;
 
 /**

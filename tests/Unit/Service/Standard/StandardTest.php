@@ -8,12 +8,14 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
+declare(strict_types=1);
+
 namespace Kocuj\Di\Tests\Unit\Service\Standard;
 
-use Kocuj\Di\Container\ContainerInterface;
-use Kocuj\Di\Service\Standard\Standard;
-use Kocuj\Di\ServiceSource\ServiceSourceFactoryInterface;
-use Kocuj\Di\ServiceSource\ServiceSourceInterface;
+use Kocuj\Di\Core\Container\ContainerInterface;
+use Kocuj\Di\Core\Service\Standard\Standard;
+use Kocuj\Di\Core\ServiceSource\ServiceSourceFactoryInterface;
+use Kocuj\Di\Core\ServiceSource\ServiceSourceInterface;
 use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\MethodProphecy;

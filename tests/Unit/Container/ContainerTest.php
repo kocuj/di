@@ -8,16 +8,18 @@
  * @copyright Copyright (c) 2017-2020 kocuj.pl
  */
 
+declare(strict_types=1);
+
 namespace Kocuj\Di\Tests\Unit\Container;
 
-use Kocuj\Di\Container\Container;
-use Kocuj\Di\Container\ContainerInterface;
-use Kocuj\Di\Container\Exception;
-use Kocuj\Di\Container\NotFoundException;
-use Kocuj\Di\Service\ServiceFactoryInterface;
-use Kocuj\Di\Service\ServiceInterface;
-use Kocuj\Di\Service\ServiceType;
-use Kocuj\Di\ServiceIdDecorator\ServiceIdDecoratorInterface;
+use Kocuj\Di\Core\Container\Container;
+use Kocuj\Di\Core\Container\ContainerInterface;
+use Kocuj\Di\Core\Container\Exception;
+use Kocuj\Di\Core\Container\NotFoundException;
+use Kocuj\Di\Core\Service\ServiceFactoryInterface;
+use Kocuj\Di\Core\Service\ServiceInterface;
+use Kocuj\Di\Core\Service\ServiceType;
+use Kocuj\Di\Core\ServiceIdDecorator\ServiceIdDecoratorInterface;
 use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
@@ -580,7 +582,7 @@ class ContainerTest extends TestCase
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
         $serviceFactoryReveal = $this->serviceFactory->reveal();
 
-        $this->expectException(\Kocuj\Di\Container\Exception::class);
+        $this->expectException(\Kocuj\Di\Core\Container\Exception::class);
 
         // ---- ACT ----
 
@@ -617,7 +619,7 @@ class ContainerTest extends TestCase
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
         $serviceFactoryReveal = $this->serviceFactory->reveal();
 
-        $this->expectException(\Kocuj\Di\Container\NotFoundException::class);
+        $this->expectException(\Kocuj\Di\Core\Container\NotFoundException::class);
 
         // ---- ACT ----
 
@@ -678,7 +680,7 @@ class ContainerTest extends TestCase
         /** @var ServiceFactoryInterface $serviceFactoryReveal */
         $serviceFactoryReveal = $this->serviceFactory->reveal();
 
-        $this->expectException(\Kocuj\Di\Container\Exception::class);
+        $this->expectException(\Kocuj\Di\Core\Container\Exception::class);
 
         // ---- ACT ----
 

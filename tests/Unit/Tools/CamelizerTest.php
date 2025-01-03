@@ -8,6 +8,8 @@
  * @copyright Copyright (c) 2017-2024 kocuj.pl
  */
 
+declare(strict_types=1);
+
 namespace Kocuj\Di\Tests\Unit\Tools;
 
 use Kocuj\Di\Tools\Camelizer\Camelizer;
