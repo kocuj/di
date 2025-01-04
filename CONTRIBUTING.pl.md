@@ -6,7 +6,7 @@ Akceptuję wkład w projekt przy użyciu próśb o pociągnięcie danych ("pull 
 
 ## Prośby o pociągnięcie danych ("pull requests")
 
-- **[Standard kodowania PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - Najprostszym sposobem użycia tej konwencji jest zainstalowanie [PHP Code Sniffer](http://pear.php.net/package/PHP_CodeSniffer).
+- **[Standard kodowania PSR-12](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-12-extended-coding-style-guide.md)** - Najprostszym sposobem użycia tej konwencji jest zainstalowanie [PHP Code Sniffer](http://pear.php.net/package/PHP_CodeSniffer).
 
 - **Dodaj testy!** - Twoje poprawki nie zostaną zaakceptowane, jeżeli nie będą posiadały testów.
 
