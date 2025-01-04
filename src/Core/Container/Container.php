@@ -188,7 +188,7 @@ class Container implements ContainerInterface, Countable
         if (!empty($arguments)) {
             $serviceSource = $this->classDefinitionFactory->create($serviceSource, new ClassArgumentsCollectionImmutable($arguments));
 
-            trigger_error('Argument $arguments for ' . $deprecatedMethod . ' method is deprecated and will be removed in version 2.1.0; please use second argument $serviceSource instead based on documentation', E_USER_DEPRECATED);
+            trigger_error('Argument $arguments for ' . $deprecatedMethod . ' method is deprecated and will be removed in version 3.0.0; please use second argument $serviceSource instead based on documentation', E_USER_DEPRECATED);
         }
 
         return $serviceSource;
