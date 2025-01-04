@@ -35,7 +35,7 @@ class AnonymousFunction implements ServiceSourceInterface
     }
 
     /**
-     * @param mixed $serviceSource
+     * {@inheritdoc}
      */
     public function supports($serviceSource): bool {
         return $serviceSource instanceof Closure;

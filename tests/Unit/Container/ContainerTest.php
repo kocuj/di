@@ -601,6 +601,9 @@ class ContainerTest extends TestCase
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function setUp(): void
     {
         $this->serviceIdDecorator = $this->prophesize(ServiceIdDecoratorInterface::class);

@@ -10,6 +10,9 @@ use ArrayObject;
 abstract class AbstractCollection extends ArrayObject implements CollectionInterface {
     use CheckTypeInCollectionTrait;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct($array = [], int $flags = 0, string $iteratorClass = ArrayIterator::class) {
         $this->checkElementsTypesInArray($array, 'Wrong type in array from which collection should be created');
 
@@ -20,18 +23,27 @@ abstract class AbstractCollection extends ArrayObject implements CollectionInter
         return new static($collectionImmutable);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function append($value): void {
         $this->checkTypeForElement($value, 'Wrong type for append to collection');
 
         parent::append($value);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function exchangeArray($array): array {
         $this->checkElementsTypesInArray($array, 'Wrong type in array for which collection tried to exchange');
 
         return parent::exchangeArray($array);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function offsetSet($offset, $value): void {
         $this->checkTypeForElement($value, 'Wrong type for set in collection');
 
