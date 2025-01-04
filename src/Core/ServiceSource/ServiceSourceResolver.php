@@ -15,6 +15,9 @@ namespace Kocuj\Di\Core\ServiceSource;
 use Kocuj\Di\Core\Container\ContainerInterface;
 use Kocuj\Di\Core\ServiceSource\ClassName\ServiceFactoryInterface;
 
+/**
+ * @package Kocuj\Di
+ */
 class ServiceSourceResolver implements ServiceSourceResolverInterface
 {
     private ServiceSourceFactoryInterface $serviceSourceFactory;

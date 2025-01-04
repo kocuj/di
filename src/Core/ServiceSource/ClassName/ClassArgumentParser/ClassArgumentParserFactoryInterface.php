@@ -16,7 +16,7 @@ use Kocuj\Di\Core\Container\ContainerInterface;
 use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument\ClassArgument;
 
 /**
- * @package Kocuj\Di\ServiceSource\ClassName\ArgumentParser
+ * @package Kocuj\Di
  */
 interface ClassArgumentParserFactoryInterface
 {

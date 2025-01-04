@@ -18,7 +18,7 @@ use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @package Kocuj\Di\Tests\ServiceSource\AnonymousFunction
+ * @package Kocuj\Di\Tests
  */
 class AnonymousFunctionTest extends TestCase
 {

@@ -15,7 +15,7 @@ namespace Kocuj\Di\Core\ServiceSource;
 use Kocuj\Di\Core\Container\ContainerInterface;
 
 /**
- * @package Kocuj\Di\ServiceSource
+ * @package Kocuj\Di
  */
 interface ServiceSourceFactoryInterface
 {

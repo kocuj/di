@@ -14,6 +14,9 @@ namespace Kocuj\Di\Core\ServiceSource;
 
 use MyCLabs\Enum\Enum;
 
+/**
+ * @package Kocuj\Di
+ */
 class ServiceSourceType extends Enum
 {
     public const ANONYMOUS_FUNCTION = 0;

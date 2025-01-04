@@ -15,6 +15,10 @@ use Kocuj\Di\Examples\Lib\InputService;
 use Kocuj\Di\Examples\Lib\Main;
 use Kocuj\Di\Examples\Lib\OutputService;
 
+/**
+ * @package Kocuj\Di\Examples
+ */
+
 echo 'This is an example of adding services to different containers.' . PHP_EOL;
 echo PHP_EOL;
 

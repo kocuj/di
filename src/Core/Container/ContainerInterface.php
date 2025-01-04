@@ -15,7 +15,7 @@ namespace Kocuj\Di\Core\Container;
 use Kocuj\Di\Core\Service\ServiceType;
 
 /**
- * @package Kocuj\Di\Container
+ * @package Kocuj\Di
  */
 interface ContainerInterface extends \Psr\Container\ContainerInterface
 {

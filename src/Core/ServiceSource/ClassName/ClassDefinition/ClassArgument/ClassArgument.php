@@ -15,7 +15,7 @@ namespace Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument;
 use Kocuj\Di\Core\ServiceSource\Exception;
 
 /**
- * @package Kocuj\Di\ServiceSource\ClassData\ClassDefinition
+ * @package Kocuj\Di
  */
 class ClassArgument
 {

@@ -16,7 +16,7 @@ use Kocuj\Di\Tools\Camelizer\Camelizer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @package Kocuj\Di\Tests\Tools
+ * @package Kocuj\Di\Tests
  */
 class CamelizerTest extends TestCase
 {

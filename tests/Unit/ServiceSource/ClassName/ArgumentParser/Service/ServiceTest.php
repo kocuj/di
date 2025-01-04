@@ -19,7 +19,7 @@ use Kocuj\Di\Core\ServiceSource\Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @package Kocuj\Di\Tests\ServiceSource\ClassName\ArgumentParser\Service
+ * @package Kocuj\Di\Tests
  */
 class ServiceTest extends TestCase
 {

@@ -13,7 +13,7 @@ declare(strict_types=1);
 namespace Kocuj\Di\Core\ServiceIdDecorator;
 
 /**
- * @package Kocuj\Di\ServiceIdDecorator
+ * @package Kocuj\Di
  */
 interface ServiceIdDecoratorInterface
 {

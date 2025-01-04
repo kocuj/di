@@ -18,7 +18,7 @@ use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument\ClassArg
 use Kocuj\Di\Core\ServiceSource\Exception;
 
 /**
- * @package Kocuj\Di\ServiceSource\ClassName\ArgumentParser
+ * @package Kocuj\Di
  */
 class ValueClassArgumentParser implements ClassArgumentParserInterface
 {

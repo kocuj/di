@@ -14,6 +14,9 @@ namespace Kocuj\Di;
 
 use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument\ClassArgument as CoreServiceSourceClassNameClassArgument;
 
+/**
+ * @package Kocuj\Di
+ */
 class ClassArgument extends CoreServiceSourceClassNameClassArgument
 {
 }

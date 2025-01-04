@@ -23,7 +23,7 @@ use Kocuj\Di\Core\ServiceSource\ClassName\ServiceFactoryInterface;
 use Kocuj\Di\Core\ServiceSource\ObjectInstance\ObjectInstance;
 
 /**
- * @package Kocuj\Di\ServiceSource
+ * @package Kocuj\Di
  */
 class ServiceSourceFactory implements ServiceSourceFactoryInterface
 {

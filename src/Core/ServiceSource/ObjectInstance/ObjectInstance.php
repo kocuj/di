@@ -17,7 +17,7 @@ use Kocuj\Di\Core\ServiceSource\Exception;
 use Kocuj\Di\Core\ServiceSource\ServiceSourceInterface;
 
 /**
- * @package Kocuj\Di\ServiceSource\ObjectInstance
+ * @package Kocuj\Di
  */
 class ObjectInstance implements ServiceSourceInterface
 {

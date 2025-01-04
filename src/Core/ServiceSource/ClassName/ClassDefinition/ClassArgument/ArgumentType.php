@@ -14,6 +14,9 @@ namespace Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument;
 
 use MyCLabs\Enum\Enum;
 
+/**
+ * @package Kocuj\Di
+ */
 class ArgumentType extends Enum
 {
     public const SERVICE = 0;

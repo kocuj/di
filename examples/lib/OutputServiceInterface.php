@@ -13,16 +13,9 @@ declare(strict_types=1);
 namespace Kocuj\Di\Examples\Lib;
 
 /**
- * Output service interface
- *
- * @package Kocuj\Di\Examples\Lib
+ * @package Kocuj\Di\Examples
  */
 interface OutputServiceInterface
 {
-    /**
-     * Display output string
-     *
-     * @param string $output String to display
-     */
     public function displayOutput(string $output): void;
 }

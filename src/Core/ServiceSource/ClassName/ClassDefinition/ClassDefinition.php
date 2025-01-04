@@ -15,7 +15,7 @@ namespace Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition;
 use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument\ClassArgumentsCollectionImmutable;
 
 /**
- * @package Kocuj\Di\ServiceSource\ClassData\ClassDefinition
+ * @package Kocuj\Di
  */
 class ClassDefinition
 {

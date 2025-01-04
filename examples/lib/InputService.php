@@ -13,15 +13,10 @@ declare(strict_types=1);
 namespace Kocuj\Di\Examples\Lib;
 
 /**
- * Input service
- *
- * @package Kocuj\Di\Examples\Lib
+ * @package Kocuj\Di\Examples
  */
 class InputService implements InputServiceInterface
 {
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         echo 'InputService created' . PHP_EOL;

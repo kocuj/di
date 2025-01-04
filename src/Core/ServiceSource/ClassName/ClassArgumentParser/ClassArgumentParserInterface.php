@@ -13,9 +13,7 @@ declare(strict_types=1);
 namespace Kocuj\Di\Core\ServiceSource\ClassName\ClassArgumentParser;
 
 /**
- * Service argument parser interface
- *
- * @package Kocuj\Di\ServiceSource\ClassName\ArgumentParser
+ * @package Kocuj\Di
  */
 interface ClassArgumentParserInterface
 {

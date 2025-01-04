@@ -19,7 +19,7 @@ use Kocuj\Di\Core\ServiceSource\ServiceSourceFactoryInterface;
 use Kocuj\Di\Core\ServiceSource\ServiceSourceResolverInterface;
 
 /**
- * @package Kocuj\Di\Service
+ * @package Kocuj\Di
  */
 class ServiceFactory implements ServiceFactoryInterface
 {

@@ -13,7 +13,7 @@ declare(strict_types=1);
 namespace Kocuj\Di\Common\Camelizer;
 
 /**
- * @package Kocuj\Di\Common\Camelizer
+ * @package Kocuj\Di
  */
 interface CamelizerInterface
 {

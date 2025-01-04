@@ -20,7 +20,7 @@ use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument\ClassArg
 use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassDefinitionFactoryInterface;
 
 /**
- * @package Kocuj\Di\Container
+ * @package Kocuj\Di
  */
 class Container implements ContainerInterface, Countable
 {

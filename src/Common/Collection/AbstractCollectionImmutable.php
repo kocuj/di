@@ -8,6 +8,9 @@ use ArrayIterator;
 use ArrayObject;
 use RuntimeException;
 
+/**
+ * @package Kocuj\Di
+ */
 abstract class AbstractCollectionImmutable extends ArrayObject implements CollectionImmutableInterface {
     use CheckTypeInCollectionTrait;
 

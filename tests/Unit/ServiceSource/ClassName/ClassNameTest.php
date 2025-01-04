@@ -24,7 +24,7 @@ use Prophecy\Prophecy\MethodProphecy;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
- * @package Kocuj\Di\Tests\ServiceSource\ClassName
+ * @package Kocuj\Di\Tests
  */
 class ClassNameTest extends TestCase
 {

@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\MethodProphecy;
 
 /**
- * @package Kocuj\Di\Tests\Service\Shared
+ * @package Kocuj\Di\Tests
  */
 class SharedTest extends TestCase
 {

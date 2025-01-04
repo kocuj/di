@@ -15,7 +15,7 @@ namespace Kocuj\Di\Core\ServiceIdDecorator;
 use Kocuj\Di\Common\Camelizer\CamelizerInterface;
 
 /**
- * @package Kocuj\Di\ServiceIdDecorator
+ * @package Kocuj\Di
  */
 class ServiceIdDecorator implements ServiceIdDecoratorInterface
 {

@@ -18,7 +18,7 @@ use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @package Kocuj\Di\Tests\ServiceSource\ObjectInstance
+ * @package Kocuj\Di\Tests
  */
 class ObjectInstanceTest extends TestCase
 {

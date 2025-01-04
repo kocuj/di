@@ -7,6 +7,9 @@ namespace Kocuj\Di\Common\Collection;
 use ArrayIterator;
 use ArrayObject;
 
+/**
+ * @package Kocuj\Di
+ */
 abstract class AbstractCollection extends ArrayObject implements CollectionInterface {
     use CheckTypeInCollectionTrait;
 

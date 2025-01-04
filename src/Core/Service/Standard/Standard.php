@@ -18,7 +18,7 @@ use Kocuj\Di\Core\ServiceSource\ServiceSourceFactoryInterface;
 use Kocuj\Di\Core\ServiceSource\ServiceSourceResolverInterface;
 
 /**
- * @package Kocuj\Di\Service\Standard
+ * @package Kocuj\Di
  */
 class Standard implements ServiceInterface
 {

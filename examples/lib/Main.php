@@ -13,28 +13,14 @@ declare(strict_types=1);
 namespace Kocuj\Di\Examples\Lib;
 
 /**
- * Main service
- *
- * @package Kocuj\Di\Examples\Lib
+ * @package Kocuj\Di\Examples
  */
 class Main
 {
-    /**
-     * Input service
-     */
     private InputServiceInterface $inputService;
 
-    /**
-     * Output service
-     */
     private OutputServiceInterface $outputService;
 
-    /**
-     * Constructor
-     *
-     * @param InputServiceInterface $inputService Input service
-     * @param OutputServiceInterface $outputService Output service
-     */
     public function __construct(InputServiceInterface $inputService, OutputServiceInterface $outputService)
     {
         $this->inputService = $inputService;
@@ -43,9 +29,6 @@ class Main
         echo 'Main created' . PHP_EOL;
     }
 
-    /**
-     * Display
-     */
     public function display(): void
     {
         $this->outputService->displayOutput($this->inputService->getInput());

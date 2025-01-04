@@ -13,15 +13,10 @@ declare(strict_types=1);
 namespace Kocuj\Di\Examples\Lib;
 
 /**
- * Output service
- *
- * @package Kocuj\Di\Examples\Lib
+ * @package Kocuj\Di\Examples
  */
 class OutputService implements OutputServiceInterface
 {
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         echo 'OutputService created' . PHP_EOL;

@@ -15,7 +15,7 @@ namespace Kocuj\Di\Core\Service;
 use MyCLabs\Enum\Enum;
 
 /**
- * @package Kocuj\Di\Service
+ * @package Kocuj\Di
  */
 class ServiceType extends Enum
 {

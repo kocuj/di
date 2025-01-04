@@ -17,7 +17,7 @@ use Kocuj\Di\Core\ServiceSource\Exception;
 use Kocuj\Di\Core\ServiceSource\ServiceSourceInterface;
 
 /**
- * @package Kocuj\Di\ServiceSource\ClassName
+ * @package Kocuj\Di
  */
 class AnonymousFunction implements ServiceSourceInterface
 {

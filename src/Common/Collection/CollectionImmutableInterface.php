@@ -9,5 +9,8 @@ use Countable;
 use IteratorAggregate;
 use Serializable;
 
+/**
+ * @package Kocuj\Di
+ */
 interface CollectionImmutableInterface extends IteratorAggregate, ArrayAccess, Serializable, Countable {
 }

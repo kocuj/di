@@ -27,7 +27,7 @@ use Prophecy\Prophecy\MethodProphecy;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
- * @package Kocuj\Di\Tests\Container
+ * @package Kocuj\Di\Tests
  */
 class ContainerTest extends TestCase
 {

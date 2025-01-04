@@ -13,7 +13,7 @@ declare(strict_types=1);
 namespace Kocuj\Di\Tests\Fixtures;
 
 /**
- * @package Kocuj\Di\TestsLib
+ * @package Kocuj\Di\Tests
  */
 class FakeService
 {

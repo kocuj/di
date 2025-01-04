@@ -13,7 +13,7 @@ declare(strict_types=1);
 namespace Kocuj\Di\Core\ServiceSource\ClassName;
 
 /**
- * @package Kocuj\Di\ServiceSource\ClassName
+ * @package Kocuj\Di
  */
 class ServiceFactory implements ServiceFactoryInterface
 {

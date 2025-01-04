@@ -14,6 +14,9 @@ namespace Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument;
 
 use Kocuj\Di\Common\Collection\AbstractCollectionImmutable;
 
+/**
+ * @package Kocuj\Di
+ */
 class ClassArgumentsCollectionImmutable extends AbstractCollectionImmutable {
     protected ?string $requiredClass = ClassArgument::class;
 }

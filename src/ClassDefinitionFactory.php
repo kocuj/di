@@ -14,6 +14,9 @@ namespace Kocuj\Di;
 
 use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassDefinitionFactory as CoreServiceSourceClassNameClassDefinitionFactory;
 
+/**
+ * @package Kocuj\Di
+ */
 class ClassDefinitionFactory extends CoreServiceSourceClassNameClassDefinitionFactory
 {
 }

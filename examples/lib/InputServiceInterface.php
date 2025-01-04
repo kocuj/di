@@ -13,16 +13,9 @@ declare(strict_types=1);
 namespace Kocuj\Di\Examples\Lib;
 
 /**
- * Input service interface
- *
- * @package Kocuj\Di\Examples\Lib
+ * @package Kocuj\Di\Examples
  */
 interface InputServiceInterface
 {
-    /**
-     * Get input
-     *
-     * @return string Input string
-     */
     public function getInput(): string;
 }

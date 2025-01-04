@@ -15,7 +15,7 @@ namespace Kocuj\Di\Core\Container;
 use Psr\Container\ContainerExceptionInterface;
 
 /**
- * @package Kocuj\Di\Container
+ * @package Kocuj\Di
  */
 class Exception extends \Exception implements ContainerExceptionInterface
 {

@@ -7,6 +7,9 @@ namespace Kocuj\Di\Common\Collection;
 use ArrayObject;
 use InvalidArgumentException;
 
+/**
+ * @package Kocuj\Di
+ */
 trait CheckTypeInCollectionTrait {
     protected ?string $requiredClass = null;
 
