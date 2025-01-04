@@ -16,5 +16,8 @@ use Kocuj\Di\Core\Container\ContainerInterface;
 
 interface ServiceSourceResolverInterface
 {
+    /**
+     * @param mixed $serviceSource
+     */
     public function resolve(ContainerInterface $container, string $id, $serviceSource): object;
 }

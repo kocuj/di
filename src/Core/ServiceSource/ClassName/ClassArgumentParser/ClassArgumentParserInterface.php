@@ -20,9 +20,7 @@ namespace Kocuj\Di\Core\ServiceSource\ClassName\ClassArgumentParser;
 interface ClassArgumentParserInterface
 {
     /**
-     * Parse service argument and return argument to service constructor
-     *
-     * @return mixed Parsed argument
+     * @return mixed
      */
     public function parse();
 }

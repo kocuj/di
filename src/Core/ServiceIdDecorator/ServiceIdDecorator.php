@@ -15,23 +15,12 @@ namespace Kocuj\Di\Core\ServiceIdDecorator;
 use Kocuj\Di\Common\Camelizer\CamelizerInterface;
 
 /**
- * Service identifier decorator
- *
  * @package Kocuj\Di\ServiceIdDecorator
  */
 class ServiceIdDecorator implements ServiceIdDecoratorInterface
 {
-    /**
-     * Camelizer object
-     */
     private CamelizerInterface $camelizer;
 
-    /**
-     * Constructor
-     *
-     * @param CamelizerInterface $camelizer Camelizer object
-     * @codeCoverageIgnore
-     */
     public function __construct(CamelizerInterface $camelizer)
     {
         $this->camelizer = $camelizer;

@@ -34,8 +34,14 @@ class ClassName implements ServiceSourceInterface
 
     private string $id;
 
+    /**
+     * @var mixed
+     */
     private $serviceSource;
 
+    /**
+     * @param mixed $serviceSource
+     */
     public function __construct(
         ServiceFactoryInterface $serviceFactory,
         ClassDefinitionFactoryInterface $classDefinitionFactory,
@@ -52,6 +58,9 @@ class ClassName implements ServiceSourceInterface
         $this->serviceSource = $serviceSource;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supports($serviceSource): bool {
         return is_string($serviceSource) || $serviceSource instanceof ClassDefinition;
     }

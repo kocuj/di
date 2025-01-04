@@ -13,16 +13,9 @@ declare(strict_types=1);
 namespace Kocuj\Di\Core\Service;
 
 /**
- * Service creator interface
- *
  * @package Kocuj\Di\Service
  */
 interface ServiceInterface
 {
-    /**
-     * Get service
-     *
-     * @return object Service object
-     */
     public function getService(): object;
 }

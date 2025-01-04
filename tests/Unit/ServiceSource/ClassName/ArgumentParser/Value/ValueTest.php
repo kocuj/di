@@ -17,15 +17,10 @@ use Kocuj\Di\Core\ServiceSource\Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for Value object
- *
  * @package Kocuj\Di\Tests\ServiceSource\ClassName\ArgumentParser\Value
  */
 class ValueTest extends TestCase
 {
-    /**
-     * Testing wrong argument
-     */
     public function testWrongArgument(): void
     {
         // ---- ARRANGE ----
@@ -42,10 +37,7 @@ class ValueTest extends TestCase
     }
 
     /**
-     * Testing parsing value as argument
-     *
      * @param mixed $value Value
-     * @throws Exception
      * @dataProvider parseValueProvider
      */
     public function testParseValue($value): void
@@ -66,11 +58,6 @@ class ValueTest extends TestCase
         $this->assertSame($parsedArg, $value);
     }
 
-    /**
-     * Provider for testing parsing value as argument
-     *
-     * @return array Data for testing parsing value as argument
-     */
     public function parseValueProvider(): array
     {
         return [

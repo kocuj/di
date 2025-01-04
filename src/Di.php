@@ -28,34 +28,18 @@ use Kocuj\Di\Core\ServiceSource\ServiceSourceResolver;
 use Metadata\Tests\Driver\Fixture\C\SubDir\C;
 
 /**
- * Dependency injection containers library
- *
  * @package Kocuj\Di
  */
 class Di
 {
-    /**
-     * Service identifier decorator
-     */
     private ServiceIdDecoratorInterface $serviceIdDecorator;
 
-    /**
-     * Service factory
-     */
     private ServiceFactoryInterface $serviceFactory;
 
     private ClassDefinitionFactoryInterface $classDefinitionFactory;
 
-    /**
-     * Default dependency injection container for services
-     */
     private ContainerInterface $defaultContainer;
 
-    /**
-     * Constructor
-     *
-     * @codeCoverageIgnore
-     */
     public function __construct()
     {
         $this->serviceIdDecorator = new ServiceIdDecorator(new Camelizer());
@@ -67,35 +51,16 @@ class Di
         $this->defaultContainer = $this->create();
     }
 
-    /**
-     * Create dependency injection container for services
-     *
-     * @return ContainerInterface New container
-     * @codeCoverageIgnore
-     */
     public function create(): ContainerInterface
     {
         return new Container($this->serviceIdDecorator, $this->serviceFactory, $this->classDefinitionFactory);
     }
 
-    /**
-     * Copy container
-     *
-     * @param ContainerInterface $fromContainer Container from which copy will be made
-     * @return ContainerInterface Copied container
-     * @codeCoverageIgnore
-     */
     public function copy(ContainerInterface $fromContainer): ContainerInterface
     {
         return clone $fromContainer;
     }
 
-    /**
-     * Get default dependency injection container for services
-     *
-     * @return ContainerInterface Default container
-     * @codeCoverageIgnore
-     */
     public function getDefault(): ContainerInterface
     {
         return $this->defaultContainer;

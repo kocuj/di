@@ -15,20 +15,12 @@ namespace Kocuj\Di\Core\Service;
 use Kocuj\Di\Core\Container\ContainerInterface;
 
 /**
- * Service factory interface
- *
  * @package Kocuj\Di\Service
  */
 interface ServiceFactoryInterface
 {
     /**
-     * Create standard or shared service
-     *
-     * @param ContainerInterface $container Dependency injection container for services
-     * @param ServiceType $serviceType Service type
-     * @param string $id Service identifier
-     * @param mixed $serviceSource Source for service to create
-     * @return ServiceInterface Service creator object
+     * @param mixed $serviceSource
      */
     public function create(
         ContainerInterface $container,

@@ -19,15 +19,10 @@ use Kocuj\Di\Core\ServiceSource\ServiceSourceFactoryInterface;
 use Kocuj\Di\Core\ServiceSource\ServiceSourceResolverInterface;
 
 /**
- * Service factory
- *
  * @package Kocuj\Di\Service
  */
 class ServiceFactory implements ServiceFactoryInterface
 {
-    /**
-     * Service source factory
-     */
     private ServiceSourceResolverInterface $serviceSourceResolver;
 
     public function __construct(ServiceSourceResolverInterface $serviceSourceResolver)
@@ -38,7 +33,6 @@ class ServiceFactory implements ServiceFactoryInterface
     /**
      * {@inheritdoc}
      * @throws Exception
-     * @codeCoverageIgnore
      */
     public function create(
         ContainerInterface $container,

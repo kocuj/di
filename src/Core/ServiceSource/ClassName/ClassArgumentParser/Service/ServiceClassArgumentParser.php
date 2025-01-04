@@ -19,8 +19,6 @@ use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument\ClassArg
 use Kocuj\Di\Core\ServiceSource\Exception;
 
 /**
- * Service argument parser interface
- *
  * @package Kocuj\Di\ServiceSource\ClassName\ArgumentParser
  */
 class ServiceClassArgumentParser implements ClassArgumentParserInterface
@@ -42,6 +40,9 @@ class ServiceClassArgumentParser implements ClassArgumentParserInterface
         $this->classArgument = $classArgument;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function parse() {
         $serviceId = $this->classArgument->getServiceId();
 

@@ -18,30 +18,17 @@ use Kocuj\Di\Core\ServiceSource\ServiceSourceFactoryInterface;
 use Kocuj\Di\Core\ServiceSource\ServiceSourceResolverInterface;
 
 /**
- * Standard service creator
- *
  * @package Kocuj\Di\Service\Standard
  */
 class Standard implements ServiceInterface
 {
-    /**
-     * Service source factory
-     */
     private ServiceSourceResolverInterface $serviceSourceResolver;
 
-    /**
-     * Dependency injection container for services
-     */
     private ContainerInterface $container;
 
-    /**
-     * Service identifier
-     */
     private string $id;
 
     /**
-     * Source for service to create
-     *
      * @var mixed
      */
     private $serviceSource;

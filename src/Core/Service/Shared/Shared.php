@@ -18,37 +18,21 @@ use Kocuj\Di\Core\ServiceSource\ServiceSourceFactoryInterface;
 use Kocuj\Di\Core\ServiceSource\ServiceSourceResolverInterface;
 
 /**
- * Shared service creator
- *
  * @package Kocuj\Di\Service\Shared
  */
 class Shared implements ServiceInterface
 {
-    /**
-     * Service source factory
-     */
     private ServiceSourceResolverInterface $serviceSourceResolver;
 
-    /**
-     * Dependency injection container for services
-     */
     private ContainerInterface $container;
 
-    /**
-     * Service identifier
-     */
     private string $id;
 
     /**
-     * Source for service to create
-     *
      * @var mixed
      */
     private $serviceSource;
 
-    /**
-     * Service object
-     */
     private ?object $serviceObject = null;
 
     public function __construct(

@@ -13,8 +13,6 @@ declare(strict_types=1);
 namespace Kocuj\Di\Common\Camelizer;
 
 /**
- * Camelizer
- *
  * @package Kocuj\Di\Common\Camelizer
  */
 class Camelizer implements CamelizerInterface

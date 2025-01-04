@@ -21,16 +21,10 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\MethodProphecy;
 
 /**
- * Tests for Shared object
- *
  * @package Kocuj\Di\Tests\Service\Shared
  */
 class SharedTest extends TestCase
 {
-    /**
-     * Testing get the selected service
-     *
-     */
     public function testGetService(): void
     {
         // ---- ARRANGE ----

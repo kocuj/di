@@ -27,34 +27,23 @@ use Prophecy\Prophecy\MethodProphecy;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
- * Tests for Container object
- *
  * @package Kocuj\Di\Tests\Container
  */
 class ContainerTest extends TestCase
 {
     /**
-     * Service identifier decorator
-     *
      * @var ObjectProphecy|ServiceIdDecoratorInterface|null
      */
     private $serviceIdDecorator = null;
 
     /**
-     * Service creator
-     *
      * @var ObjectProphecy|ServiceInterface|null
      */
     private $service = null;
 
-    /**
-     * Fake service
-     */
     private ?FakeService $fakeService = null;
 
     /**
-     * Service factory
-     *
      * @var ObjectProphecy|ServiceFactoryInterface|null
      */
     private $serviceFactory = null;
@@ -62,10 +51,6 @@ class ContainerTest extends TestCase
     /**
      * Testing cloning container; any service in the cloned container should have the same identifier and should be the same type and instance as in the original container
      *
-     * @param ServiceType $serviceType Service type
-     * @param string $serviceId Service identifier
-     * @param string $decoratedServiceId Decorated service identifier
-     * @throws Exception
      * @dataProvider cloneProvider
      */
     public function testClone(
@@ -114,12 +99,6 @@ class ContainerTest extends TestCase
         $this->assertSame($clonedContainer->get($serviceId), $container->get($serviceId));
     }
 
-    /**
-     * Provider for testing cloning container
-     *
-     * @return array Data for testing cloning container
-     * @throws \Exception
-     */
     public function cloneProvider(): array
     {
         return [
@@ -139,14 +118,7 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * Testing adding standard or shared service
-     *
-     * @param ServiceType $serviceType Service type
-     * @param string $serviceId Service identifier
-     * @param string $decoratedServiceId Decorated service identifier
      * @dataProvider addCheckTypeHasProvider
-     * @throws Exception
-     * @throws NotFoundException
      */
     public function testAdd(
         ServiceType $serviceType,
@@ -180,13 +152,6 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * Testing checking type of standard or shared service
-     *
-     * @param ServiceType $serviceType Service type
-     * @param string $serviceId Service identifier
-     * @param string $decoratedServiceId Decorated service identifier
-     * @throws Exception
-     * @throws NotFoundException
      * @dataProvider addCheckTypeHasProvider
      */
     public function testCheckType(
@@ -217,12 +182,6 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * Testing checking standard or shared service
-     *
-     * @param ServiceType $serviceType Service type
-     * @param string $serviceId Service identifier
-     * @param string $decoratedServiceId Decorated service identifier
-     * @throws Exception
      * @dataProvider addCheckTypeHasProvider
      */
     public function testHas(
@@ -252,12 +211,6 @@ class ContainerTest extends TestCase
         $this->assertTrue($container->has($decoratedServiceId));
     }
 
-    /**
-     * Provider for testing adding and checking standard and shared services
-     *
-     * @return array Data for testing adding and checking standard and shared services
-     * @throws \Exception
-     */
     public function addCheckTypeHasProvider(): array
     {
         return [
@@ -301,10 +254,6 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * Testing checking services count
-     *
-     * @param ServiceType $serviceType Service type
-     * @throws Exception
      * @dataProvider servicesTypesProvider
      */
     public function testCount(ServiceType $serviceType): void
@@ -361,13 +310,6 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * Testing get standard or shared service by "__call" method
-     *
-     * @param ServiceType $serviceType Service type
-     * @param string $serviceId Service identifier
-     * @param string $decoratedServiceId Decorated service identifier
-     * @param string $callMethod Method to call to get service
-     * @throws Exception
      * @dataProvider callMethodProvider
      */
     public function testCallMethod(
@@ -403,12 +345,6 @@ class ContainerTest extends TestCase
         $this->assertSame($this->fakeService, $returnedService);
     }
 
-    /**
-     * Provider for testing standard and shared services by "__call" method
-     *
-     * @return array Data for testing standard and shared services
-     * @throws \Exception
-     */
     public function callMethodProvider(): array
     {
         return [
@@ -458,12 +394,6 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * Testing get standard or shared service
-     *
-     * @param ServiceType $serviceType Service type
-     * @param string $serviceId Service identifier
-     * @param string $decoratedServiceId Decorated service identifier
-     * @param string $callMethod Method to call to get service
      * @dataProvider getMethodProvider
      */
     public function testGetMethod(
@@ -495,12 +425,6 @@ class ContainerTest extends TestCase
         $this->assertSame($this->fakeService, $returnedService);
     }
 
-    /**
-     * Provider for testing standard and shared services
-     *
-     * @return array Data for testing standard and shared services
-     * @throws \Exception
-     */
     public function getMethodProvider(): array
     {
         return [
@@ -544,9 +468,6 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * Testing for adding service which already exists
-     *
-     * @param ServiceType $serviceType Service type
      * @dataProvider servicesTypesProvider
      */
     public function testErrorAddAlreadyExists(ServiceType $serviceType): void
@@ -575,10 +496,6 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * Testing wrong service identifier to get after creating standard or shared service
-     *
-     * @param ServiceType $serviceType Service type
-     * @throws Exception
      * @dataProvider servicesTypesProvider
      */
     public function testErrorAddWithWrongGet(ServiceType $serviceType): void
@@ -612,9 +529,6 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * Testing calling wrong method
-     *
-     * @param ServiceType $serviceType Service type
      * @dataProvider servicesTypesProvider
      */
     public function testErrorWrongCallMethod(ServiceType $serviceType): void
@@ -642,9 +556,6 @@ class ContainerTest extends TestCase
     }
 
     /**
-     * Testing calling with arguments
-     *
-     * @param ServiceType $serviceType Service type
      * @dataProvider servicesTypesProvider
      */
     public function testCallMethodWithArguments(ServiceType $serviceType): void
@@ -678,12 +589,6 @@ class ContainerTest extends TestCase
         ]);
     }
 
-    /**
-     * Provider for services types
-     *
-     * @return array Data for services types
-     * @throws \Exception
-     */
     public function servicesTypesProvider(): array
     {
         return [
@@ -711,12 +616,6 @@ class ContainerTest extends TestCase
         $this->serviceFactory = $this->prophesize(ServiceFactoryInterface::class);
     }
 
-    /**
-     * Preparing objects for testing
-     *
-     * @param ServiceType $serviceType
-     * @param array $services
-     */
     private function prepareService(
         ServiceType $serviceType,
         string $serviceId,

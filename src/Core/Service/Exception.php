@@ -13,8 +13,6 @@ declare(strict_types=1);
 namespace Kocuj\Di\Core\Service;
 
 /**
- * Exception
- *
  * @package Kocuj\Di\Service
  */
 class Exception extends \Exception

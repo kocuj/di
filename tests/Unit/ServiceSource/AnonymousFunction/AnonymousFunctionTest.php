@@ -18,17 +18,10 @@ use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for AnonymousFunction object
- *
  * @package Kocuj\Di\Tests\ServiceSource\AnonymousFunction
  */
 class AnonymousFunctionTest extends TestCase
 {
-    /**
-     * Testing wrong service source
-     *
-     * @throws Exception
-     */
     public function testWrongServiceSource(): void
     {
         // ---- ARRANGE ----
@@ -42,11 +35,6 @@ class AnonymousFunctionTest extends TestCase
         new AnonymousFunction($serviceSource);
     }
 
-    /**
-     * Testing resolving service without returning an object
-     *
-     * @throws Exception
-     */
     public function testResolveWithoutObject(): void
     {
         // ---- ARRANGE ----
@@ -63,11 +51,6 @@ class AnonymousFunctionTest extends TestCase
         $anonymousFunction->resolve();
     }
 
-    /**
-     * Testing resolving service
-     *
-     * @throws Exception
-     */
     public function testResolve(): void
     {
         // ---- ARRANGE ----

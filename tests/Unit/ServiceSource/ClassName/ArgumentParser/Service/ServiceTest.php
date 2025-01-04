@@ -19,15 +19,10 @@ use Kocuj\Di\Core\ServiceSource\Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for Service object
- *
  * @package Kocuj\Di\Tests\ServiceSource\ClassName\ArgumentParser\Service
  */
 class ServiceTest extends TestCase
 {
-    /**
-     * Testing wrong argument
-     */
     public function testWrongArgument(): void
     {
         // ---- ARRANGE ----
@@ -50,11 +45,6 @@ class ServiceTest extends TestCase
         new Service($containerReveal, $id, $argument);
     }
 
-    /**
-     * Testing parsing service as argument
-     *
-     * @throws Exception
-     */
     public function testParseService(): void
     {
         // ---- ARRANGE ----
@@ -88,9 +78,6 @@ class ServiceTest extends TestCase
         $this->assertSame($serviceReveal, $parsedArg);
     }
 
-    /**
-     * Testing parsing the same service twice as argument
-     */
     public function testParseTheSameService(): void
     {
         // ---- ARRANGE ----

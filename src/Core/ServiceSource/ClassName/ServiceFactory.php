@@ -13,15 +13,12 @@ declare(strict_types=1);
 namespace Kocuj\Di\Core\ServiceSource\ClassName;
 
 /**
- * Service factory
- *
  * @package Kocuj\Di\ServiceSource\ClassName
  */
 class ServiceFactory implements ServiceFactoryInterface
 {
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnore
      */
     public function create(string $className, array $arguments): object
     {

@@ -13,18 +13,14 @@ declare(strict_types=1);
 namespace Kocuj\Di\Core\ServiceSource;
 
 /**
- * Service source interface
- *
  * @package Kocuj\Di\ServiceSource
  */
 interface ServiceSourceInterface
 {
+    /**
+     * @param mixed $serviceSource
+     */
     public function supports($serviceSource): bool;
 
-    /**
-     * Resolve a service source into an object
-     *
-     * @return object Resolved service source
-     */
     public function resolve(): object;
 }

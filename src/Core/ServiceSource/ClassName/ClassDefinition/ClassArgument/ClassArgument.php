@@ -28,6 +28,9 @@ class ClassArgument
      */
     private $argumentValue;
 
+    /**
+     * @param mixed|null $argumentValue
+     */
     public function __construct(ArgumentType $argumentType, ?string $serviceId = null, $argumentValue = null)
     {
         switch ($argumentType->getValue()) {
@@ -60,6 +63,9 @@ class ClassArgument
         return new self(new ArgumentType(ArgumentType::SERVICE), $serviceId);
     }
 
+    /**
+     * @param mixed|null $argumentValue
+     */
     public static function createForValue($argumentValue): self {
         return new self(new ArgumentType(ArgumentType::VALUE), null, $argumentValue);
     }

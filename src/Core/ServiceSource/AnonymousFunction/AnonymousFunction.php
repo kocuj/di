@@ -17,25 +17,26 @@ use Kocuj\Di\Core\ServiceSource\Exception;
 use Kocuj\Di\Core\ServiceSource\ServiceSourceInterface;
 
 /**
- * Service source creator for anonymous function
- *
  * @package Kocuj\Di\ServiceSource\ClassName
  */
 class AnonymousFunction implements ServiceSourceInterface
 {
+    /**
+     * @var mixed
+     */
     private $serviceSource;
 
     /**
-     * Constructor
-     *
      * @param mixed $serviceSource Service source
-     * @throws Exception
      */
     public function __construct($serviceSource)
     {
         $this->serviceSource = $serviceSource;
     }
 
+    /**
+     * @param mixed $serviceSource
+     */
     public function supports($serviceSource): bool {
         return $serviceSource instanceof Closure;
     }

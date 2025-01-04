@@ -18,8 +18,6 @@ use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument\ClassArg
 use Kocuj\Di\Core\ServiceSource\Exception;
 
 /**
- * Service argument parser interface
- *
  * @package Kocuj\Di\ServiceSource\ClassName\ArgumentParser
  */
 class ValueClassArgumentParser implements ClassArgumentParserInterface
@@ -35,6 +33,9 @@ class ValueClassArgumentParser implements ClassArgumentParserInterface
         $this->classArgument = $classArgument;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function parse() {
         return $this->classArgument->getArgumentValue();
     }

@@ -16,15 +16,11 @@ use Kocuj\Di\Tools\Camelizer\Camelizer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for Camelizer object
- *
  * @package Kocuj\Di\Tests\Tools
  */
 class CamelizerTest extends TestCase
 {
     /**
-     * Testing camelize of strings
-     *
      * @dataProvider camelizeProvider
      */
     public function testCamelize(string $inputText, string $expectedOutputText): void
@@ -39,9 +35,6 @@ class CamelizerTest extends TestCase
         $this->assertEquals($expectedOutputText, $outputText);
     }
 
-    /**
-     * Provider for testing camelize of strings
-     */
     public function camelizeProvider(): array
     {
         return [
@@ -81,8 +74,6 @@ class CamelizerTest extends TestCase
     }
 
     /**
-     * Testing camelize (with first character uppercase) of strings
-     *
      * @dataProvider camelizeWithUpperFirstCharProvider
      */
     public function testCamelizeWithUpperFirstChar(string $inputText, string $expectedOutputText): void
@@ -97,9 +88,6 @@ class CamelizerTest extends TestCase
         $this->assertEquals($expectedOutputText, $outputText);
     }
 
-    /**
-     * Provider for testing camelize (with first character uppercase) of strings
-     */
     public function camelizeWithUpperFirstCharProvider(): array
     {
         return [

@@ -18,17 +18,10 @@ use Kocuj\Di\Tests\Fixtures\FakeService;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for ObjectInstance object
- *
  * @package Kocuj\Di\Tests\ServiceSource\ObjectInstance
  */
 class ObjectInstanceTest extends TestCase
 {
-    /**
-     * Testing service source when it is not an object
-     *
-     * @throws Exception
-     */
     public function testServiceSourceNoObject(): void
     {
         // ---- ARRANGE ----
@@ -42,11 +35,6 @@ class ObjectInstanceTest extends TestCase
         new ObjectInstance($serviceSource);
     }
 
-    /**
-     * Testing service source when it is an anonymous function
-     *
-     * @throws Exception
-     */
     public function testServiceSourceAnonymousFunction(): void
     {
         // ---- ARRANGE ----
@@ -62,11 +50,6 @@ class ObjectInstanceTest extends TestCase
         new ObjectInstance($serviceSource);
     }
 
-    /**
-     * Testing resolving service
-     *
-     * @throws Exception
-     */
     public function testResolve(): void
     {
         // ---- ARRANGE ----

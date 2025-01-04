@@ -23,8 +23,6 @@ use Kocuj\Di\Core\ServiceSource\ClassName\ServiceFactoryInterface;
 use Kocuj\Di\Core\ServiceSource\ObjectInstance\ObjectInstance;
 
 /**
- * Service source factory
- *
  * @package Kocuj\Di\ServiceSource
  */
 class ServiceSourceFactory implements ServiceSourceFactoryInterface
@@ -44,7 +42,6 @@ class ServiceSourceFactory implements ServiceSourceFactoryInterface
     /**
      * {@inheritdoc}
      * @throws Exception
-     * @codeCoverageIgnore
      */
     public function create(ServiceSourceType $serviceSourceType, ContainerInterface $container, string $id, $serviceSource): ServiceSourceInterface
     {

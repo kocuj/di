@@ -13,21 +13,14 @@ declare(strict_types=1);
 namespace Kocuj\Di\Tests\Fixtures;
 
 /**
- * Fake service
- *
  * @package Kocuj\Di\TestsLib
  */
 class FakeService
 {
-    /**
-     * Fake values
-     */
     public array $values = [];
 
     /**
-     * Constructor
-     *
-     * @param mixed ...$values Fake values
+     * @param mixed ...$values
      */
     public function __construct(...$values)
     {
@@ -35,9 +28,6 @@ class FakeService
     }
 
     /**
-     * Get fake value
-     *
-     * @param int $id Value identifier
      * @return mixed Fake value
      * @throws \Exception
      */

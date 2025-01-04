@@ -23,6 +23,9 @@ class ServiceSourceResolver implements ServiceSourceResolverInterface
         $this->serviceSourceFactory = $serviceSourceFactory;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function resolve(ContainerInterface $container, string $id, $serviceSource): object {
         foreach (ServiceSourceType::values() as $serviceSourceType) {
             $serviceSourceObject = $this->serviceSourceFactory->create($serviceSourceType, $container, $id, $serviceSource);

@@ -19,6 +19,9 @@ use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument\ClassArg
  */
 class ClassDefinitionFactory implements ClassDefinitionFactoryInterface
 {
+    /**
+     * {@inheritDoc}
+     */
     public function create(string $className, ?ClassArgumentsCollectionImmutable $classArgumentsCollectionImmutable = null): ClassDefinition {
         return new ClassDefinition($className, $classArgumentsCollectionImmutable);
     }

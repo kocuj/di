@@ -15,8 +15,6 @@ namespace Kocuj\Di\Core\Container;
 use Psr\Container\NotFoundExceptionInterface;
 
 /**
- * Exception
- *
  * @package Kocuj\Di\Container
  */
 class NotFoundException extends \Exception implements NotFoundExceptionInterface

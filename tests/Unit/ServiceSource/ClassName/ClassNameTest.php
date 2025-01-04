@@ -24,17 +24,10 @@ use Prophecy\Prophecy\MethodProphecy;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
- * Tests for ClassName object
- *
  * @package Kocuj\Di\Tests\ServiceSource\ClassName
  */
 class ClassNameTest extends TestCase
 {
-    /**
-     * Testing wrong service source
-     *
-     * @throws Exception
-     */
     public function testWrongServiceSource(): void
     {
         // ---- ARRANGE ----
@@ -65,11 +58,6 @@ class ClassNameTest extends TestCase
             $serviceSource);
     }
 
-    /**
-     * Testing when service source class does not exist
-     *
-     * @throws Exception
-     */
     public function testServiceSourceClassNotExists(): void
     {
         // ---- ARRANGE ----
@@ -101,12 +89,6 @@ class ClassNameTest extends TestCase
         $className->resolve();
     }
 
-    /**
-     * Provider for wrong service source
-     *
-     * @return array Data for services types
-     * @throws \Exception
-     */
     public function wrongServiceSourceProvider(): array
     {
         return [
@@ -117,10 +99,7 @@ class ClassNameTest extends TestCase
     }
 
     /**
-     * Testing wrong service source
-     *
      * @param mixed $serviceSource Service source
-     * @throws Exception
      * @dataProvider resolveWrongServiceSourceProvider
      */
     public function testResolveWrongServiceSource($serviceSource): void
@@ -153,12 +132,6 @@ class ClassNameTest extends TestCase
         $className->resolve();
     }
 
-    /**
-     * Provider for wrong service source
-     *
-     * @return array Data for services types
-     * @throws \Exception
-     */
     public function resolveWrongServiceSourceProvider(): array
     {
         return [
@@ -181,11 +154,6 @@ class ClassNameTest extends TestCase
         ];
     }
 
-    /**
-     * Testing resolving service from string
-     *
-     * @throws Exception
-     */
     public function testResolveFromString(): void
     {
         // ---- ARRANGE ----
@@ -227,9 +195,6 @@ class ClassNameTest extends TestCase
     }
 
     /**
-     * Testing resolving service from array
-     *
-     * @throws Exception
      * @dataProvider resolveFromArrayProvider
      */
     public function testResolveFromArray(array $arguments): void
@@ -300,11 +265,6 @@ class ClassNameTest extends TestCase
         $this->assertEquals(FakeService::class, get_class($resolve));
     }
 
-    /**
-     * Provider for testing resolving service from array
-     *
-     * @return array Data for testing resolving service from array
-     */
     public function resolveFromArrayProvider(): array
     {
         return [

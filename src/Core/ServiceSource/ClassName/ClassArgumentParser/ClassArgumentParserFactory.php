@@ -20,12 +20,13 @@ use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument\ClassArg
 use Kocuj\Di\Core\ServiceSource\Exception;
 
 /**
- * Service argument parser factory interface
- *
  * @package Kocuj\Di\ServiceSource\ClassName\ArgumentParser
  */
 class ClassArgumentParserFactory implements ClassArgumentParserFactoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function create(ContainerInterface $container, string $id, ClassArgument $classArgument): ClassArgumentParserInterface {
         switch ($classArgument->getArgumentType()->getValue()) {
             case ArgumentType::SERVICE:

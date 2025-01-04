@@ -20,32 +20,18 @@ use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassArgument\ClassArg
 use Kocuj\Di\Core\ServiceSource\ClassName\ClassDefinition\ClassDefinitionFactoryInterface;
 
 /**
- * Dependency injection container for services
- *
  * @package Kocuj\Di\Container
  */
 class Container implements ContainerInterface, Countable
 {
-    /**
-     * Service identifier decorator
-     */
     private ServiceIdDecoratorInterface $serviceIdDecorator;
 
-    /**
-     * Service factory
-     */
     private ServiceFactoryInterface $serviceFactory;
 
     private ClassDefinitionFactoryInterface $classDefinitionFactory;
 
-    /**
-     * Services definitions
-     */
     private array $definitions = [];
 
-    /**
-     * Services definitions count
-     */
     private int $definitionsCount = 0;
 
     public function __construct(
@@ -58,12 +44,6 @@ class Container implements ContainerInterface, Countable
         $this->classDefinitionFactory = $classDefinitionFactory;
     }
 
-    /**
-     * Cloning container
-     *
-     * @return void
-     * @throws Exception
-     */
     public function __clone()
     {
         $oldDefinitions = $this->definitions;
@@ -105,7 +85,6 @@ class Container implements ContainerInterface, Countable
      * {@inheritdoc}
      * @throws Exception
      * @throws \Exception
-     * @codeCoverageIgnore
      */
     public function addStandard(string $id, $serviceSource, array $arguments = []): ContainerInterface
     {
@@ -118,7 +97,6 @@ class Container implements ContainerInterface, Countable
      * {@inheritdoc}
      * @throws Exception
      * @throws \Exception
-     * @codeCoverageIgnore
      */
     public function addShared(string $id, $serviceSource, array $arguments = []): ContainerInterface
     {
@@ -155,11 +133,8 @@ class Container implements ContainerInterface, Countable
     }
 
     /**
-     * Call service by method get*(), where "*" is service identifier written in camel case with first upper character
+     * Call service by method get*(), where "*" is service identifier written in camelcase with first upper character
      *
-     * @param string $method Method to call
-     * @param array $arguments Arguments for called method
-     * @return object Service object
      * @throws Exception
      * @throws NotFoundException
      */
@@ -188,24 +163,12 @@ class Container implements ContainerInterface, Countable
         return $this->getServiceDefinition($id)['service']->getService();
     }
 
-    /**
-     * Clear definitions
-     *
-     * @return void
-     */
     private function clearDefinitions(): void
     {
         $this->definitions = [];
         $this->definitionsCount = 0;
     }
 
-    /**
-     * Get service definition
-     *
-     * @param string $id Service identifier
-     * @return array Service definition
-     * @throws NotFoundException
-     */
     private function getServiceDefinition(string $id): array
     {
         $decoratedId = $this->serviceIdDecorator->decorateForServiceId($id);
@@ -218,11 +181,7 @@ class Container implements ContainerInterface, Countable
     }
 
     /**
-     * Get service source converted if there was used of deprecated argument
-     *
      * @param mixed $serviceSource
-     * @param array $arguments
-     * @param string $deprecatedMethod
      * @return mixed
      */
     private function getDeprecatedServiceSource($serviceSource, array $arguments, string $deprecatedMethod) {

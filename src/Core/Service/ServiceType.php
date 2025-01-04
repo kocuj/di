@@ -15,23 +15,11 @@ namespace Kocuj\Di\Core\Service;
 use MyCLabs\Enum\Enum;
 
 /**
- * Service type
- *
  * @package Kocuj\Di\Service
  */
 class ServiceType extends Enum
 {
-    /**
-     * Standard service
-     *
-     * @var int
-     */
     public const STANDARD = 0;
 
-    /**
-     * Shared service
-     *
-     * @var int
-     */
     public const SHARED = 1;
 }

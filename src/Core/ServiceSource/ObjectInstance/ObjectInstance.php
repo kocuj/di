@@ -17,18 +17,17 @@ use Kocuj\Di\Core\ServiceSource\Exception;
 use Kocuj\Di\Core\ServiceSource\ServiceSourceInterface;
 
 /**
- * Service source creator for object instance
- *
  * @package Kocuj\Di\ServiceSource\ObjectInstance
  */
 class ObjectInstance implements ServiceSourceInterface
 {
+    /**
+     * @var mixed
+     */
     private $serviceSource;
 
     /**
-     * Constructor
-     *
-     * @param mixed $serviceSource Service source
+     * @param mixed $serviceSource
      * @throws Exception
      */
     public function __construct($serviceSource)
@@ -36,6 +35,9 @@ class ObjectInstance implements ServiceSourceInterface
         $this->serviceSource = $serviceSource;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supports($serviceSource): bool {
         return is_object($serviceSource) && !$serviceSource instanceof Closure;
     }
