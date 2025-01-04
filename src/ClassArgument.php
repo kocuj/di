@@ -1,7 +1,7 @@
 <?php
 
 /*
- * ClassArgumentFactory.php
+ * ClassArgument.php
  *
  * @author Dominik Kocuj
  * @license https://opensource.org/licenses/MIT The MIT License
