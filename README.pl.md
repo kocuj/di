@@ -47,7 +47,7 @@ $di = new Di();
 
 Utworzy to obiekt biblioteki Kocuj DI. Możesz utworzyć więcej obiektów Di, ale nie jest to zalecane. Lepszym rozwiązaniem jest utworzenie większej ilości kontenerów DI, co zostanie wyjaśnione w dalszej części niniejszej dokumentacji.
 
-Po skonstruowaniu, zmienna $di będzie zawierała jeden kontener do wstrzykiwania zależności, które możesz pobrać używając następującego kodu:
+Po skonstruowaniu, zmienna `$di` będzie zawierała jeden kontener do wstrzykiwania zależności, które możesz pobrać używając następującego kodu:
 
 ```php
 $defaultContainer = $di->getDefault();
@@ -65,7 +65,7 @@ Możesz także utworzyć nowy kontener bazujący na już istniejącym kontenerze
 $myContainer = $di->copy($oldContainer);
 ```
 
-Od tego momentu możesz używać nowego kontenera używając metod na zmiennej $myContainer. Jednakże niniejsza dokumentacja będzie używała domyślnego kontenera do wyjaśnień dotyczących używania biblioteki Kocuj DI.
+Od tego momentu możesz używać nowego kontenera używając metod na zmiennej `$myContainer`. Jednakże niniejsza dokumentacja będzie używała domyślnego kontenera do wyjaśnień dotyczących używania biblioteki Kocuj DI.
 
 Po utworzeniu kontenera (domyślnego lub innego), możesz dodać serwisy do niego. Istnieją dwa typy serwisów:
 
@@ -75,19 +75,19 @@ Po utworzeniu kontenera (domyślnego lub innego), możesz dodać serwisy do nieg
 Aby utworzyć serwis, możesz użyć następującej metody:
 `add(ServiceType $serviceType, string $id, $serviceSource): ContainerInterface`
 
-Argument $serviceType może być jednym z następujących:
+Argument `$serviceType` może być jednym z następujących:
 
 * aby utworzyć serwis współdzielony - `new ServiceType(ServiceType::SHARED)`;
 * aby utworzyć serwis standardowy - `new ServiceType(ServiceType::STANDARD)`.
 
-Jeżeli chcesz pominąć argument $serviceType, możesz użyć jednej z następujących metod:
+Jeżeli chcesz pominąć argument `$serviceType`, możesz użyć jednej z następujących metod:
 
 * aby utworzyć serwis współdzielony - `addShared(string $id, $serviceSource): ContainerInterface`;
 * aby utworzyć serwis standardowy - `addStandard(string $id, $serviceSource): ContainerInterface`.
 
-Argument $id jest identyfikatorem utworzonego serwisu. Wszystkie identyfikatory są automatycznie zmieniane na format "camelCase". Pamiętaj, że wewnątrz jednego kontenera możesz być tylko jeden serwis o wybranym identyfikatorze.
+Argument `$id` jest identyfikatorem utworzonego serwisu. Wszystkie identyfikatory są automatycznie zmieniane na format "camelCase". Pamiętaj, że wewnątrz jednego kontenera możesz być tylko jeden serwis o wybranym identyfikatorze.
 
-Argument $serviceSource jest serwisem używanym z wybranym identyfikatorem. Argument ten może być jednym z następujących typów:
+Argument `$serviceSource` jest serwisem używanym z wybranym identyfikatorem. Argument ten może być jednym z następujących typów:
 
 * obiekt - ten obiekt będzie używany jako serwis;
 * funkcja anonimowa - ta funkcja nie posiada argumentów i powinna zwrócić obiekt, który będzie używany jako serwis;
@@ -95,16 +95,16 @@ Argument $serviceSource jest serwisem używanym z wybranym identyfikatorem. Argu
   * `className` - wymagany element; jest to w pełni kwalifikowana nazwa klasy serwisu (dobrą praktyką jest użycie notacji "::class" w tym miejscu);
   * `arguments` - opcjonalny element; więcej informacji o tym elemencie znajduje się poniżej w niniejszej dokumentacji.
 
-Najlepszą funkcjonalnością biblioteki Kocuj DI jest automatyczne rozwiązywanie zależności pomiędzy serwisami, gdy argument $serviceSource jest tablicą. Aby użyć tej funkcjonalności, powinien być przynajmniej jeden argument wysłany do konstruktora serwisu. Miejscem do wykonania tego jest element "arguments" wewnątrz tablicy w argumencie $serviceSource.
+Najlepszą funkcjonalnością biblioteki Kocuj DI jest automatyczne rozwiązywanie zależności pomiędzy serwisami, gdy argument `$serviceSource` jest tablicą. Aby użyć tej funkcjonalności, powinien być przynajmniej jeden argument wysłany do konstruktora serwisu. Miejscem do wykonania tego jest element "arguments" wewnątrz tablicy w argumencie `$serviceSource`.
 
-Każdy argument w $arguments zawiera tablicę z jednym elementem z indeksem "type" i z drugim z indeksem "value", którego wartość zależy od wartości ustawionej w indeksie "type". Element z indeksem "type" zawiera nazwę typu argumentu.
+Każdy argument w `$arguments` zawiera tablicę z jednym elementem z indeksem "type" i z drugim z indeksem "value", którego wartość zależy od wartości ustawionej w indeksie "type". Element z indeksem "type" zawiera nazwę typu argumentu.
 
 Istnieją dwa typy argumentów wybierane przez element z indeksem "type":
 
 * "service" - aby ustawić serwis do pobrania, musi istnieć drugi element w tablicy z indeksem "value" zawierającym identyfikator serwisu;
 * "value" - aby ustawić wartość, musi istnieć drugi element w tablicy z indeksem "value" zawierającym tą wartość.
 
-Na przykład, aby dodać serwis współdzielony z klasy \Services\OtherService z identyfikatorem "otherService", który posiada konstruktor `__construct(\Services\Service $service, bool $status)` i wymaga, aby $status był ustawiony na true, użyj następującego kodu:
+Na przykład, aby dodać serwis współdzielony z klasy \Services\OtherService z identyfikatorem "otherService", który posiada konstruktor `__construct(\Services\Service $service, bool $status)` i wymaga, aby `$status` był ustawiony na true, użyj następującego kodu:
 
 ```php
 $myContainer->addShared('otherService', [

@@ -47,7 +47,7 @@ $di = new Di();
 
 It will create a Kocuj DI library object. You can create more Di objects, but it is not recommended. The better solution is to create more DI containers, which will be explained in the next part of this documentation.
 
-After the construction, the $di variable will have one container for Dependency Injection, which you can get by using the following code:
+After the construction, the `$di` variable will have one container for Dependency Injection, which you can get by using the following code:
 
 ```php
 $defaultContainer = $di->getDefault();
@@ -65,7 +65,7 @@ You can also create new container based on already existing container by using t
 $myContainer = $di->copy($oldContainer);
 ```
 
-From now on you can use new container by using methods on $myContainer variable. However, the following documentation will use default container for explanations about using the Kocuj DI library.
+From now on you can use new container by using methods on `$myContainer` variable. However, the following documentation will use default container for explanations about using the Kocuj DI library.
 
 After creating the container (default or other), you can add services into it. There are two types of services:
 
@@ -75,19 +75,19 @@ After creating the container (default or other), you can add services into it. T
 To create service you can use the following method:
 `add(ServiceType $serviceType, string $id, $serviceSource): ContainerInterface`
 
-The $serviceType argument can be one of the following:
+The `$serviceType` argument can be one of the following:
 
 * to create shared service - `new ServiceType(ServiceType::SHARED)`;
 * to create standard service - `new ServiceType(ServiceType::STANDARD)`.
 
-If you want to ommit a $serviceType argument, you can use one of the following methods:
+If you want to ommit a `$serviceType` argument, you can use one of the following methods:
 
 * to create shared service - `addShared(string $id, $serviceSource): ContainerInterface`;
 * to create standard service - `addStandard(string $id, $serviceSource): ContainerInterface`.
 
-Argument $id is an identifier of created service. All identifiers will be automatically converted to camelCase format. Remember, that inside one container there can be only one service with the selected identifier.
+Argument `$id` is an identifier of created service. All identifiers will be automatically converted to camelCase format. Remember, that inside one container there can be only one service with the selected identifier.
 
-Argument $serviceSource is a service to use with the selected identifier. It can be one of the following types:
+Argument `$serviceSource` is a service to use with the selected identifier. It can be one of the following types:
 
 * an object - this object will be used as service;
 * an anonymous function - this function has no arguments and should return an object which will be used as service;
@@ -95,16 +95,16 @@ Argument $serviceSource is a service to use with the selected identifier. It can
   * `className` - required element; it is fully qualified class name for service (it is a good practice to use "::class" notation in this place);
   * `arguments` - optional element; more information about this element are below in this documentation.
 
-The best feature of the Kocuj DI library is to automatically resolving dependencies between services when a $serviceSource argument is an array. To use this feature, there should be at least one argument sent to a service constructor. The place to do so is in element "arguments" inside an array for argument $serviceSource.
+The best feature of the Kocuj DI library is to automatically resolving dependencies between services when a `$serviceSource` argument is an array. To use this feature, there should be at least one argument sent to a service constructor. The place to do so is in element "arguments" inside an array for argument `$serviceSource`.
 
-Each argument in $arguments contains an array with one element with index "type" and second with index "value" which value depends on value set in index "type". Element with index "type" contains a name of argument type.
+Each argument in `$arguments` contains an array with one element with index "type" and second with index "value" which value depends on value set in index "type". Element with index "type" contains a name of argument type.
 
 There are two types of arguments selected by element with index "type":
 
 * "service" - to set service to get, there must be a second element in array with index "value" containing service identifier;
 * "value" - to set value, there must be a second element in array with index "value" containing this value.
 
-For example, to add shared service from class \Services\OtherService with "otherService" identifier, which has constructor `__construct(\Services\Service $service, bool $status)` and require $status to set to true, use the following code:
+For example, to add shared service from class \Services\OtherService with "otherService" identifier, which has constructor `__construct(\Services\Service $service, bool $status)` and require `$status` to set to true, use the following code:
 
 ```php
 $myContainer->addShared('otherService', [
